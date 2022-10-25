@@ -14,8 +14,11 @@ import {
   Box,
   CardMedia,
 } from "@mui/material";
+import { useRouter } from "next/router";
 
 export const SideBar = () => {
+  const { route } = useRouter();
+
   return (
     <Box
       sx={{
@@ -49,8 +52,13 @@ export const SideBar = () => {
       >
         <NextLink href="/patrimony" passHref>
           <Link>
-            <IconButton>
-              <HouseOutlined fontSize="large" sx={{ color: "white" }} />
+            <IconButton
+              sx={{ bgcolor: route == "/patrimony" ? "white" : "transparent" }}
+            >
+              <HouseOutlined
+                fontSize="large"
+                sx={{ color: route == "/patrimony" ? "steelblue" : "white" }}
+              />
             </IconButton>
           </Link>
         </NextLink>
@@ -66,8 +74,13 @@ export const SideBar = () => {
       >
         <NextLink href="/testament" passHref>
           <Link>
-            <IconButton>
-              <FileOpenOutlined fontSize="large" sx={{ color: "white" }} />
+            <IconButton
+              sx={{ bgcolor: route == "/testament" ? "white" : "transparent" }}
+            >
+              <FileOpenOutlined
+                fontSize="large"
+                sx={{ color: route == "/testament" ? "steelblue" : "white" }}
+              />
             </IconButton>
           </Link>
         </NextLink>
@@ -83,8 +96,13 @@ export const SideBar = () => {
       >
         <NextLink href="/goals" passHref>
           <Link>
-            <IconButton>
-              <FlagCircleOutlined fontSize="large" sx={{ color: "white" }} />
+            <IconButton
+              sx={{ bgcolor: route == "/goals" ? "white" : "transparent" }}
+            >
+              <FlagCircleOutlined
+                fontSize="large"
+                sx={{ color: route == "/goals" ? "steelblue" : "white" }}
+              />
             </IconButton>
           </Link>
         </NextLink>
@@ -100,8 +118,13 @@ export const SideBar = () => {
       >
         <NextLink href="/savings" passHref>
           <Link>
-            <IconButton>
-              <AttachMoneyOutlined fontSize="large" sx={{ color: "white" }} />
+            <IconButton
+              sx={{ bgcolor: route == "/savings" ? "white" : "transparent" }}
+            >
+              <AttachMoneyOutlined
+                fontSize="large"
+                sx={{ color: route == "/savings" ? "steelblue" : "white" }}
+              />
             </IconButton>
           </Link>
         </NextLink>
