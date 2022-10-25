@@ -47,7 +47,7 @@ export const SideBar = () => {
         alignItems="center"
         sx={{ mb: 2 }}
       >
-        <NextLink href="/" passHref>
+        <NextLink href="/patrimony" passHref>
           <Link>
             <IconButton>
               <HouseOutlined fontSize="large" sx={{ color: "white" }} />
@@ -64,7 +64,7 @@ export const SideBar = () => {
         alignItems="center"
         sx={{ mb: 2 }}
       >
-        <NextLink href="/" passHref>
+        <NextLink href="/testament" passHref>
           <Link>
             <IconButton>
               <FileOpenOutlined fontSize="large" sx={{ color: "white" }} />
@@ -81,7 +81,7 @@ export const SideBar = () => {
         alignItems="center"
         sx={{ mb: 2 }}
       >
-        <NextLink href="/" passHref>
+        <NextLink href="/goals" passHref>
           <Link>
             <IconButton>
               <FlagCircleOutlined fontSize="large" sx={{ color: "white" }} />
@@ -98,7 +98,7 @@ export const SideBar = () => {
         alignItems="center"
         sx={{ mb: 2 }}
       >
-        <NextLink href="/" passHref>
+        <NextLink href="/savings" passHref>
           <Link>
             <IconButton>
               <AttachMoneyOutlined fontSize="large" sx={{ color: "white" }} />

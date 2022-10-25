@@ -1,14 +1,14 @@
-import React, { FC, PropsWithChildren } from "react";
 import Head from "next/head";
-import { SideBar } from "../Ui";
-
+import React, { FC, PropsWithChildren } from "react";
+import { TopBar } from "../Ui";
+  
 interface Props {
   title: string;
   pageDescription: string;
   imageForShare?: string;
 }
 
-export const ActionsLayout: FC<PropsWithChildren<Props>> = ({
+export const MainLayout: FC<PropsWithChildren<Props>> = ({
   title,
   pageDescription,
   imageForShare,
@@ -24,14 +24,14 @@ export const ActionsLayout: FC<PropsWithChildren<Props>> = ({
         {imageForShare && <meta name="og:image" content={imageForShare} />}
       </Head>
       <nav>
-        <SideBar />
+        <TopBar />
       </nav>
       <main
         style={{
           backgroundImage: 'url("backgrounds/Pagina-Web.jpg")',
-          width: "calc(100vw - 90px)",
+          width: "100vw",
           height: "100vh",
-          float: 'right'
+          paddingTop: "90px"
         }}
       >
         {children}
