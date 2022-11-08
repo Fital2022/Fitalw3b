@@ -53,7 +53,7 @@ const Home: NextPage = () => {
       >
         <Grid container spacing={2} sx={{ maxWidth: 1300 }}>
           {OPTIONS.map((item) => (
-            <Grid item xs={3}>
+            <Grid key={item.path} item xs={3}>
               <Card
                 key={item.title}
                 sx={{
