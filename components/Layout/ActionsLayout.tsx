@@ -30,13 +30,13 @@ export const ActionsLayout: FC<PropsWithChildren<Props>> = ({
         style={{
           backgroundImage: 'url("backgrounds/Pagina-Web.jpg")',
           width: "calc(100vw - 90px)",
-          height: "100vh",
-          float: 'right'
+          minHeight: "100vh",
+          float: "right",
         }}
       >
         {children}
-      </main>
-      <footer>{/* TODO: posible footer*/}</footer>
+\      </main>
+      {/* <footer>TODO: posible footer</footer> */}
     </>
   );
 };

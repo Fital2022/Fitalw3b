@@ -30,7 +30,7 @@ export const MainLayout: FC<PropsWithChildren<Props>> = ({
         style={{
           backgroundImage: 'url("backgrounds/Pagina-Web.jpg")',
           width: "100vw",
-          height: "100vh",
+          minHeight: "100vh",
           paddingTop: "90px"
         }}
       >

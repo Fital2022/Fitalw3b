@@ -1,80 +1,67 @@
+import { Add } from "@mui/icons-material";
+import {
+  Box,
+  Button,
+  Card,
+  Grid,
+  IconButton,
+  Link,
+  Typography,
+} from "@mui/material";
+import { MainLayout } from "../components/Layout/MainLayout";
 import NextLink from "next/link";
-import { AttachMoneyOutlined, FileOpenOutlined, FlagCircleOutlined, HouseOutlined, SearchOffOutlined } from "@mui/icons-material";
-import { Box, Card, Grid, IconButton, Link, Typography } from "@mui/material";
-import type { NextPage } from "next";
-import { ActionsLayout, MainLayout } from "../components/Layout";
-import { SimpleCard } from "../components/Ui/SimpleCard";
 
-interface IOption {
-  title: string;
-  icon: JSX.Element;
-  path: '/patrimony' | '/testament' | '/goals' | '/savings';
-}
-
-const OPTIONS: IOption[] = [
-  {
-    path: '/patrimony',
-    title: "Patrimonio",
-    icon: (
-      <HouseOutlined fontSize="large" sx={{ color: "black", fontSize: 200 }} />
-    ),
-  },
-  {
-    path: '/testament',
-    title: "Testamento Digital",
-    icon: (
-      <FileOpenOutlined fontSize="large" sx={{ color: "black", fontSize: 200 }} />
-    ),
-  },
-  {
-    path: '/goals',
-    title: "Metas",
-    icon: (
-      <FlagCircleOutlined fontSize="large" sx={{ color: "black", fontSize: 200 }} />
-    ),
-  },
-  {
-    path: '/savings',
-    title: "Ahorros",
-    icon: (
-      <AttachMoneyOutlined fontSize="large" sx={{ color: "black", fontSize: 200 }} />
-    ),
-  },
-];
-
-const Home: NextPage = () => {
+const Home = () => {
   return (
-    <MainLayout title={"Fital"} pageDescription={"Página principal"}>
+    <MainLayout
+      title={"Fital | Menú principal"}
+      pageDescription={"Menú principal"}
+    >
       <Box
         display="flex"
         justifyContent="center"
         alignItems="center"
         sx={{ width: "100%", height: "100%" }}
       >
-        <Grid container spacing={2} sx={{ maxWidth: 1300 }}>
-          {OPTIONS.map((item) => (
-            <Grid key={item.path} item xs={3}>
-              <Card
-                key={item.title}
-                sx={{
-                  height: 300,
-                  width: 300,
-                  justifyContent: "center",
-                  display: "flex",
-                  flexWrap: "wrap",
-                }}
-              >
-                <NextLink href={item.path} passHref>
-                  <Link>
-                    <IconButton>{item.icon}</IconButton>
-                  </Link>
-                </NextLink>
-                <Typography variant="h4" sx={{ textAlign: "center" }}>
-                  {item.title}
-                </Typography>
-              </Card>
-            </Grid>
-          ))}
+        <Grid container spacing={2} sx={{ maxWidth: 1300, justifyContent: 'center' }}>
+          <Grid item xs={3}>
+            <Card
+              sx={{
+                height: '190px',
+                width: '190px',
+                justifyContent: "center",
+                alignItems: "center",
+                display: "flex",
+                flexWrap: "wrap",
+              }}
+            >
+              <NextLink href="/main" passHref>
+                <Link>
+                  <IconButton>
+                    <Add sx={{ fontSize: 120, color: "black" }} />
+                  </IconButton>
+                </Link>
+              </NextLink>
+            </Card>
+          </Grid>
+          <Grid item xs={3}>
+            <Card
+              sx={{
+                height: '190px',
+                width: '190px',
+                justifyContent: "center",
+                alignItems: "center",
+                display: "flex",
+                flexWrap: "wrap",
+              }}
+            >
+              <NextLink href="/main" passHref>
+                <Link sx={{textDecoration: 'none'}} >
+                  <Typography sx={{color: 'black', fontSize: 40}} >Imperio</Typography>
+                </Link>
+              </NextLink>
+            </Card>
+          </Grid>
         </Grid>
       </Box>
     </MainLayout>

@@ -26,7 +26,8 @@ export const SideBar = () => {
         position: "fixed",
         left: 0,
         height: "100vh",
-        backgroundColor: "steelblue",
+        // backgroundColor: "steelblue",
+        background: "var(--side-gradient)",
         display: "flex",
         flexDirection: "column",
         width: "90px",
@@ -57,7 +58,7 @@ export const SideBar = () => {
             >
               <HouseOutlined
                 fontSize="large"
-                sx={{ color: route == "/patrimony" ? "steelblue" : "white" }}
+                sx={{ color: route == "/patrimony" ? "black" : "white" }}
               />
             </IconButton>
           </Link>
@@ -79,7 +80,7 @@ export const SideBar = () => {
             >
               <FileOpenOutlined
                 fontSize="large"
-                sx={{ color: route == "/testament" ? "steelblue" : "white" }}
+                sx={{ color: route == "/testament" ? "black" : "white" }}
               />
             </IconButton>
           </Link>
@@ -101,7 +102,7 @@ export const SideBar = () => {
             >
               <FlagCircleOutlined
                 fontSize="large"
-                sx={{ color: route == "/goals" ? "steelblue" : "white" }}
+                sx={{ color: route == "/goals" ? "black" : "white" }}
               />
             </IconButton>
           </Link>
@@ -123,7 +124,7 @@ export const SideBar = () => {
             >
               <AttachMoneyOutlined
                 fontSize="large"
-                sx={{ color: route == "/savings" ? "steelblue" : "white" }}
+                sx={{ color: route == "/savings" ? "black" : "white" }}
               />
             </IconButton>
           </Link>

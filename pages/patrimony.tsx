@@ -1,8 +1,42 @@
 import { ActionsLayout } from "../components/Layout";
 import { Box, Grid, Typography } from "@mui/material";
-import { SimpleCard } from "../components/Ui";
+import { IBottomMenuData } from "../interfaces";
+import { BottomMenu } from "../components/bottomMenu/BottomMenu";
 
-const PATRIMONY_OPTIONS = ["Casa", "Automovíl", "Seguro"];
+const MENU_ACTIONS: IBottomMenuData[] = [
+  {
+    link: { id: 1, name: "Dinero" },
+    sublinks: [
+      { id: 1, name: "Casa", img: "/images/casa.png" },
+      { id: 2, name: "Departamento", img: "/images/casa.png" },
+      { id: 3, name: "Autos", img: "/images/autos.png" },
+    ],
+  },
+  {
+    link: { id: 2, name: "Mobiliario" },
+    sublinks: [
+      { id: 1, name: "Casa", img: "/images/casa.png" },
+      { id: 2, name: "Departamento", img: "/images/casa.png" },
+      { id: 3, name: "Autos", img: "/images/autos.png" },
+    ],
+  },
+  {
+    link: { id: 3, name: "Inmobiliario" },
+    sublinks: [
+      { id: 1, name: "Casa", img: "/images/casa.png" },
+      { id: 2, name: "Departamento", img: "/images/casa.png" },
+      { id: 3, name: "Autos", img: "/images/autos.png" },
+    ],
+  },
+  {
+    link: { id: 4, name: "Derechos" },
+    sublinks: [
+      { id: 1, name: "Casa", img: "/images/casa.png" },
+      { id: 2, name: "Departamento", img: "/images/casa.png" },
+      { id: 3, name: "Autos", img: "/images/autos.png" },
+    ],
+  },
+];
 
 const patrimony = () => {
   return (
@@ -10,7 +44,7 @@ const patrimony = () => {
       title={"Fital - Patrimonio"}
       pageDescription={"Página de patrimonio"}
     >
-      <Box>
+      {/* <Box>
         <Typography
           variant="h2"
           component="h1"
@@ -23,7 +57,9 @@ const patrimony = () => {
             <SimpleCard key={item} title={item} />
           ))}
         </Box>
-      </Box>
+      </Box> */}
+
+      <BottomMenu data={MENU_ACTIONS} />
     </ActionsLayout>
   );
 };

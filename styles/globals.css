@@ -1,3 +1,14 @@
+:root {
+  --side-gradient: transparent
+    linear-gradient(180deg, #000000 0%, #2e3192 53%, #3b1458 100%) 0% 0%
+    no-repeat padding-box;
+  --top-gradient: transparent
+    linear-gradient(117deg, #000000 0%, #2e3192 53%, #3b1458 100%) 0% 0%
+    no-repeat padding-box;
+    
+  --icon-gradient: linear-gradient(180deg, #2e3192, #3b1458);
+}
+
 html,
 body {
   padding: 0;

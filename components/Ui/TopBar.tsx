@@ -24,11 +24,10 @@ export const TopBar = () => {
         position: "fixed",
         top: 0,
         height: "90px",
-        backgroundColor: "steelblue",
+        background: "var(--top-gradient)",
         display: "flex",
         width: "100vw",
         alignItems: "center",
-        justifyContent: "space-between",
       }}
     >
       <NextLink href="/" passHref>
@@ -41,9 +40,14 @@ export const TopBar = () => {
           />
         </Link>
       </NextLink>
-      <Typography variant="h4" component="h4" sx={{ color: "white" }}>
-        Hola Desconocido
-      </Typography>
+      <Box sx={{ml: 10}} >
+        <Typography variant="h5" component="h5" sx={{ color: "white" }}>
+          ¡Buenos días Júan!
+        </Typography>
+        <Typography variant="h5" component="h5" sx={{ color: "white" }}>
+          Empecemos:
+        </Typography>
+      </Box>
     </Box>
   );
 };
