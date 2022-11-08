@@ -1,0 +1,21 @@
+.buttonLogin {
+    border-radius: 30px;
+    color: white;
+    background-color: #8A6BE5;
+    margin-top: 20px;
+    text-transform: none;
+    /* background-image: url('/backgrounds/buttonLogin.svg') */
+}
+
+.buttonRegistro {
+    border-radius: 30px;
+    color: black;
+    background-color: white;
+    margin-top: 20px;
+    text-transform: none;
+    text-decoration: none; 
+}
+
+.linkk{
+    text-decoration: none;
+}
