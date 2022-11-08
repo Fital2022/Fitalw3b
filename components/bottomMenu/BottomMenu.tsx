@@ -25,7 +25,7 @@ export const BottomMenu: FC<Props> = ({ data }) => {
     >
       {data.map((element) => {
         return (
-          <Box sx={{ position: "relative" }}>
+          <Box key={element.link.id} sx={{ position: "relative" }}>
             <Box
               sx={[
                 {
@@ -37,12 +37,14 @@ export const BottomMenu: FC<Props> = ({ data }) => {
                   // backgroundColor: "grey",
                   height: "110px",
                   visibility: "hidden",
+                  opacity: 0,
                   transition: "all 0.3s ease",
                 },
                 element.link.id === currentId && {
                   visibility: "visible",
                   top: "-120px",
                   zIndex: 1,
+                  opacity: 1,
                 },
               ]}
             >
