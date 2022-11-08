@@ -14,7 +14,7 @@ const patrimony = () => {
         <Typography
           variant="h2"
           component="h1"
-          sx={{ textAlign: "center", mt: 5 }}
+          sx={{ textAlign: "center", mt: 5, color: "black" }}
         >
           Patrimonio
         </Typography>

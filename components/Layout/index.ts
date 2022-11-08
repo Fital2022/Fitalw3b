@@ -1,3 +1,3 @@
-export * from './ActionsLayout';
-export * from './MainLayout';
-export * from './FirstLayout';
+export * from './ActionsLayout'
+export * from './MainLayout'
+export * from './FormLayout'
