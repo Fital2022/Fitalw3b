@@ -1,14 +1,11 @@
-// next
 import type { NextPage } from 'next'
 import * as React from 'react';
-// material
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import { Avatar, AvatarGroup } from '@mui/material';
+import { Avatar } from '@mui/material';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
-// project
 import { ActionsLayout } from '../../components/Layout';
 import styles from './Savings.module.css';
 
@@ -46,7 +43,7 @@ const BorderLinearProgressBlue = styled(LinearProgress)(({ theme }) => ({
 
 const Savings: NextPage = () => {
   return (
-    <ActionsLayout title={'Fital'} pageDescription={'Página principal'}>
+    <ActionsLayout title={'Fital - Ahorros'} pageDescription={'Página principal'}>
       <div
         style={{
           marginTop: "80px",

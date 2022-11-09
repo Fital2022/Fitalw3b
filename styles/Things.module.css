@@ -1,0 +1,20 @@
+.buttonGreen {
+  border-radius: 30px;
+  color: white;
+  background: #31a354 0% 0% no-repeat padding-box;
+  border-radius: 10px;
+  opacity: 1;
+  text-transform: none;
+}
+
+.closeModal {
+  position: absolute;
+  border-radius: 50%;
+  bottom: 6px;
+  right: -20px;
+  top: -225px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
