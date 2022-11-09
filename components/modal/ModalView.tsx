@@ -1,17 +1,7 @@
-import React, {
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-
-import styles from "../../styles/Things.module.css";
-import Image from "next/image";
 
 import ReactCanvasConfetti from "react-canvas-confetti";
 
@@ -46,34 +36,14 @@ const style = {
 };
 
 interface Props {
-  text: string;
+  confetti?: boolean;
+  children: (
+    handleClose: () => void,
+    pauseAnimation: () => void
+  ) => JSX.Element;
 }
 
-// function Fireworks() {
-
-//   return (
-//     <>
-//       <div>
-//         <button onClick={startAnimation}>Start</button>
-//         <button onClick={pauseAnimation}>Pause</button>
-//         <button onClick={stopAnimation}>Stop</button>
-//       </div>
-//       <ReactCanvasConfetti
-//         refConfetti={getInstance}
-//         style={{
-//           position: "fixed",
-//           pointerEvents: "none",
-//           width: "100%",
-//           height: "100%",
-//           top: 0,
-//           left: 0,
-//         }}
-//       />
-//     </>
-//   );
-// }
-
-export const ModalView: React.FC<PropsWithChildren<Props>> = ({ text }) => {
+export const ModalView: React.FC<Props> = ({ confetti = true, children }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -128,57 +98,21 @@ export const ModalView: React.FC<PropsWithChildren<Props>> = ({ text }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
-          <Typography
-            id="modal-modal-description"
-            sx={{ mt: 2, color: "black" }}
-          >
-            {text}
-          </Typography>
-          <br />
-          <Box
-            component="span"
-            sx={{ p: 2 }}
-            position="relative"
-            style={{
-              top: "50%",
-              left: "24%",
-              transform: "translate(-50%, -50%)",
-            }}
-          >
-            <Button
-              className={styles.buttonGreen}
-              variant="contained"
-              color="primary"
-            >
-              Regístrate ahora
-            </Button>
-          </Box>
-          <span className={styles.closeModal}>
-            <Image
-              alt="Icon Info Member"
-              src="/icons/cancel.png"
-              width={30}
-              height={30}
-              onClick={function (event) {
-                handleClose();
-                pauseAnimation();
-              }}
-            />
-          </span>
-        </Box>
+        <Box sx={style}>{children(handleClose, pauseAnimation)}</Box>
       </Modal>
-      <ReactCanvasConfetti
-        refConfetti={getInstance}
-        style={{
-          position: "fixed",
-          pointerEvents: "none",
-          width: "100%",
-          height: "100%",
-          top: 0,
-          left: 0,
-        }}
-      />
+      {confetti && (
+        <ReactCanvasConfetti
+          refConfetti={getInstance}
+          style={{
+            position: "fixed",
+            pointerEvents: "none",
+            width: "100%",
+            height: "100%",
+            top: 0,
+            left: 0,
+          }}
+        />
+      )}
     </>
   );
 };

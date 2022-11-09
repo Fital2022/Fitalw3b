@@ -1,17 +1,61 @@
+import { Box, Button, Typography } from "@mui/material";
+import Image from "next/image";
 import { ActionsLayout } from "../../components/Layout";
-import { ModalView } from "../../components/Ui";
-// import { Fireworks } from "../../components/Ui";
+import { ModalView } from "../../components/modal";
 
-const patrimony = () => {
+import styles from "../../styles/Things.module.css";
+
+const ModalConfetti = () => {
   return (
     <ActionsLayout
       title={"Fital - Modal y Confetti"}
       pageDescription={"Pruebas"}
     >
-      <ModalView text="Este es una prueba del modal y del confetti en el sistema de Fital"></ModalView>
-      {/* <Fireworks></Fireworks> */}
+      <ModalView confetti>
+        {(handleClose, pauseAnimation) => (
+          <>
+            <Typography
+              id="modal-modal-description"
+              sx={{ mt: 2, color: "black" }}
+            >
+              Este es una prueba del modal en Modal-confetti en el proyecto Fital
+            </Typography>
+            <br />
+            <Box
+              component="span"
+              sx={{ p: 2 }}
+              position="relative"
+              style={{
+                top: "50%",
+                left: "24%",
+                transform: "translate(-50%, -50%)",
+              }}
+            >
+              <Button
+                className={styles.buttonGreen}
+                variant="contained"
+                color="primary"
+              >
+                Regístrate ahora
+              </Button>
+            </Box>
+            <span className={styles.closeModal}>
+              <Image
+                alt="Icon Info Member"
+                src="/icons/cancel.png"
+                width={30}
+                height={30}
+                onClick={function (event) {
+                  handleClose();
+                  pauseAnimation();
+                }}
+              />
+            </span>
+          </>
+        )}
+      </ModalView>
     </ActionsLayout>
   );
 };
 
-export default patrimony;
+export default ModalConfetti;
