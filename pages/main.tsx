@@ -62,7 +62,7 @@ const MainMenu: NextPage = () => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        sx={{ width: "100%", height: "100%" }}
+        sx={{ width: "100%", minHeight: "calc(100vh - 90px)" }}
       >
         <Grid container spacing={2} sx={{ maxWidth: 1300 }}>
           {OPTIONS.map((item) => (

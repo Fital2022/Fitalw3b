@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React, { FC, PropsWithChildren } from "react";
 import { TopBar } from "../Ui";
-  
+
 interface Props {
   title: string;
   pageDescription: string;
@@ -30,8 +30,9 @@ export const MainLayout: FC<PropsWithChildren<Props>> = ({
         style={{
           backgroundImage: 'url("backgrounds/Pagina-Web.jpg")',
           width: "100vw",
-          minHeight: "100vh",
-          paddingTop: "90px"
+          minHeight: "calc(100vh - 90px)",
+          marginTop: "90px",
+          backgroundColor: "green",
         }}
       >
         {children}

@@ -21,7 +21,7 @@ const Home = () => {
         display="flex"
         justifyContent="center"
         alignItems="center"
-        sx={{ width: "100%", height: "100%" }}
+        sx={{ width: "100%", height: "calc(100vh - 90px)" }}
       >
         <Grid container spacing={2} sx={{ maxWidth: 1300, justifyContent: 'center' }}>
           <Grid item xs={3}>

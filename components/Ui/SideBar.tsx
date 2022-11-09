@@ -13,11 +13,22 @@ import {
   Typography,
   Box,
   CardMedia,
+  SxProps,
+  Theme,
 } from "@mui/material";
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 export const SideBar = () => {
   const { route } = useRouter();
+  const [selectedPosition, setSelectedPosition] = useState<
+    SxProps<Theme> | undefined
+  >();
+
+  // useEffect(() => {
+  //   if (route == "/patrimony") setSelectedPosition({ transform: 'translateY(-2px)' });
+  //   if (route == "/testament") setSelectedPosition({ transform: 'translateY(30px)' });
+  // }, [route]);
 
   return (
     <Box
@@ -32,6 +43,7 @@ export const SideBar = () => {
         flexDirection: "column",
         width: "90px",
         alignItems: "center",
+        top: 0,
       }}
     >
       <NextLink href="/" passHref>
@@ -45,93 +57,107 @@ export const SideBar = () => {
         </Link>
       </NextLink>
       {/* <Box flex={1} /> */}
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        sx={{ mb: 2 }}
-      >
-        <NextLink href="/patrimony" passHref>
-          <Link>
-            <IconButton
-              sx={{ bgcolor: route == "/patrimony" ? "white" : "transparent" }}
-            >
-              <HouseOutlined
-                fontSize="large"
-                sx={{ color: route == "/patrimony" ? "black" : "white" }}
-              />
-            </IconButton>
-          </Link>
-        </NextLink>
-        <Typography variant="caption" sx={{ color: "white" }}>
-          Patrimonio
-        </Typography>
-      </Box>
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        sx={{ mb: 2 }}
-      >
-        <NextLink href="/testament" passHref>
-          <Link>
-            <IconButton
-              sx={{ bgcolor: route == "/testament" ? "white" : "transparent" }}
-            >
-              <FileOpenOutlined
-                fontSize="large"
-                sx={{ color: route == "/testament" ? "black" : "white" }}
-              />
-            </IconButton>
-          </Link>
-        </NextLink>
-        <Typography variant="caption" sx={{ color: "white" }}>
-          Testamento
-        </Typography>
-      </Box>
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        sx={{ mb: 2 }}
-      >
-        <NextLink href="/goals" passHref>
-          <Link>
-            <IconButton
-              sx={{ bgcolor: route == "/goals" ? "white" : "transparent" }}
-            >
-              <FlagCircleOutlined
-                fontSize="large"
-                sx={{ color: route == "/goals" ? "black" : "white" }}
-              />
-            </IconButton>
-          </Link>
-        </NextLink>
-        <Typography variant="caption" sx={{ color: "white" }}>
-          Metas
-        </Typography>
-      </Box>
-      <Box
-        display="flex"
-        flexDirection="column"
-        alignItems="center"
-        sx={{ mb: 2 }}
-      >
-        <NextLink href="/savings" passHref>
-          <Link>
-            <IconButton
-              sx={{ bgcolor: route == "/savings" ? "white" : "transparent" }}
-            >
-              <AttachMoneyOutlined
-                fontSize="large"
-                sx={{ color: route == "/savings" ? "black" : "white" }}
-              />
-            </IconButton>
-          </Link>
-        </NextLink>
-        <Typography variant="caption" sx={{ color: "white" }}>
-          Ahorros
-        </Typography>
+      <Box sx={{ position: "relative" }}>
+        <Box
+          sx={{
+            position: "absolute",
+            width: "55px",
+            height: "55px",
+            background: "white",
+            borderRadius: "50%",
+            left: "5px",
+            zIndex: -1,
+            transition: "all 0.3s ease",
+            top:
+              route == "/patrimony"
+                ? "-2px"
+                : route == "/testament"
+                ? "85px"
+                : "-10px",
+          }}
+        />
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          sx={{ mb: 2 }}
+        >
+          <NextLink href="/patrimony" passHref>
+            <Link>
+              <IconButton>
+                <HouseOutlined
+                  fontSize="large"
+                  sx={{ color: route == "/patrimony" ? "black" : "white" }}
+                />
+              </IconButton>
+            </Link>
+          </NextLink>
+          <Typography variant="caption" sx={{ color: "white" }}>
+            Patrimonio
+          </Typography>
+        </Box>
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          sx={{ mb: 2 }}
+        >
+          <NextLink href="/testament" passHref>
+            <Link>
+              <IconButton>
+                <FileOpenOutlined
+                  fontSize="large"
+                  sx={{ color: route == "/testament" ? "black" : "white" }}
+                />
+              </IconButton>
+            </Link>
+          </NextLink>
+          <Typography variant="caption" sx={{ color: "white" }}>
+            Testamento
+          </Typography>
+        </Box>
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          sx={{ mb: 2 }}
+        >
+          <NextLink href="/goals" passHref>
+            <Link>
+              <IconButton>
+                <FlagCircleOutlined
+                  fontSize="large"
+                  sx={{ color: route == "/goals" ? "black" : "white" }}
+                />
+              </IconButton>
+            </Link>
+          </NextLink>
+          <Typography variant="caption" sx={{ color: "white" }}>
+            Metas
+          </Typography>
+        </Box>
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          sx={{ mb: 2 }}
+        >
+          <NextLink href="/savings" passHref>
+            <Link>
+              <IconButton
+                sx={{ bgcolor: route == "/savings" ? "white" : "transparent" }}
+              >
+                <AttachMoneyOutlined
+                  fontSize="large"
+                  sx={{ color: route == "/savings" ? "black" : "white" }}
+                />
+              </IconButton>
+            </Link>
+          </NextLink>
+          <Typography variant="caption" sx={{ color: "white" }}>
+            Ahorros
+          </Typography>
+        </Box>
       </Box>
       {/* <Box flex={1} /> */}
     </Box>
