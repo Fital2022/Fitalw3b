@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { empireSlice } from ".";
+import { empireSlice } from "./empireSlice";
 
 export const store = configureStore({
   reducer: {
