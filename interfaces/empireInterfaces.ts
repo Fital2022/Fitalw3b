@@ -10,6 +10,7 @@ export interface IRight {
   name: string;
   value: number;
   type: 'casa' | 'departamento' | 'auto';
+  id?: number;
 }
 
 export interface ITrustor {
@@ -20,4 +21,10 @@ export interface ITrustor {
 export interface IBeneficiary {
   id: number;
   name: string;
+}
+
+export interface IRightBeneficiary {
+  idRight: number;
+  idBeneficiary: number;
+  percentage: number;
 }
