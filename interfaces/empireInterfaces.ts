@@ -4,13 +4,15 @@ export interface IEmpire {
   rights: IRight[];
   trustor: ITrustor[];
   beneficiary: IBeneficiary[];
+  
 }
 
 export interface IRight {
   name: string;
   value: number;
-  type: 'casa' | 'departamento' | 'auto';
+  type: 'casa' | 'departamento' | 'auto' | 'seguro';
   id?: number;
+  img?: string;
 }
 
 export interface ITrustor {
@@ -21,10 +23,11 @@ export interface ITrustor {
 export interface IBeneficiary {
   id: number;
   name: string;
+  img?: string;
+  properties: IRightBeneficiary[];
 }
 
 export interface IRightBeneficiary {
   idRight: number;
-  idBeneficiary: number;
   percentage: number;
 }

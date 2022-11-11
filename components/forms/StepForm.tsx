@@ -18,6 +18,8 @@ import React, { FC, useState } from "react";
 import styles from "../../styles/form.module.css";
 import { TextField } from "@mui/material";
 import DataTable from "../tables/DataTable";
+import { IEmpire } from "../../interfaces/empireInterfaces";
+
 
 const StyledTextField = styled(TextField)`
 label.Mui-focused{
@@ -128,11 +130,12 @@ const handleSubmitF = async (event: any) => {
   alert(`nombre: ${data.name}, fecha de nacimiento: ${data.birth}, sexo: ${data.genre}, domicilio: ${data.direction}, estado civil: ${data.marital} `)
 }
 
-type Props = {
-  premium: boolean
+interface Props  {
+  premium: boolean;
+  iempire: IEmpire;
 }
 
-export const StepForm: FC<Props> = ({premium}) => {
+export const StepForm: FC<Props> = ({premium, iempire}) => {
   const [sucesion, setSucesion] = useState(true);
 
   const [formoption, setFormoption] = useState("data");
@@ -144,6 +147,8 @@ export const StepForm: FC<Props> = ({premium}) => {
       setSucesion(true);
     }
   };
+
+  console.log(iempire)
 
   return (
     <Grid
@@ -557,7 +562,7 @@ export const StepForm: FC<Props> = ({premium}) => {
                           <div className={styles["form-title"]}>
                             <Typography variant="h4">Fideicomitente</Typography>
                           </div>
-                          <DataTable />
+                          <DataTable rights={iempire.rights} beneficiarys={iempire.beneficiary} />
                           <br />
                           <Grid
                             container
