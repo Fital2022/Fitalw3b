@@ -92,6 +92,84 @@ const Properright: IRightBeneficiary [] = [
     percentage: 0,
   },
 ]
+const Properright2: IRightBeneficiary [] = [
+  {
+    idRight: 1,
+    percentage: 0,
+  },
+  {
+    idRight: 2,
+    percentage: 0,
+  },
+  {
+    idRight: 3,
+    percentage: 0,
+  },
+  {
+    idRight: 4,
+    percentage: 0,
+  },
+  {
+    idRight: 5,
+    percentage: 0,
+  },
+  {
+    idRight: 6,
+    percentage: 0,
+  },
+]
+const Properright3: IRightBeneficiary [] = [
+  {
+    idRight: 1,
+    percentage: 0,
+  },
+  {
+    idRight: 2,
+    percentage: 0,
+  },
+  {
+    idRight: 3,
+    percentage: 0,
+  },
+  {
+    idRight: 4,
+    percentage: 0,
+  },
+  {
+    idRight: 5,
+    percentage: 0,
+  },
+  {
+    idRight: 6,
+    percentage: 0,
+  },
+]
+const Properright4: IRightBeneficiary [] = [
+  {
+    idRight: 1,
+    percentage: 0,
+  },
+  {
+    idRight: 2,
+    percentage: 0,
+  },
+  {
+    idRight: 3,
+    percentage: 0,
+  },
+  {
+    idRight: 4,
+    percentage: 0,
+  },
+  {
+    idRight: 5,
+    percentage: 0,
+  },
+  {
+    idRight: 6,
+    percentage: 0,
+  },
+]
 
 const trustor: ITrustor [] = [
   {id: 1,
@@ -109,19 +187,19 @@ const beneficiary : IBeneficiary [] = [
     id: 2,
     name: 'Juan Lopez',
     img: '/images/avatar/person1.jpeg',
-    properties: Properright,
+    properties: Properright2,
   },
   {
     id: 3,
     name: 'Laura Lopez',
     img: '/images/avatar/person2.jpeg',
-    properties: Properright,
+    properties: Properright3,
   },
   {
     id: 4,
     name: 'Carlos Lopez',
     img: '/images/avatar/person1.jpeg',
-    properties: Properright,
+    properties: Properright4,
   },
 ]
 
