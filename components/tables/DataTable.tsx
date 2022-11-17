@@ -16,7 +16,7 @@ import {
   FiberManualRecord,
   FiberManualRecordOutlined,
 } from "@mui/icons-material";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { IBeneficiary, IRight, IRightBeneficiary } from "../../interfaces/empireInterfaces";
 import { IconButton } from '@mui/material';
 
@@ -28,16 +28,27 @@ interface Props {
 
 
 const DataTable: FC<Props> = ({ rights, beneficiarys }) => {
+  const [Var, setVar] = useState(true);
+
+//   const makeid = (length: number) => {
+//     var result           = '';
+//     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+//     var charactersLength = characters.length;
+//     for ( var i = 0; i < length; i++ ) {
+//         result += characters.charAt(Math.floor(Math.random() * charactersLength));
+//     }
+//     setVar(result)
+   
+// }
 
   const getmatrixdata = (id: number, index: number, right: number) => {
-
 
 var cont = 0
 
 var edited = [];
 
  for (let i = 0; i < beneficiarys.length; i++) {
-  if (beneficiarys[i].properties[index].percentage != 0  ) {
+  if (beneficiarys[i].properties[index].percentage !== 0  ) {
     cont ++;
     edited.push(i)
   }
@@ -46,15 +57,16 @@ var edited = [];
  if (cont == 0) {
   var result = 100
   for (let j = 0; j < beneficiarys.length; j++) { 
-    if(beneficiarys[j].id === id){
+    if(beneficiarys[j].id == id){
       console.log("Estoy en el cliente")
       beneficiarys[j].properties[index].percentage = result
     }
   }
  }
+
  else {
-   var result = 100 / cont
-   console.log("Reasignare datos")
+   var result = 100 / (cont + 1)
+   console.log("Reasignare datos con valor: ",result)
    for (let j = 0; j < beneficiarys.length; j++) {
     if(beneficiarys[j].id === id){
       beneficiarys[j].properties[index].percentage = result
@@ -66,6 +78,42 @@ var edited = [];
  }
 
  console.log(beneficiarys)
+//  makeid(5)
+setVar(!Var)
+
+  }
+  const quitmatrixdata = (id: number, index: number, right: number) => {
+
+var cont = 0
+
+var edited = [];
+
+ for (let i = 0; i < beneficiarys.length; i++) {
+  if (beneficiarys[i].properties[index].percentage !== 0  ) {
+    cont ++;
+    edited.push(i)
+  }
+ }
+ console.log(cont)
+
+   var result = 100 / (cont - 1)
+   console.log("Reasignare datos con valor: ",result)
+
+  for (let k = 0; k < edited.length; k++) {
+    if( beneficiarys[edited[k]].id === id){
+      beneficiarys[edited[k]].properties[index].percentage = 0
+      console.log("Le he quitado el valor")
+    }
+    else {
+      beneficiarys[edited[k]].properties[index].percentage = result
+    }
+  }
+ 
+
+ console.log(beneficiarys)
+//  makeid(5)
+setVar(!Var)
+
   }
   
   return (
@@ -104,7 +152,7 @@ var edited = [];
                     <TableCell component="th" scope="row">
                     <Grid container direction="row">
                           {" "}
-                          <Tooltip title={"Beneficiario: " + id}>
+                          <Tooltip title={"Beneficiario: " + id} placement="top">
                           <Avatar
                             alt="person"
                             src={img}
@@ -120,13 +168,13 @@ var edited = [];
                       {items.percentage > 0 ? (
                         <>
                         <Tooltip title={"Porcentaje de derechos: " + items.percentage + "%"} placement="left">
-                        <IconButton onClick={() =>  getmatrixdata(id,index,items.idRight)}>
+                        <IconButton onClick={() =>  quitmatrixdata(id,index,items.idRight)}>
                         <FiberManualRecord
                           fontSize="large"
                           sx={{ color: "gray" }}
                         />
                           </IconButton>
-                        </Tooltip>
+                        </Tooltip> 
                         </>
                       ) : (
                         <>
@@ -135,7 +183,7 @@ var edited = [];
                         <FiberManualRecordOutlined
                           fontSize="large"
                           sx={{ color: "gray" }}
-                        />
+                        /> 
                           </IconButton>
                         </Tooltip>
                         </>
