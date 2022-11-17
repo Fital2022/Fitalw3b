@@ -39,18 +39,6 @@ const ModalConfetti = () => {
                 Regístrate ahora
               </Button>
             </Box>
-            <span className={styles.closeModal}>
-              <Image
-                alt="Icon Info Member"
-                src="/icons/cancel.png"
-                width={30}
-                height={30}
-                onClick={function (event) {
-                  handleClose();
-                  pauseAnimation();
-                }}
-              />
-            </span>
           </>
         )}
       </ModalView>

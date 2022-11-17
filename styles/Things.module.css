@@ -8,13 +8,10 @@
 }
 
 .closeModal {
-  position: absolute;
-  border-radius: 50%;
-  bottom: 6px;
-  right: -20px;
-  top: -225px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   cursor: pointer;
+  float: right;
+  margin-top: -35px;
+  margin-right: -25px;
+  left: 90px;
+  width: 35px;
 }
