@@ -236,48 +236,7 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
   const closeform = () => {
     dispatch(setShowForm(false))
   }
-  const handleSubmitF = async (event: any) => { 
-
-    event.preventDefault();
-  
-    const data = {
-      name: event.target.name.value,
-      birth: event.target.birth.value,
-      genre: event.target.genre.value,
-      curp: event.target.curp.value,
-      rfc: event.target.rfc.value,
-      direction: event.target.direction.value,
-      marital: event.target.marital.value,
-    }
-  
-    // Send the data to the server in JSON format.
-    const JSONdata = JSON.stringify(data)
-  
-    // API endpoint where we send form data.
-    const endpoint = '/api/form2'
-  
-    // Form the request for sending data to the server.
-    const options = {
-      // The method is POST because we are sending data.
-      method: 'POST',
-      // Tell the server we're sending JSON.
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      // Body of the request is the JSON data we created above.
-      body: JSONdata,
-    }
-  
-    // Send the form data to our forms API on Vercel and get a response.
-    const response = await fetch(endpoint, options)
-  
-    // Get the response data from server as JSON.
-    // If server returns the name submitted, that means the form works.
-    const result = await response.json()
-    alert(`nombre: ${data.name}, fecha de nacimiento: ${data.birth}, sexo: ${data.genre}, domicilio: ${data.direction}, estado civil: ${data.marital} `)
-    dispatch(setShowForm(false))
-  }
-
+ 
 
   return (
     <Grid
@@ -918,6 +877,7 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
                     className={styles.buttonGreen}
                     variant="contained"
                     color="primary"
+                    onClick={closeform}
                   >
                     Regístrate ahora
                   </Button>
