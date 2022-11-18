@@ -16,13 +16,34 @@ import {
   styled,
   Typography,
 } from "@mui/material";
-import React, { FC, useState } from "react";
+import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import styles from "../../styles/Things.module.css";
 import { TextField } from "@mui/material";
 import DataTable from "../tables/DataTable";
 import { IEmpire } from "../../interfaces/empireInterfaces";
 import { useDispatch } from "react-redux";
 import { AppDispatch, setShowForm } from "../../store";
+import ReactCanvasConfetti from "react-canvas-confetti";
+
+// confetti
+function randomInRange(min: any, max: any) {
+  return Math.random() * (max - min) + min;
+}
+
+function getAnimationSettings(originXA: any, originXB: any) {
+  return {
+    startVelocity: 30,
+    spread: 360,
+    ticks: 60,
+    zIndex: 0,
+    particleCount: 150,
+    origin: {
+      x: randomInRange(originXA, originXB),
+      y: Math.random() - 0.2,
+    },
+  };
+}
+// confetti
 
 const style = {
   position: "absolute" as "absolute",
@@ -110,15 +131,48 @@ interface Props {
 }
 
 export const StepForm: FC<Props> = ({ premium, iempire }) => {
+  // confetti
+  const refAnimationInstance = useRef<any>(null);
+  const [intervalId, setIntervalId] = useState<any | null>(null);
+
+  const getInstance = useCallback((instance: any) => {
+    refAnimationInstance.current = instance;
+  }, []);
+
+  const nextTickAnimation = useCallback(() => {
+    if (refAnimationInstance.current) {
+      refAnimationInstance.current(getAnimationSettings(0.1, 0.3));
+      refAnimationInstance.current(getAnimationSettings(0.7, 0.9));
+    }
+  }, []);
+
+  const startAnimation = useCallback(() => {
+    if (!intervalId) {
+      setIntervalId(setInterval(nextTickAnimation, 400));
+    }
+  }, [intervalId, nextTickAnimation]);
+
+  const pauseAnimation = useCallback(() => {
+    clearInterval(intervalId);
+    setIntervalId(null);
+  }, [intervalId]);
+
+  useEffect(() => {
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [intervalId]);
+  // confetti
+
   // modal
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   // modal
-
   const [status, setStatus] = useState<string>("");
 
   const handleSubmitF = async (event: any) => {
+    startAnimation();
     event.preventDefault();
 
     const data = {
@@ -776,6 +830,7 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
                   className={styles.closeModal}
                   onClick={function (event) {
                     handleClose();
+                    pauseAnimation();
                   }}
                 >
                   <img
@@ -793,13 +848,28 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
                   <Grid item xs={3}>
                     <Typography
                       id="modal-modal-description"
-                      sx={{ mt: 2, color: "black", fontSize: 20 }}
+                      sx={{ mt: 2, color: "blue", fontSize: 20 }}
                     >
-                      <b>¡Registro exitoso!</b>
+                      <b>¡Felicidades Juan!</b>
                     </Typography>
                   </Grid>
                 </Grid>
-                <br />
+                <Grid
+                  container
+                  spacing={0}
+                  direction="column"
+                  alignItems="center"
+                  justifyContent="center"
+                >
+                  <Grid item xs={3}>
+                    <Typography
+                      id="modal-modal-description"
+                      sx={{ mt: 2, color: "black" }}
+                    >
+                      ¿Te gustaría volverlo realidad?
+                    </Typography>
+                  </Grid>
+                </Grid>
                 <br />
                 <Box display="flex" justifyContent="center" alignItems="center">
                   <Button
@@ -813,6 +883,17 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
                 </Box>
               </Box>
             </Modal>
+            <ReactCanvasConfetti
+              refConfetti={getInstance}
+              style={{
+                position: "fixed",
+                pointerEvents: "none",
+                width: "100%",
+                height: "100%",
+                top: 0,
+                left: 0,
+              }}
+            />
           </>
         ) : (
           <></>
