@@ -2,6 +2,7 @@ import { CameraAlt, CheckCircle, Star } from "@mui/icons-material";
 import {
   Avatar,
   Badge,
+  Box,
   Button,
   Card,
   CardContent,
@@ -9,17 +10,50 @@ import {
   FormControlLabel,
   FormLabel,
   Grid,
+  Modal,
   Radio,
   RadioGroup,
   styled,
   Typography,
 } from "@mui/material";
-import React, { FC, useState } from "react";
-import styles from "../../styles/form.module.css";
+import React, { FC, useCallback, useEffect, useRef, useState } from "react";
+import styles from "../../styles/Things.module.css";
 import { TextField } from "@mui/material";
 import DataTable from "../tables/DataTable";
 import { IEmpire } from "../../interfaces/empireInterfaces";
+import ReactCanvasConfetti from "react-canvas-confetti";
 
+// confetti
+function randomInRange(min: any, max: any) {
+  return Math.random() * (max - min) + min;
+}
+
+function getAnimationSettings(originXA: any, originXB: any) {
+  return {
+    startVelocity: 30,
+    spread: 360,
+    ticks: 60,
+    zIndex: 0,
+    particleCount: 150,
+    origin: {
+      x: randomInRange(originXA, originXB),
+      y: Math.random() - 0.2,
+    },
+  };
+}
+// confetti
+
+const style = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  boxShadow: 24,
+  p: 4,
+  borderRadius: "20px",
+};
 
 const StyledTextField = styled(TextField)`
 label.Mui-focused{
@@ -89,53 +123,98 @@ label.Mui-focused{
 }
 ` as typeof TextField;
 
-const handleSubmitF = async (event: any) => { 
-
-  event.preventDefault();
-
-  const data = {
-    name: event.target.name.value,
-    birth: event.target.birth.value,
-    genre: event.target.genre.value,
-    curp: event.target.curp.value,
-    rfc: event.target.rfc.value,
-    direction: event.target.direction.value,
-    marital: event.target.marital.value,
-  }
-
-  // Send the data to the server in JSON format.
-  const JSONdata = JSON.stringify(data)
-
-  // API endpoint where we send form data.
-  const endpoint = '/api/form2'
-
-  // Form the request for sending data to the server.
-  const options = {
-    // The method is POST because we are sending data.
-    method: 'POST',
-    // Tell the server we're sending JSON.
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    // Body of the request is the JSON data we created above.
-    body: JSONdata,
-  }
-
-  // Send the form data to our forms API on Vercel and get a response.
-  const response = await fetch(endpoint, options)
-
-  // Get the response data from server as JSON.
-  // If server returns the name submitted, that means the form works.
-  const result = await response.json()
-  alert(`nombre: ${data.name}, fecha de nacimiento: ${data.birth}, sexo: ${data.genre}, domicilio: ${data.direction}, estado civil: ${data.marital} `)
-}
-
-interface Props  {
+interface Props {
   premium: boolean;
   iempire: IEmpire;
 }
 
-export const StepForm: FC<Props> = ({premium, iempire}) => {
+export const StepForm: FC<Props> = ({ premium, iempire }) => {
+  // confetti
+  const refAnimationInstance = useRef<any>(null);
+  const [intervalId, setIntervalId] = useState<any | null>(null);
+
+  const getInstance = useCallback((instance: any) => {
+    refAnimationInstance.current = instance;
+  }, []);
+
+  const nextTickAnimation = useCallback(() => {
+    if (refAnimationInstance.current) {
+      refAnimationInstance.current(getAnimationSettings(0.1, 0.3));
+      refAnimationInstance.current(getAnimationSettings(0.7, 0.9));
+    }
+  }, []);
+
+  const startAnimation = useCallback(() => {
+    if (!intervalId) {
+      setIntervalId(setInterval(nextTickAnimation, 400));
+    }
+  }, [intervalId, nextTickAnimation]);
+
+  const pauseAnimation = useCallback(() => {
+    clearInterval(intervalId);
+    setIntervalId(null);
+  }, [intervalId]);
+
+  useEffect(() => {
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [intervalId]);
+  // confetti
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  const [status, setStatus] = useState<string>("");
+
+  const handleSubmitF = async (event: any) => {
+    startAnimation();
+    event.preventDefault();
+
+    const data = {
+      name: event.target.name.value,
+      birth: event.target.birth.value,
+      genre: event.target.genre.value,
+      curp: event.target.curp.value,
+      rfc: event.target.rfc.value,
+      direction: event.target.direction.value,
+      marital: event.target.marital.value,
+    };
+
+    // Send the data to the server in JSON format.
+    const JSONdata = JSON.stringify(data);
+
+    // API endpoint where we send form data.
+    const endpoint = "/api/form2";
+
+    // Form the request for sending data to the server.
+    const options = {
+      // The method is POST because we are sending data.
+      method: "POST",
+      // Tell the server we're sending JSON.
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // Body of the request is the JSON data we created above.
+      body: JSONdata,
+    };
+
+    // Send the form data to our forms API on Vercel and get a response.
+    const response = await fetch(endpoint, options);
+
+    if (response.status == 200) {
+      setStatus("success");
+      handleOpen();
+    }
+
+    // Get the response data from server as JSON.
+    // If server returns the name submitted, that means the form works.
+    const result = await response.json();
+    // alert(
+    //   `nombre: ${data.name}, fecha de nacimiento: ${data.birth}, sexo: ${data.genre}, domicilio: ${data.direction}, estado civil: ${data.marital} `
+    // );
+  };
+
   const [sucesion, setSucesion] = useState(true);
 
   const [formoption, setFormoption] = useState("data");
@@ -148,7 +227,7 @@ export const StepForm: FC<Props> = ({premium, iempire}) => {
     }
   };
 
-  console.log(iempire)
+  console.log(iempire);
 
   return (
     <Grid
@@ -207,13 +286,12 @@ export const StepForm: FC<Props> = ({premium, iempire}) => {
               : { width: "1034px", height: "542px" }
           }
         >
-          <CardContent align="center">
+          <CardContent>
             <Grid container>
               {(() => {
                 if (formoption === "data") {
                   return (
                     <>
-                    
                       <Grid item xs={2}>
                         <Badge
                           anchorOrigin={{
@@ -233,7 +311,6 @@ export const StepForm: FC<Props> = ({premium, iempire}) => {
                         <Typography>Fideicomitente</Typography>
                       </Grid>
                       {sucesion ? (
-
                         <Grid
                           item
                           container
@@ -285,10 +362,18 @@ export const StepForm: FC<Props> = ({premium, iempire}) => {
                               </FormControl>
                               <br />
                               <br />
-                              <StyledTextField required placeholder="Curp" name="curp" />
+                              <StyledTextField
+                                required
+                                placeholder="Curp"
+                                name="curp"
+                              />
                               <br />
                               <br />
-                              <StyledTextField required placeholder="RFC" name="rfc" />
+                              <StyledTextField
+                                required
+                                placeholder="RFC"
+                                name="rfc"
+                              />
                               <br />
                               <br />
                               <StyledTextField
@@ -381,10 +466,18 @@ export const StepForm: FC<Props> = ({premium, iempire}) => {
                                 </FormControl>
                                 <br />
                                 <br />
-                                <StyledTextField required placeholder="Curp" name="curp" />
+                                <StyledTextField
+                                  required
+                                  placeholder="Curp"
+                                  name="curp"
+                                />
                                 <br />
                                 <br />
-                                <StyledTextField required placeholder="RFC" name="rfc" />
+                                <StyledTextField
+                                  required
+                                  placeholder="RFC"
+                                  name="rfc"
+                                />
                                 <br />
                                 <br />
                                 <StyledTextField
@@ -562,7 +655,10 @@ export const StepForm: FC<Props> = ({premium, iempire}) => {
                           <div className={styles["form-title"]}>
                             <Typography variant="h4">Fideicomitente</Typography>
                           </div>
-                          <DataTable rights={iempire.rights} beneficiarys={iempire.beneficiary} />
+                          <DataTable
+                            rights={iempire.rights}
+                            beneficiarys={iempire.beneficiary}
+                          />
                           <br />
                           <Grid
                             container
@@ -581,7 +677,6 @@ export const StepForm: FC<Props> = ({premium, iempire}) => {
                   return (
                     <>
                       {sucesion != true ? setSucesion(true) : ""}
-                      
 
                       <Grid item xs={2}>
                         <Badge
@@ -608,99 +703,94 @@ export const StepForm: FC<Props> = ({premium, iempire}) => {
                         justifyContent="center"
                         direction="column"
                       >
-                         <div className={styles["form-title"]}>
-                        <Typography variant="h4">
-                          Sube tus documentos
-                        </Typography>
-                      </div>
-                      <br />
-                      <br />
-                      <br />
-                      <FormControl >
-                        <FormLabel  >
-                          Curp
-                        </FormLabel>
-                        <StyledTextField
+                        <div className={styles["form-title"]}>
+                          <Typography variant="h4">
+                            Sube tus documentos
+                          </Typography>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                        <FormControl>
+                          <FormLabel>Curp</FormLabel>
+                          <StyledTextField
                             required
                             type="file"
                             placeholder="Curp"
-                            disabled = {!premium}
+                            disabled={!premium}
                           />
-                      </FormControl>
-                          
-                          <FormControl>
-                        <FormLabel>
-                          RFC
-                        </FormLabel>
-                        <StyledTextField
+                        </FormControl>
+
+                        <FormControl>
+                          <FormLabel>RFC</FormLabel>
+                          <StyledTextField
                             required
                             type="file"
                             placeholder="RFC"
-                            disabled = {!premium}
+                            disabled={!premium}
                           />
                         </FormControl>
-                          <FormLabel>
-                            Comprobante de domicilio
-                          </FormLabel>
-                          <StyledTextField
-                            required
-                            type="file"
-                            placeholder="Comprobante"
-                            disabled = {!premium}
-                          />
-                          
-                          <FormControl component="fieldset">
-                            <FormLabel component="legend">
-                              Estado Civil
-                            </FormLabel>
-                            <RadioGroup
-                              row
-                              aria-label="Genre"
-                              defaultValue="null"
-                            >
-                              <FormControlLabel
-                                value="Casado"
-                                control={<Radio color="primary" />}
-                                label="Casado"
-                                disabled = {!premium}
-                              />
-                              <FormControlLabel
-                                value="Soltero"
-                                control={<Radio color="primary" />}
-                                label="Soltero"
-                                disabled = {!premium}
-                              />
-                              <FormControlLabel
-                                value="Divorciado"
-                                control={<Radio color="primary" />}
-                                label="Divorciado"
-                                disabled = {!premium}
-                              />
-                              <FormControlLabel
-                                value="Viudo"
-                                control={<Radio color="primary" />}
-                                label="Viudo"
-                                disabled = {!premium}
-                              />
-                            </RadioGroup>
-                          </FormControl>
-                          <StyledTextField
-                            required
-                            type="file"
-                            placeholder="Curp"
-                            disabled = {!premium}
-                          />
-                          <br />
-                          <br />
-                          <Grid
-                            container
-                            direction="row"
-                            justifyContent="flex-end"
+                        <FormLabel>Comprobante de domicilio</FormLabel>
+                        <StyledTextField
+                          required
+                          type="file"
+                          placeholder="Comprobante"
+                          disabled={!premium}
+                        />
+
+                        <FormControl component="fieldset">
+                          <FormLabel component="legend">Estado Civil</FormLabel>
+                          <RadioGroup
+                            row
+                            aria-label="Genre"
+                            defaultValue="null"
                           >
-                            <Button sx={{marginRight: '80px'}} className={styles["button-form-select"]}>
-                              Finalizar
-                            </Button>
-                          </Grid>
+                            <FormControlLabel
+                              value="Casado"
+                              control={<Radio color="primary" />}
+                              label="Casado"
+                              disabled={!premium}
+                            />
+                            <FormControlLabel
+                              value="Soltero"
+                              control={<Radio color="primary" />}
+                              label="Soltero"
+                              disabled={!premium}
+                            />
+                            <FormControlLabel
+                              value="Divorciado"
+                              control={<Radio color="primary" />}
+                              label="Divorciado"
+                              disabled={!premium}
+                            />
+                            <FormControlLabel
+                              value="Viudo"
+                              control={<Radio color="primary" />}
+                              label="Viudo"
+                              disabled={!premium}
+                            />
+                          </RadioGroup>
+                        </FormControl>
+                        <StyledTextField
+                          required
+                          type="file"
+                          placeholder="Curp"
+                          disabled={!premium}
+                        />
+                        <br />
+                        <br />
+                        <Grid
+                          container
+                          direction="row"
+                          justifyContent="flex-end"
+                        >
+                          <Button
+                            sx={{ marginRight: "80px" }}
+                            className={styles["button-form-select"]}
+                          >
+                            Finalizar
+                          </Button>
+                        </Grid>
                       </Grid>
                     </>
                   );
@@ -710,6 +800,89 @@ export const StepForm: FC<Props> = ({premium, iempire}) => {
           </CardContent>
         </Card>
       </Grid>
+      <form onSubmit={handleSubmitF}>
+        {status === "success" ? (
+          <>
+            <Modal
+              open={open}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <span
+                  className={styles.closeModal}
+                  onClick={function (event) {
+                    handleClose();
+                    pauseAnimation();
+                  }}
+                >
+                  <img
+                    src="https://d30y9cdsu7xlg0.cloudfront.net/png/53504-200.png"
+                    className={styles.closeModal}
+                  />
+                </span>
+                <Grid
+                  container
+                  spacing={0}
+                  direction="column"
+                  alignItems="center"
+                  justifyContent="center"
+                  // style={{ minHeight: "100vh" }}
+                >
+                  <Grid item xs={3}>
+                    <Typography
+                      id="modal-modal-description"
+                      sx={{ mt: 2, color: "blue", fontSize: 20 }}
+                    >
+                      <b>¡Felicidades Juan!</b>
+                    </Typography>
+                  </Grid>
+                </Grid>
+                <Grid
+                  container
+                  spacing={0}
+                  direction="column"
+                  alignItems="center"
+                  justifyContent="center"
+                  // style={{ minHeight: "100vh" }}
+                >
+                  <Grid item xs={3}>
+                    <Typography
+                      id="modal-modal-description"
+                      sx={{ mt: 2, color: "black" }}
+                    >
+                      ¿Te gustaría volverlo realidad?
+                    </Typography>
+                  </Grid>
+                </Grid>
+                <br />
+                <Box display="flex" justifyContent="center" alignItems="center">
+                  <Button
+                    className={styles.buttonGreen}
+                    variant="contained"
+                    color="primary"
+                  >
+                    Regístrate ahora
+                  </Button>
+                </Box>
+              </Box>
+            </Modal>
+            <ReactCanvasConfetti
+              refConfetti={getInstance}
+              style={{
+                position: "fixed",
+                pointerEvents: "none",
+                width: "100%",
+                height: "100%",
+                top: 0,
+                left: 0,
+              }}
+            />
+          </>
+        ) : (
+          <></>
+        )}
+      </form>
     </Grid>
   );
 };
