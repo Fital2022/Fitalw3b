@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
 
 import ReactCanvasConfetti from "react-canvas-confetti";
+import styles from "../../styles/Things.module.css";
 
 function randomInRange(min: any, max: any) {
   return Math.random() * (max - min) + min;
@@ -38,6 +39,7 @@ const style = {
 interface Props {
   confetti?: boolean;
   children: (
+    handleOpen: () => void,
     handleClose: () => void,
     pauseAnimation: () => void
   ) => JSX.Element;
@@ -98,7 +100,22 @@ export const ModalView: React.FC<Props> = ({ confetti = true, children }) => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>{children(handleClose, pauseAnimation)}</Box>
+        <Box sx={style}>
+          <span
+            className={styles.closeModal}
+            onClick={function (event) {
+              handleClose();
+              pauseAnimation();
+            }}
+          >
+            <img
+              src="https://d30y9cdsu7xlg0.cloudfront.net/png/53504-200.png"
+              className={styles.closeModal}
+            />
+          </span>
+          <br />
+          {children(handleOpen, handleClose, pauseAnimation)}
+        </Box>
       </Modal>
       {confetti && (
         <ReactCanvasConfetti

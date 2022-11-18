@@ -8,13 +8,81 @@
 }
 
 .closeModal {
-  position: absolute;
-  border-radius: 50%;
-  bottom: 6px;
-  right: -20px;
-  top: -225px;
+  cursor: pointer;
+  float: right;
+  margin-top: -35px;
+  margin-right: -25px;
+  left: 90px;
+  width: 35px;
+}
+
+/* formStyles */
+.form {
+  border-radius: 40px;
+  border: 0.5px solid black;
+}
+
+.button-form-select {
+  background-color: #31a354;
+  color: white;
+  border-radius: 10px;
+  width: 130px;
+  height: 37px;
+}
+.button-form-select:hover {
+  background-color: #31a354;
+  color: white;
+  border-radius: 10px;
+  width: 130px;
+  height: 37px;
+}
+.button-form-unselect {
+  background-color: white;
+  border: 0.5px solid black;
+  color: black;
+  border-radius: 10px;
+  width: 130px;
+  height: 37px;
+}
+.button-form-unselect:hover {
+  background-color: #31a354;
+  color: white;
+  border-radius: 10px;
+  width: 130px;
+  height: 37px;
+}
+
+.form-title {
+  align-items: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+  margin-left: 50px;
+  margin-top: 10px;
+  color: #6a6a6a;
 }
+.form-component-input {
+  width: 446px;
+  height: 35px;
+  border-radius: 5px;
+  border: 1px solid #707070;
+}
+
+.form-line {
+  width: 272px;
+}
+
+.icon-check {
+  background-color: white;
+  color: #31a354;
+}
+
+.table-data {
+  width: 695px;
+  height: 404px;
+}
+
+.form-label {
+  align-items: left;
+}
+/* formStyles */
