@@ -1,4 +1,4 @@
-import { CameraAlt, CheckCircle, Star } from "@mui/icons-material";
+import { CameraAlt, CheckCircle, InputOutlined, Star } from "@mui/icons-material";
 import {
   Avatar,
   Badge,
@@ -227,7 +227,7 @@ export const StepForm2: FC<Props> = ({premium, iempire}) => {
                 if (formoption === "data") {
                   return (
                     <>
-                    
+                    {sucesion != true ? setSucesion(true) : ""}
                       <Grid item xs={2}>
                         <Badge
                           anchorOrigin={{
@@ -261,40 +261,17 @@ export const StepForm2: FC<Props> = ({premium, iempire}) => {
                                 Fideicomitente
                               </Typography>
                             </div>
+                            <br />
                             <form onSubmit={handleSubmitF}>
                               <FileField description="Escritura"/>
-                              <br />
-                              <br />
-
                               <FileField description="Ultima boleta de pago de predial y de agua*"/>
-                              <br />
-                              <FileField description="Escritura de régimen de condominio *"/>
-                              <br />
-                              <br />
+                              <FileField description="Escritura de régimen de condominio *"/>                              
                               <FileField description="Constancia de no adeudo de cuotas de mantenimiento *"/>
-
-                              <br />
-                              <br />
                               <FileField description="Valor de referencia *"/>
-                              <br />
-                              <br />
-                              <StyledTextField
-                                required
-                                placeholder="Valor de referencia"
-                                name="marital"
-                              />
-                              <br />
-                              <br />
-                              <StyledTextField
-                                required
-                                placeholder="Ubicación *"
-                                name="marital"
-                              />
-                              <br />
-                              <br />
+                              <FileField description="Ubicación *"/>
                               <Grid
                                 container
-                                justifyContent="center"
+                                justifyContent="right"
                                 item
                                 direction="row"
                               >
@@ -305,12 +282,6 @@ export const StepForm2: FC<Props> = ({premium, iempire}) => {
                                     className={styles["button-form-select"]}
                                   >
                                     Finalizar
-                                  </Button>
-                                  <Button
-                                    className={styles["button-form-select"]}
-                                    onClick={changecontent}
-                                  >
-                                    Sucesion
                                   </Button>
                                 </Grid>
                               </Grid>
@@ -729,26 +700,11 @@ const FileField: FC<FileFieldProps> = ({ description }) => {
           mb: 3,
         }}
       >
-        <Typography
-          sx={{ color: "white", fontSize: "16px", maxWidth: "400px" }}
-        >
-          {description}
-        </Typography>
-        <Button
-          onClick={() => openFileSelector()}
-          sx={{
-            justifySelf: "end",
-            textTransform: "none",
-            fontSize: "16px",
-            bgcolor: "#F4F4F4",
-            color: "#6A6A6A",
-            py: 0,
-          }}
-        >
-          SeleccionarArchivo
-        </Button>
+       
+        <input className={styles['form-input-file']} readOnly onClick={() => openFileSelector()} value={description}></input>
+       
       </Box>
-      <Divider sx={{ bgcolor: "white", mb: 3 }} />
+      
     </>
   );
 };

@@ -133,11 +133,11 @@ setVar(!Var)
               <TableHead>
                 <TableRow>
                   <TableCell>&nbsp;&nbsp;&nbsp;</TableCell>
-                  {rights.map(({ id, name, value, type, img }) => (
+                  {rights.map(({ id, name, value, type, img },index) => (
                     <>
                     <TableCell align="right">
                       <Tooltip title={name} placement="top">
-                      <Avatar alt="service1" key={id} src={img} />
+                      <Avatar alt="service1" key={index} src={img} />
                       </Tooltip>
                     </TableCell>
                     </>

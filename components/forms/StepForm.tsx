@@ -185,6 +185,10 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
     dispatch(setShowForm(false));
   };
 
+  const changepage = () => {
+    setSucesion(true)
+  }
+
   return (
     <Grid
       container
@@ -242,12 +246,13 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
               : { width: "1034px", height: "542px" }
           }
         >
-          <CardContent>
+          <CardContent align="center">
             <Grid container>
               {(() => {
                 if (formoption === "data") {
                   return (
                     <>
+                    {changepage}
                       <Grid item xs={2}>
                         <Badge
                           anchorOrigin={{
@@ -603,10 +608,6 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
                         className={styles["table-data"]}
                       >
                         <Grid item container direction="column">
-                          <br />
-                          <br />
-                          <br />
-                          <br />
                           <br />
                           <br />
                           <br />
