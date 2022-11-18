@@ -3,6 +3,7 @@ import { ActionsLayout } from '../../components/Layout/ActionsLayout';
 
 export default function index() {
   return (
-    <ActionsLayout title='' pageDescription=''></ActionsLayout>
+    <ActionsLayout title={"Fital - Imperio"}
+    pageDescription={"Imperio"}></ActionsLayout>
   )
 }
