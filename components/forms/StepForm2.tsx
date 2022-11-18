@@ -2,9 +2,11 @@ import { CameraAlt, CheckCircle, Star } from "@mui/icons-material";
 import {
   Avatar,
   Badge,
+  Box,
   Button,
   Card,
   CardContent,
+  Divider,
   FormControl,
   FormControlLabel,
   FormLabel,
@@ -14,13 +16,14 @@ import {
   styled,
   Typography,
 } from "@mui/material";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styles from "../../styles/form.module.css";
 import { TextField } from "@mui/material";
 import DataTable from "../tables/DataTable";
 import { IEmpire } from "../../interfaces/empireInterfaces";
 import { useDispatch } from "react-redux";
 import { AppDispatch, setShowForm } from "../../store";
+import { useFilePicker } from "use-file-picker";
 
 
 const StyledTextField = styled(TextField)`
@@ -98,7 +101,7 @@ interface Props  {
   iempire: IEmpire;
 }
 
-export const StepForm: FC<Props> = ({premium, iempire}) => {
+export const StepForm2: FC<Props> = ({premium, iempire}) => {
   const [sucesion, setSucesion] = useState(true);
 
   const [formoption, setFormoption] = useState("data");
@@ -259,59 +262,32 @@ export const StepForm: FC<Props> = ({premium, iempire}) => {
                               </Typography>
                             </div>
                             <form onSubmit={handleSubmitF}>
-                              <StyledTextField
-                                required
-                                placeholder="Nombre Completo"
-                                name="name"
-                              />
+                              <FileField description="Escritura"/>
                               <br />
                               <br />
 
-                              <StyledTextField
-                                required
-                                type={"date"}
-                                placeholder="Fecha de nacimiento"
-                                name="birth"
-                              />
+                              <FileField description="Ultima boleta de pago de predial y de agua*"/>
                               <br />
-                              <FormControl component="fieldset">
-                                <FormLabel component="legend">Sexo</FormLabel>
-                                <RadioGroup
-                                  row
-                                  aria-label="genre"
-                                  defaultValue="null"
-                                  name="genre"
-                                >
-                                  <FormControlLabel
-                                    value="Mujer"
-                                    control={<Radio color="primary" />}
-                                    label="Mujer"
-                                  />
-                                  <FormControlLabel
-                                    value="Hombre"
-                                    control={<Radio color="primary" />}
-                                    label="Hombre"
-                                  />
-                                </RadioGroup>
-                              </FormControl>
+                              <FileField description="Escritura de régimen de condominio *"/>
                               <br />
                               <br />
-                              <StyledTextField required placeholder="Curp" name="curp" />
+                              <FileField description="Constancia de no adeudo de cuotas de mantenimiento *"/>
+
                               <br />
                               <br />
-                              <StyledTextField required placeholder="RFC" name="rfc" />
+                              <FileField description="Valor de referencia *"/>
                               <br />
                               <br />
                               <StyledTextField
                                 required
-                                placeholder="Domicilio"
-                                name="direction"
+                                placeholder="Valor de referencia"
+                                name="marital"
                               />
                               <br />
                               <br />
                               <StyledTextField
                                 required
-                                placeholder="Estado civil"
+                                placeholder="Ubicación *"
                                 name="marital"
                               />
                               <br />
@@ -727,5 +703,52 @@ export const StepForm: FC<Props> = ({premium, iempire}) => {
         </Card>
       </Grid>
     </Grid>
+  );
+};
+
+
+interface FileFieldProps {
+  description: string;
+}
+const FileField: FC<FileFieldProps> = ({ description }) => {
+  const [openFileSelector, { filesContent, loading }] = useFilePicker({
+    accept: '.pdf',
+  });
+
+  useEffect(() => {
+    console.log(filesContent);
+  }, [filesContent]);
+
+  return (
+    <>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          mb: 3,
+        }}
+      >
+        <Typography
+          sx={{ color: "white", fontSize: "16px", maxWidth: "400px" }}
+        >
+          {description}
+        </Typography>
+        <Button
+          onClick={() => openFileSelector()}
+          sx={{
+            justifySelf: "end",
+            textTransform: "none",
+            fontSize: "16px",
+            bgcolor: "#F4F4F4",
+            color: "#6A6A6A",
+            py: 0,
+          }}
+        >
+          SeleccionarArchivo
+        </Button>
+      </Box>
+      <Divider sx={{ bgcolor: "white", mb: 3 }} />
+    </>
   );
 };

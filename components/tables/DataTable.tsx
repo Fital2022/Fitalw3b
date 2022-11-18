@@ -127,7 +127,7 @@ setVar(!Var)
             Testamento Digital
           </Typography> */}
 
-        <Box display="flex" justifyContent="center" sx={{ mt: 4, px: 3 }}>
+        <Box display="flex" justifyContent="center">
           <TableContainer component={Paper}>
             <Table aria-label="simple table" stickyHeader>
               <TableHead>
