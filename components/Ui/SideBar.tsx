@@ -4,6 +4,7 @@ import {
   FileOpenOutlined,
   FlagCircleOutlined,
   AttachMoneyOutlined,
+  HolidayVillage
 } from "@mui/icons-material";
 import {
   AppBar,
@@ -156,6 +157,28 @@ export const SideBar = () => {
           </NextLink>
           <Typography variant="caption" sx={{ color: "white" }}>
             Ahorros
+          </Typography>
+        </Box>
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          sx={{ mb: 2 }}
+        >
+          <NextLink href="/empire" passHref>
+            <Link>
+              <IconButton
+                sx={{ bgcolor: route == "/empire" ? "white" : "transparent" }}
+              >
+                <HolidayVillage
+                  fontSize="large"
+                  sx={{ color: route == "/empire" ? "black" : "white" }}
+                />
+              </IconButton>
+            </Link>
+          </NextLink>
+          <Typography variant="caption" sx={{ color: "white" }}>
+            Imperio
           </Typography>
         </Box>
       </Box>

@@ -4,14 +4,14 @@ import * as React from 'react';
 
 import { Box, Button, Grid, Link } from '@mui/material';
 
-import { FirstLayout } from '../../components/Layout';
+import { MainLayout } from '../../components/Layout';
 import styles from './Welcome.module.css'
 import NextLink from 'next/link';
 
 
 const WelcomePage: NextPage = () => {
   return (
-    <FirstLayout title={'Fital'} pageDescription={'Inicio'}>
+    <MainLayout title={'Fital'} pageDescription={'Inicio'}>
       <Grid
         container
         justifyContent="center"
@@ -37,7 +37,7 @@ const WelcomePage: NextPage = () => {
           <Buttons />
         </Grid>
       </Grid>
-    </FirstLayout >
+    </MainLayout >
   )
 }
 

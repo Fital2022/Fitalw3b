@@ -16,34 +16,13 @@ import {
   styled,
   Typography,
 } from "@mui/material";
-import React, { FC, useCallback, useEffect, useRef, useState } from "react";
+import React, { FC, useState } from "react";
 import styles from "../../styles/Things.module.css";
 import { TextField } from "@mui/material";
 import DataTable from "../tables/DataTable";
 import { IEmpire } from "../../interfaces/empireInterfaces";
 import { useDispatch } from "react-redux";
 import { AppDispatch, setShowForm } from "../../store";
-import ReactCanvasConfetti from "react-canvas-confetti";
-
-// confetti
-function randomInRange(min: any, max: any) {
-  return Math.random() * (max - min) + min;
-}
-
-function getAnimationSettings(originXA: any, originXB: any) {
-  return {
-    startVelocity: 30,
-    spread: 360,
-    ticks: 60,
-    zIndex: 0,
-    particleCount: 150,
-    origin: {
-      x: randomInRange(originXA, originXB),
-      y: Math.random() - 0.2,
-    },
-  };
-}
-// confetti
 
 const style = {
   position: "absolute" as "absolute",
@@ -131,46 +110,15 @@ interface Props {
 }
 
 export const StepForm: FC<Props> = ({ premium, iempire }) => {
-  // confetti
-  const refAnimationInstance = useRef<any>(null);
-  const [intervalId, setIntervalId] = useState<any | null>(null);
-
-  const getInstance = useCallback((instance: any) => {
-    refAnimationInstance.current = instance;
-  }, []);
-
-  const nextTickAnimation = useCallback(() => {
-    if (refAnimationInstance.current) {
-      refAnimationInstance.current(getAnimationSettings(0.1, 0.3));
-      refAnimationInstance.current(getAnimationSettings(0.7, 0.9));
-    }
-  }, []);
-
-  const startAnimation = useCallback(() => {
-    if (!intervalId) {
-      setIntervalId(setInterval(nextTickAnimation, 400));
-    }
-  }, [intervalId, nextTickAnimation]);
-
-  const pauseAnimation = useCallback(() => {
-    clearInterval(intervalId);
-    setIntervalId(null);
-  }, [intervalId]);
-
-  useEffect(() => {
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [intervalId]);
-  // confetti
-
+  // modal
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  // modal
+
   const [status, setStatus] = useState<string>("");
 
   const handleSubmitF = async (event: any) => {
-    startAnimation();
     event.preventDefault();
 
     const data = {
@@ -231,12 +179,11 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
 
   console.log(iempire);
 
-  const dispatch = useDispatch<AppDispatch>()
-  
+  const dispatch = useDispatch<AppDispatch>();
+
   const closeform = () => {
-    dispatch(setShowForm(false))
-  }
- 
+    dispatch(setShowForm(false));
+  };
 
   return (
     <Grid
@@ -317,7 +264,7 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
                         </Badge>
                         <br />
                         <br />
-                        <Typography >Fideicomitente</Typography>
+                        <Typography>Fideicomitente</Typography>
                       </Grid>
                       {sucesion ? (
                         <Grid
@@ -666,17 +613,17 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
                           <br />
                           <br />
                           <div className={styles["form-title"]}>
-                            <Typography  variant="h4">Fideicomitente</Typography>
+                            <Typography variant="h4">Fideicomitente</Typography>
                           </div>
-                          <Grid item >
-                          <DataTable
-                            rights={iempire.rights}
-                            beneficiarys={iempire.beneficiary}
-                          />
+                          <Grid item>
+                            <DataTable
+                              rights={iempire.rights}
+                              beneficiarys={iempire.beneficiary}
+                            />
                           </Grid>
                           <br />
                           <Grid
-                          item
+                            item
                             container
                             direction="row"
                             justifyContent="flex-end"
@@ -829,7 +776,6 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
                   className={styles.closeModal}
                   onClick={function (event) {
                     handleClose();
-                    pauseAnimation();
                   }}
                 >
                   <img
@@ -843,34 +789,17 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
                   direction="column"
                   alignItems="center"
                   justifyContent="center"
-                  // style={{ minHeight: "100vh" }}
                 >
                   <Grid item xs={3}>
                     <Typography
                       id="modal-modal-description"
-                      sx={{ mt: 2, color: "blue", fontSize: 20 }}
+                      sx={{ mt: 2, color: "black", fontSize: 20 }}
                     >
-                      <b>¡Felicidades Juan!</b>
+                      <b>¡Registro exitoso!</b>
                     </Typography>
                   </Grid>
                 </Grid>
-                <Grid
-                  container
-                  spacing={0}
-                  direction="column"
-                  alignItems="center"
-                  justifyContent="center"
-                  // style={{ minHeight: "100vh" }}
-                >
-                  <Grid item xs={3}>
-                    <Typography
-                      id="modal-modal-description"
-                      sx={{ mt: 2, color: "black" }}
-                    >
-                      ¿Te gustaría volverlo realidad?
-                    </Typography>
-                  </Grid>
-                </Grid>
+                <br />
                 <br />
                 <Box display="flex" justifyContent="center" alignItems="center">
                   <Button
@@ -879,22 +808,11 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
                     color="primary"
                     onClick={closeform}
                   >
-                    Regístrate ahora
+                    OK
                   </Button>
                 </Box>
               </Box>
             </Modal>
-            <ReactCanvasConfetti
-              refConfetti={getInstance}
-              style={{
-                position: "fixed",
-                pointerEvents: "none",
-                width: "100%",
-                height: "100%",
-                top: 0,
-                left: 0,
-              }}
-            />
           </>
         ) : (
           <></>
