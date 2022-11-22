@@ -56,6 +56,8 @@ const OPTIONS: IOption[] = [
 ];
 
 const MainMenu: NextPage = () => {
+  
+
   return (
     <MainLayout title={"Fital"} pageDescription={"Página principal"}>
       <Box
@@ -70,8 +72,8 @@ const MainMenu: NextPage = () => {
               <Card
                 key={item.title}
                 sx={{
-                  height: '190px',
-                  width: '190px',
+                  height: "190px",
+                  width: "190px",
                   justifyContent: "center",
                   display: "flex",
                   flexWrap: "wrap",
@@ -82,7 +84,10 @@ const MainMenu: NextPage = () => {
                     <IconButton>{item.icon}</IconButton>
                   </Link>
                 </NextLink>
-                <Typography variant="h4" sx={{ textAlign: "center", fontSize: '20px' }}>
+                <Typography
+                  variant="h4"
+                  sx={{ textAlign: "center", fontSize: "20px" }}
+                >
                   {item.title}
                 </Typography>
               </Card>

@@ -18,6 +18,15 @@ export const empireSlice = createSlice({
     addEscrow: (state, { payload }: PayloadAction<IEmpire>) => {
       state.empires.push(payload);
     },
+    selectEscrow: (state, { payload }: PayloadAction<number>) => {
+      if (payload < 0) {
+        state.selectedEmpire = null;
+        return;
+      }
+      state.selectedEmpire = state.empires.filter(
+        (empire) => empire.id === payload
+      )[0];
+    },
     addRight: (
       state,
       { payload: { id, right } }: PayloadAction<{ right: IRight; id: number }>
@@ -43,13 +52,21 @@ export const empireSlice = createSlice({
       const escrow = state.empires.find((empire) => empire.id === id);
       if (escrow) escrow.beneficiary.push(beneficiary);
     },
-    setDragg: (state, {payload}: PayloadAction<boolean>) => {
-      state.isDraggin = payload ;
+    setDragg: (state, { payload }: PayloadAction<boolean>) => {
+      state.isDraggin = payload;
     },
-    setShowForm: (state, {payload}: PayloadAction<boolean>) => {
-      state.showform = payload ;
+    setShowForm: (state, { payload }: PayloadAction<boolean>) => {
+      state.showform = payload;
     },
   },
 });
 
-export const {addBeneficiary, addEscrow, addTrustor, addRight,setDragg,setShowForm} = empireSlice.actions 
+export const {
+  addBeneficiary,
+  addEscrow,
+  addTrustor,
+  addRight,
+  setDragg,
+  setShowForm,
+  selectEscrow,
+} = empireSlice.actions;

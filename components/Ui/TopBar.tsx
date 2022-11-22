@@ -14,8 +14,18 @@ import {
   Box,
   CardMedia,
 } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { IEmpire } from "../../interfaces/empireInterfaces";
+import { RootState, selectEscrow } from "../../store";
+import { useRouter } from "next/router";
 
 export const TopBar = () => {
+  const { name, type } =
+    useSelector((state: RootState) => state.empire.selectedEmpire as IEmpire) ||
+    {};
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   return (
     <Box
       sx={{
@@ -30,23 +40,29 @@ export const TopBar = () => {
         alignItems: "center",
       }}
     >
-      <NextLink href="/" passHref>
-        <Link>
-          <CardMedia
-            image="icons/Pagina-Web-logo.png"
-            component="img"
-            alt="Fital Logo"
-            sx={{ width: "70px", height: "70px" }}
-          />
-        </Link>
-      </NextLink>
-      <Box sx={{ml: 10}} >
+      <CardMedia
+        onClick={() => {
+          router.push("/");
+          dispatch(selectEscrow(-1));
+        }}
+        image="icons/Pagina-Web-logo.png"
+        component="img"
+        alt="Fital Logo"
+        sx={{ width: "70px", height: "70px" }}
+      />
+
+      <Box sx={{ ml: 10 }}>
         <Typography variant="h5" component="h5" sx={{ color: "white" }}>
           ¡Buenos días Júan!
         </Typography>
         <Typography variant="h5" component="h5" sx={{ color: "white" }}>
           Empecemos:
         </Typography>
+      </Box>
+      <Box flex={1} />
+      <Box>
+        {name ? <Typography>{name}</Typography> : null}
+        {type ? <Typography>{type}</Typography> : null}
       </Box>
     </Box>
   );
