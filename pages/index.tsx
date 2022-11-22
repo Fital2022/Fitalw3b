@@ -18,6 +18,7 @@ import { addEscrow, RootState, selectEscrow } from "../store";
 import { useEffect, useState } from "react";
 import index from "./empire/index";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const ESCROW_TYPES = [
   "Administración de condominios",
@@ -70,6 +71,7 @@ const Home = () => {
           <Grid item xs={3}>
             <Card
               sx={{
+                borderRadius: "50%",
                 height: "190px",
                 width: "190px",
                 justifyContent: "center",
@@ -94,18 +96,36 @@ const Home = () => {
                     justifyContent: "center",
                     alignItems: "center",
                     display: "flex",
-                    flexWrap: "wrap",
                     cursor: "pointer",
+                    flexDirection: "column",
                   }}
                   onClick={() => {
                     dispatch(selectEscrow(emp.id));
                     router.push("/main");
                   }}
                 >
-                  <Typography sx={{ color: "black", fontSize: 16 }}>
+                  <Image src="/icons/crown.png" width={20} height={20} />
+                  <Typography
+                    sx={{
+                      color: "black",
+                      fontSize: 14,
+                      textAlign: "center",
+                      fontWeight: "bold",
+                      maxWidth: "185px",
+                      mb: 1,
+                      textTransform: "uppercase",
+                    }}
+                  >
                     {emp.name}
                   </Typography>
-                  <Typography sx={{ color: "black", fontSize: 16 }}>
+                  <Typography
+                    sx={{
+                      color: "black",
+                      fontSize: 12,
+                      textAlign: "center",
+                      maxWidth: "185px",
+                    }}
+                  >
                     {emp.type}
                   </Typography>
                 </Card>
