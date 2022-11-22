@@ -23,32 +23,32 @@ const Home = () => {
         alignItems="center"
         sx={{ width: "100%", height: "calc(100vh - 90px)" }}
       >
-        <Grid container spacing={2} sx={{ maxWidth: 1300, justifyContent: 'center' }}>
+        <Grid
+          container
+          spacing={2}
+          sx={{ maxWidth: 1300, justifyContent: "center" }}
+        >
           <Grid item xs={3}>
             <Card
               sx={{
-                height: '190px',
-                width: '190px',
+                height: "190px",
+                width: "190px",
                 justifyContent: "center",
                 alignItems: "center",
                 display: "flex",
                 flexWrap: "wrap",
               }}
             >
-              <NextLink href="/main" passHref>
-                <Link>
-                  <IconButton>
-                    <Add sx={{ fontSize: 120, color: "black" }} />
-                  </IconButton>
-                </Link>
-              </NextLink>
+              <IconButton>
+                <Add sx={{ fontSize: 120, color: "black" }} />
+              </IconButton>
             </Card>
           </Grid>
           <Grid item xs={3}>
             <Card
               sx={{
-                height: '190px',
-                width: '190px',
+                height: "190px",
+                width: "190px",
                 justifyContent: "center",
                 alignItems: "center",
                 display: "flex",
@@ -56,8 +56,10 @@ const Home = () => {
               }}
             >
               <NextLink href="/main" passHref>
-                <Link sx={{textDecoration: 'none'}} >
-                  <Typography sx={{color: 'black', fontSize: 40}} >Imperio</Typography>
+                <Link sx={{ textDecoration: "none" }}>
+                  <Typography sx={{ color: "black", fontSize: 40 }}>
+                    Imperio
+                  </Typography>
                 </Link>
               </NextLink>
             </Card>

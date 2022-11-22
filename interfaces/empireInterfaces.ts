@@ -1,16 +1,16 @@
 export interface IEmpire {
   name: string;
   id: number;
+  type?: string;
   rights: IRight[];
   trustor: ITrustor[];
   beneficiary: IBeneficiary[];
-  
 }
 
 export interface IRight {
   name: string;
   value: number;
-  type: 'casa' | 'departamento' | 'auto' | 'seguro';
+  type: "casa" | "departamento" | "auto" | "seguro";
   id?: number;
   img?: string;
 }

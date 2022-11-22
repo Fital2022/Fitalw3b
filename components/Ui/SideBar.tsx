@@ -4,7 +4,7 @@ import {
   FileOpenOutlined,
   FlagCircleOutlined,
   AttachMoneyOutlined,
-  HolidayVillage
+  HolidayVillage,
 } from "@mui/icons-material";
 import {
   AppBar,
@@ -60,24 +60,6 @@ export const SideBar = () => {
       {/* <Box flex={1} /> */}
       <Box sx={{ position: "relative" }}>
         <Box
-          sx={{
-            position: "absolute",
-            width: "55px",
-            height: "55px",
-            background: "white",
-            borderRadius: "50%",
-            left: "5px",
-            zIndex: -1,
-            transition: "all 0.3s ease",
-            top:
-              route == "/patrimony"
-                ? "-2px"
-                : route == "/testament"
-                ? "85px"
-                : "-10px",
-          }}
-        />
-        <Box
           display="flex"
           flexDirection="column"
           alignItems="center"
@@ -85,7 +67,11 @@ export const SideBar = () => {
         >
           <NextLink href="/patrimony" passHref>
             <Link>
-              <IconButton>
+              <IconButton
+                sx={{
+                  bgcolor: route == "/patrimony" ? "white" : "transparent",
+                }}
+              >
                 <HouseOutlined
                   fontSize="large"
                   sx={{ color: route == "/patrimony" ? "black" : "white" }}
@@ -105,7 +91,11 @@ export const SideBar = () => {
         >
           <NextLink href="/testament" passHref>
             <Link>
-              <IconButton>
+              <IconButton
+                sx={{
+                  bgcolor: route == "/testament" ? "white" : "transparent",
+                }}
+              >
                 <FileOpenOutlined
                   fontSize="large"
                   sx={{ color: route == "/testament" ? "black" : "white" }}
@@ -125,7 +115,9 @@ export const SideBar = () => {
         >
           <NextLink href="/goals" passHref>
             <Link>
-              <IconButton>
+              <IconButton
+                sx={{ bgcolor: route == "/goals" ? "white" : "transparent" }}
+              >
                 <FlagCircleOutlined
                   fontSize="large"
                   sx={{ color: route == "/goals" ? "black" : "white" }}

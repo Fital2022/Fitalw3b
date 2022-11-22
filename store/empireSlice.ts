@@ -10,6 +10,7 @@ export const empireSlice = createSlice({
   name: "empire",
   initialState: {
     empires: [] as IEmpire[],
+    selectedEmpire: null as IEmpire | null,
     isDraggin: false,
     showform: false,
   },
