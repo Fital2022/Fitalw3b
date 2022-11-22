@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { empire } from '../data/empire';
 import {
   IEmpire,
   IRight,
@@ -9,8 +10,8 @@ import {
 export const empireSlice = createSlice({
   name: "empire",
   initialState: {
-    empires: [] as IEmpire[],
-    selectedEmpire: null as IEmpire | null,
+    empires: [{...empire}] as IEmpire[],
+    selectedEmpire: {} as IEmpire,
     isDraggin: false,
     showform: false,
   },
@@ -20,7 +21,7 @@ export const empireSlice = createSlice({
     },
     selectEscrow: (state, { payload }: PayloadAction<number>) => {
       if (payload < 0) {
-        state.selectedEmpire = null;
+        state.selectedEmpire = {} as IEmpire;
         return;
       }
       state.selectedEmpire = state.empires.filter(
