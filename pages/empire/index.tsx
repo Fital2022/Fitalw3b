@@ -17,6 +17,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import { IRight } from "../../interfaces/empireInterfaces";
 import { FC } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 interface Props {
   rights: IRight[];
@@ -90,6 +92,10 @@ const ResponsiveGrid: FC<Props> = ({ rights }) => {
     },
   ];
 
+  const rightss = useSelector(
+    (state: RootState) => state.empire.selectedEmpire?.rights
+  );
+
   return (
     <ActionsLayout pageDescription="" title="">
       <Box sx={{ flexGrow: 1, paddingTop: 2, paddingLeft: 2 }}>
@@ -100,62 +106,66 @@ const ResponsiveGrid: FC<Props> = ({ rights }) => {
         >
           {/* {Array.from(Array(right.length)).map((_, index) => ( */}
           <>
-            {right.map(({ name, img }, index) => (
-              <Grid key={index} item xs={2} sm={2} md={2}>
-                <Card
-                  sx={{
-                    height: 150,
-                    width: 240,
-                    backgroundColor: "transparent",
-                    boxShadow: "none",
-                  }}
-                >
-                  <CardContent sx={{ marginLeft: 1 }}>
-                    <Grid
-                      container
-                      spacing={1}
-                      alignItems="center"
-                      justifyContent="center"
-                      paddingTop={1}
-                    >
-                      <Grid item>
-                        <Avatar
-                          alt="Remy Sharp"
-                          src={img}
-                          sx={{ width: 56, height: 56 }}
-                        />
-                        {name}
+            {rightss &&
+              rightss.length > 0 &&
+              rightss.map(({ name, img }, index) => (
+                <Grid key={index} item xs={2} sm={2} md={2}>
+                  <Card
+                    sx={{
+                      height: 150,
+                      width: 240,
+                      backgroundColor: "transparent",
+                      boxShadow: "none",
+                    }}
+                  >
+                    <CardContent sx={{ marginLeft: 1 }}>
+                      <Grid
+                        container
+                        spacing={1}
+                        alignItems="center"
+                        justifyContent="center"
+                        paddingTop={1}
+                      >
+                        <Grid item>
+                          <Avatar
+                            alt="Remy Sharp"
+                            src={img}
+                            sx={{ width: 56, height: 56 }}
+                          />
+                          {name}
+                        </Grid>
                       </Grid>
-                    </Grid>
-                  </CardContent>
-                  <CardActions disableSpacing sx={{ marginLeft: 1 }}>
-                    {/* {object.length > 0 &&
+                    </CardContent>
+                    <CardActions disableSpacing sx={{ marginLeft: 1 }}>
+                      {/* {object.length > 0 &&
                     object.map((bien, index) => ( */}
-                    <Grid container wrap="nowrap" spacing={0}>
-                      <Grid item>
-                        <EditIcon></EditIcon>
+                      <Grid container wrap="nowrap" spacing={0}>
+                        <Grid item>
+                          <EditIcon></EditIcon>
+                        </Grid>
+                        <Grid item xs>
+                          <Typography sx={{ paddingRight: 9 }}>
+                            Editar
+                          </Typography>
+                        </Grid>
                       </Grid>
-                      <Grid item xs>
-                        <Typography sx={{ paddingRight: 9 }}>Editar</Typography>
-                      </Grid>
-                    </Grid>
 
-                    <Grid container wrap="nowrap" spacing={0}>
-                      <Grid item>
-                        <DeleteIcon></DeleteIcon>
+                      <Grid container wrap="nowrap" spacing={0}>
+                        <Grid item>
+                          <DeleteIcon></DeleteIcon>
+                        </Grid>
+                        <Grid item xs>
+                          <Typography sx={{ paddingRight: 9 }}>
+                            Eliminar
+                          </Typography>
+                        </Grid>
                       </Grid>
-                      <Grid item xs>
-                        <Typography sx={{ paddingRight: 9 }}>
-                          Eliminar
-                        </Typography>
-                      </Grid>
-                    </Grid>
 
-                    {/* ))} */}
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
+                      {/* ))} */}
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
           </>
           {/* // ))} */}
         </Grid>

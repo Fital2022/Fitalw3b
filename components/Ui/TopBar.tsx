@@ -61,7 +61,7 @@ export const TopBar = () => {
       </Box>
       <Box flex={1} />
       <Box>
-        {name ? <Typography>{name}</Typography> : null}
+        {name ? <Typography sx={{textTransform: 'uppercase'}} >{name}</Typography> : null}
         {type ? <Typography>{type}</Typography> : null}
       </Box>
     </Box>
