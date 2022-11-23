@@ -26,12 +26,14 @@ export const OneLink: FC<Props> = ({ img, name, align = 'flex-end' }) =>
 { 
   const dispatch = useDispatch<AppDispatch>()
 
-  let draggmode = useSelector((state: RootState) => state.empire.isDraggin);
+  let draggmode = useSelector((state: RootState) => state.form.isDraggin);
 
   const onDragStart =  (event: DragEvent) => {
     dispatch(setDragg(true))
     console.log(event)
+    
     event.dataTransfer.setData('option', name)
+    event.dataTransfer.setData('img',img)
     console.log("Ya empece")
     console.log(draggmode)
   }
@@ -46,7 +48,7 @@ export const OneLink: FC<Props> = ({ img, name, align = 'flex-end' }) =>
     <Typography
       sx={{ fontSize: "10px", textTransform: "none", color: "black" }}
     >
-      {name}
+      Agregar {name}
     </Typography>
   </Button>
 )};

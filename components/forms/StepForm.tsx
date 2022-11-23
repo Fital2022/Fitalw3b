@@ -21,8 +21,8 @@ import styles from "../../styles/Things.module.css";
 import { TextField } from "@mui/material";
 import DataTable from "../tables/DataTable";
 import { IEmpire } from "../../interfaces/empireInterfaces";
-import { useDispatch } from "react-redux";
-import { AppDispatch, setShowForm } from "../../store";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState, setShowForm } from "../../store";
 import ReactCanvasConfetti from "react-canvas-confetti";
 
 // confetti
@@ -242,6 +242,13 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
   const changepage = () => {
     setSucesion(true)
   }
+
+  const rights = useSelector(
+    (state: RootState) => state.empire.selectedEmpire?.rights
+  );
+  const beneficiary = useSelector(
+    (state: RootState) => state.empire.selectedEmpire?.beneficiary
+  );
 
   return (
     <Grid
@@ -672,8 +679,8 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
                           </div>
                           <Grid item>
                             <DataTable
-                              rights={iempire.rights}
-                              beneficiarys={iempire.beneficiary}
+                              rights={rights}
+                              beneficiarys={beneficiary}
                             />
                           </Grid>
                           <br />

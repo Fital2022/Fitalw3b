@@ -4,7 +4,7 @@ import { IBottomMenuData } from "../interfaces";
 import { BottomMenu } from "../components/bottomMenu/BottomMenu";
 import { StepForm, StepForm2 } from "../components/forms";
 import { useDispatch, useSelector } from "react-redux";
-import { setShowForm, AppDispatch, RootState } from "../store";
+import { setShowForm, AppDispatch, RootState, setShowForm2 } from "../store";
 import { IRight, IRightBeneficiary, ITrustor, IBeneficiary, IEmpire } from "../interfaces/empireInterfaces";
 import { NextPage } from "next";
 
@@ -203,52 +203,56 @@ const MENU_ACTIONS: IBottomMenuData[] = [
   {
     link: { id: 1, name: "Dinero" },
     sublinks: [
-      { id: 1, name: "Casa", img: "/images/casa.png" },
-      { id: 2, name: "Departamento", img: "/images/casa.png" },
-      { id: 3, name: "Autos", img: "/images/autos.png" },
+      { id: 1, name: "casa", img: "/images/casa.png" },
+      { id: 2, name: "departamento", img: "/images/casa.png" },
+      { id: 3, name: "auto", img: "/images/autos.png" },
     ],
   },
   {
     link: { id: 2, name: "Mobiliario" },
     sublinks: [
-      { id: 1, name: "Casa", img: "/images/casa.png" },
-      { id: 2, name: "Departamento", img: "/images/casa.png" },
-      { id: 3, name: "Autos", img: "/images/autos.png" },
+      { id: 1, name: "casa", img: "/images/casa.png" },
+      { id: 2, name: "departamento", img: "/images/casa.png" },
+      { id: 3, name: "auto", img: "/images/autos.png" },
     ],
   },
   {
     link: { id: 3, name: "Inmobiliario" },
     sublinks: [
-      { id: 1, name: "Casa", img: "/images/casa.png" },
-      { id: 2, name: "Departamento", img: "/images/casa.png" },
-      { id: 3, name: "Autos", img: "/images/autos.png" },
+      { id: 1, name: "casa", img: "/images/casa.png" },
+      { id: 2, name: "departamento", img: "/images/casa.png" },
+      { id: 3, name: "auto", img: "/images/autos.png" },
     ],
   },
   {
     link: { id: 4, name: "Derechos" },
     sublinks: [
-      { id: 1, name: "Casa", img: "/images/casa.png" },
-      { id: 2, name: "Departamento", img: "/images/casa.png" },
-      { id: 3, name: "Autos", img: "/images/autos.png" },
+      { id: 1, name: "casa", img: "/images/casa.png" },
+      { id: 2, name: "departamento", img: "/images/casa.png" },
+      { id: 3, name: "auto", img: "/images/autos.png" },
     ],
   },
 ];
+let tipo = ''
+let img = ''
 
 const Patrimony: NextPage = () => {
 
   const  onDropEntry = (event: DragEvent<HTMLDivElement>) => {
     console.log(event)
-    const tipo = event.dataTransfer.getData('option')
+    tipo = event.dataTransfer.getData('option')
+    img = event.dataTransfer.getData('img')
     console.log({tipo})
-    dispatch(setShowForm(true))
+    console.log({img})
+    dispatch(setShowForm2(true))
     
   }
   
   const dispatch = useDispatch<AppDispatch>()
   
-  let draggmode = useSelector((state: RootState) => state.empire.isDraggin);
+  let draggmode = useSelector((state: RootState) => state.form.isDraggin);
   
-  let formmode = useSelector((state: RootState) => state.empire.showform);
+  let formmode = useSelector((state: RootState) => state.form.showform2);
   
   const  allowDrop = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -269,7 +273,7 @@ const Patrimony: NextPage = () => {
         <Typography sx={{align: 'center'}}>Suelta aqui</Typography>
         </Grid> : '' }
         </div>
-        {formmode ? <Grid item sx={{transition: 'all .1s'}}> <StepForm2 premium={true} iempire={empire} /></Grid>  : '' }
+        {formmode ? <Grid item sx={{transition: 'all .1s'}}> <StepForm2 premium={true} iempire={empire} title={tipo} img={img} /></Grid>  : '' }
       </Box>
       <BottomMenu data={MENU_ACTIONS} />
     </ActionsLayout>

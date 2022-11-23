@@ -23,6 +23,8 @@ import {
   IRightBeneficiary,
 } from "../../interfaces/empireInterfaces";
 import { IconButton } from "@mui/material";
+import { useDispatch } from "react-redux";
+import { AppDispatch, deleteBeneficiaryProperties, updateBeneficiaryProperties } from "../../store";
 
 interface Props {
   rights: IRight[];
@@ -30,6 +32,7 @@ interface Props {
 }
 
 const DataTable: FC<Props> = ({ rights, beneficiarys }) => {
+  const dispatch = useDispatch<AppDispatch>();
   const [Var, setVar] = useState(true);
 
   //   const makeid = (length: number) => {
@@ -44,70 +47,81 @@ const DataTable: FC<Props> = ({ rights, beneficiarys }) => {
   // }
 
   const getmatrixdata = (id: number, index: number, right: number) => {
-    var cont = 0;
-
-    var edited = [];
-
-    for (let i = 0; i < beneficiarys.length; i++) {
-      if (beneficiarys[i].properties[index].percentage !== 0) {
-        cont++;
-        edited.push(i);
-      }
+    // var cont = 0;
+    let data = {
+      id: id,
+      index: index,
     }
-    console.log(cont);
-    if (cont == 0) {
-      var result = 100;
-      for (let j = 0; j < beneficiarys.length; j++) {
-        if (beneficiarys[j].id == id) {
-          console.log("Estoy en el cliente");
-          beneficiarys[j].properties[index].percentage = result;
-        }
-      }
-    } else {
-      var result = 100 / (cont + 1);
-      console.log("Reasignare datos con valor: ", result);
-      for (let j = 0; j < beneficiarys.length; j++) {
-        if (beneficiarys[j].id === id) {
-          beneficiarys[j].properties[index].percentage = result;
-        }
-      }
-      for (let k = 0; k < edited.length; k++) {
-        beneficiarys[edited[k]].properties[index].percentage = result;
-      }
-    }
+    // var edited = [];
 
-    console.log(beneficiarys);
+    // for (let i = 0; i < beneficiarys.length; i++) {
+    //   if (beneficiarys[i].properties[index].percentage !== 0) {
+    //     cont++;
+    //     edited.push(i);
+    //   }
+    // }
+    // console.log(cont);
+    // if (cont == 0) {
+    //   var result = 100;
+    //   for (let j = 0; j < beneficiarys.length; j++) {
+    //     if (beneficiarys[j].id == id) {
+    //       console.log("Estoy en el cliente");
+    //       beneficiarys[j].properties[index].percentage = result;
+    //     }
+    //   }
+    // } else {
+    //   var result = 100 / (cont + 1);
+    //   console.log("Reasignare datos con valor: ", result);
+    //   for (let j = 0; j < beneficiarys.length; j++) {
+    //     if (beneficiarys[j].id === id) {
+    //       beneficiarys[j].properties[index].percentage = result;
+    //     }
+    //   }
+    //   for (let k = 0; k < edited.length; k++) {
+    //     beneficiarys[edited[k]].properties[index].percentage = result;
+    //   }
+    // }
+
+    // console.log(beneficiarys);
+    dispatch(updateBeneficiaryProperties(data))
     //  makeid(5)
-    setVar(!Var);
+  
   };
   const quitmatrixdata = (id: number, index: number, right: number) => {
-    var cont = 0;
 
-    var edited = [];
-
-    for (let i = 0; i < beneficiarys.length; i++) {
-      if (beneficiarys[i].properties[index].percentage !== 0) {
-        cont++;
-        edited.push(i);
-      }
+    let data = {
+      id: id,
+      index: index,
     }
-    console.log(cont);
+    // var cont = 0;
 
-    var result = 100 / (cont - 1);
-    console.log("Reasignare datos con valor: ", result);
+    // var edited = [];
 
-    for (let k = 0; k < edited.length; k++) {
-      if (beneficiarys[edited[k]].id === id) {
-        beneficiarys[edited[k]].properties[index].percentage = 0;
-        console.log("Le he quitado el valor");
-      } else {
-        beneficiarys[edited[k]].properties[index].percentage = result;
-      }
-    }
+    // for (let i = 0; i < beneficiarys.length; i++) {
+    //   if (beneficiarys[i].properties[index].percentage !== 0) {
+    //     cont++;
+    //     edited.push(i);
+    //   }
+    // }
+    // console.log(cont);
 
-    console.log(beneficiarys);
+    // var result = 100 / (cont - 1);
+    // console.log("Reasignare datos con valor: ", result);
+
+    // for (let k = 0; k < edited.length; k++) {
+    //   if (beneficiarys[edited[k]].id === id) {
+    //     beneficiarys[edited[k]].properties[index].percentage = 0;
+    //     console.log("Le he quitado el valor");
+    //   } else {
+    //     beneficiarys[edited[k]].properties[index].percentage = result;
+    //   }
+    // }
+
+    // console.log(beneficiarys);
+
     //  makeid(5)
-    setVar(!Var);
+    dispatch(deleteBeneficiaryProperties(data))
+    
   };
 
   return (

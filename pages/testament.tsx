@@ -53,9 +53,9 @@ const Testament: NextPage = () => {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  let draggmode = useSelector((state: RootState) => state.empire.isDraggin);
+  let draggmode = useSelector((state: RootState) => state.form.isDraggin);
 
-  let formmode = useSelector((state: RootState) => state.empire.showform);
+  let formmode = useSelector((state: RootState) => state.form.showform);
 
   const allowDrop = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
