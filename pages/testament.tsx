@@ -20,9 +20,9 @@ const MENU_ACTIONS: IBottomMenuData[] = [
   {
     link: { id: 1, name: "Arbol" },
     sublinks: [
-      { id: 1, name: "Agregar Fideicomitente", img: "/images/casa.png" },
-      { id: 2, name: "Agregar Fidusuario", img: "/images/casa.png" },
-      { id: 3, name: "Agregar Beneficiario", img: "/images/autos.png" },
+      { id: 1, name: "Fideicomitente", img: "/images/casa.png" },
+      { id: 2, name: "Fidusuario", img: "/images/casa.png" },
+      { id: 3, name: "Beneficiario", img: "/images/autos.png" },
     ],
   },
   {
@@ -43,11 +43,16 @@ const MENU_ACTIONS: IBottomMenuData[] = [
   },
 ];
 
+let tipo = ''
+let img = ''
+
 const Testament: NextPage = () => {
   const onDropEntry = (event: DragEvent<HTMLDivElement>) => {
     console.log(event);
-    const tipo = event.dataTransfer.getData("option");
-    console.log({ tipo });
+    tipo = event.dataTransfer.getData('option')
+    img = event.dataTransfer.getData('img')
+    console.log({tipo})
+    console.log({img})
     dispatch(setShowForm(true));
   };
 
@@ -85,7 +90,7 @@ const Testament: NextPage = () => {
         {formmode ? (
           <Grid item sx={{ transition: "all .1s" }}>
             {" "}
-            <StepForm premium={true} iempire={empire} />
+            <StepForm premium={true} iempire={empire} title={tipo} img={img}  />
           </Grid>
         ) : (
           ""

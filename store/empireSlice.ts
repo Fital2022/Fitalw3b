@@ -13,6 +13,7 @@ export const empireSlice = createSlice({
   initialState: {
     empires: [{ ...empire }] as IEmpire[],
     selectedEmpire: {} as IEmpire,
+    currentright: {} as IRightBeneficiary[],
   },
   reducers: {
     addEscrow: (state, { payload }: PayloadAction<IEmpire>) => {
@@ -89,32 +90,39 @@ export const empireSlice = createSlice({
         }
       }
     },
-    deleteBeneficiaryProperties : ( state,
-      { payload: { id, index } }: PayloadAction<{ id: number; index: number }>) => {
-        var cont = 0;
+    deleteBeneficiaryProperties: (
+      state,
+      { payload: { id, index } }: PayloadAction<{ id: number; index: number }>
+    ) => {
+      var cont = 0;
 
-        var edited = [];
-    
-        for (let i = 0; i < state.selectedEmpire.beneficiary.length; i++) {
-          if (state.selectedEmpire.beneficiary[i].properties[index].percentage !== 0) {
-            cont++;
-            edited.push(i);
-          }
+      var edited = [];
+
+      for (let i = 0; i < state.selectedEmpire.beneficiary.length; i++) {
+        if (
+          state.selectedEmpire.beneficiary[i].properties[index].percentage !== 0
+        ) {
+          cont++;
+          edited.push(i);
         }
-        console.log(cont);
-    
-        var result = 100 / (cont - 1);
-        console.log("Reasignare datos con valor: ", result);
-    
-        for (let k = 0; k < edited.length; k++) {
-          if (state.selectedEmpire.beneficiary[edited[k]].id === id) {
-            state.selectedEmpire.beneficiary[edited[k]].properties[index].percentage = 0;
-            console.log("Le he quitado el valor");
-          } else {
-            state.selectedEmpire.beneficiary[edited[k]].properties[index].percentage = result;
-          }
+      }
+      console.log(cont);
+
+      var result = 100 / (cont - 1);
+      console.log("Reasignare datos con valor: ", result);
+
+      for (let k = 0; k < edited.length; k++) {
+        if (state.selectedEmpire.beneficiary[edited[k]].id === id) {
+          state.selectedEmpire.beneficiary[edited[k]].properties[
+            index
+          ].percentage = 0;
+          console.log("Le he quitado el valor");
+        } else {
+          state.selectedEmpire.beneficiary[edited[k]].properties[
+            index
+          ].percentage = result;
         }
-    
+      }
     },
     addTrustor: (
       state,
@@ -125,14 +133,20 @@ export const empireSlice = createSlice({
       const escrow = state.empires.find((empire) => empire.id === id);
       if (escrow) escrow.trustor.push(trustor);
     },
-    addBeneficiary: (
-      state,
-      {
-        payload: { id, beneficiary },
-      }: PayloadAction<{ id: number; beneficiary: IBeneficiary }>
-    ) => {
-      const escrow = state.empires.find((empire) => empire.id === id);
-      if (escrow) escrow.beneficiary.push(beneficiary);
+
+    getRights: (state) => {
+      let result = [];
+      for (let index = 0; index < state.selectedEmpire.rights.length; index++) {
+        let data: IRightBeneficiary = {
+          idRight: state.selectedEmpire.rights[index].id!,
+          percentage: 0,
+        };
+        result.push(data);
+      }
+      state.currentright = result;
+    },
+    addBeneficiary: (state, { payload }: PayloadAction<IBeneficiary>) => {
+      state.selectedEmpire.beneficiary.push(payload);
     },
   },
 });
@@ -142,6 +156,7 @@ export const {
   addEscrow,
   addTrustor,
   addRight,
+  getRights,
   addBeneficiaryProperties,
   selectEscrow,
   updateBeneficiaryProperties,

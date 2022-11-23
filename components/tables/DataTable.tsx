@@ -25,6 +25,7 @@ import {
 import { IconButton } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { AppDispatch, deleteBeneficiaryProperties, updateBeneficiaryProperties } from "../../store";
+import styles from "../../styles/form.module.css";
 
 interface Props {
   rights: IRight[];
@@ -135,9 +136,9 @@ const DataTable: FC<Props> = ({ rights, beneficiarys }) => {
             Testamento Digital
           </Typography> */}
 
-        <Box display="flex" justifyContent="center">
-          <TableContainer component={Paper}>
-            <Table aria-label="simple table" stickyHeader>
+        <Box display="flex" justifyContent="center"  sx={{width: '600px', height: '400px', overflowX: 'auto'}}>
+          <TableContainer component={Paper} className={styles['table-style']} sx={{overflow: 'scroll'}} >
+            <Table aria-label="simple table" stickyHeader className={styles['table-style']}>
               <TableHead>
                 <TableRow>
                   <TableCell>&nbsp;&nbsp;&nbsp;</TableCell>

@@ -6,7 +6,8 @@ export const addformSlice = createSlice({
     isDraggin: false,
     showform: false,
     showform2: false,
-    currentid: 6
+    currentid: 6,
+    userid: 5,
   },
   reducers: {
 
@@ -22,6 +23,10 @@ export const addformSlice = createSlice({
     addid: (state) => {
         state.currentid = state.currentid + 1;
         console.log("Tengo ahora el id: " + state.currentid);
+    },
+    adduser: (state) =>{
+        state.userid = state.userid + 1;
+
     }
 
   },
@@ -33,4 +38,5 @@ export const {
   setShowForm,
   setShowForm2,
   addid,
+  adduser,
 } = addformSlice.actions;

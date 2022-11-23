@@ -1,4 +1,4 @@
-import { CameraAlt, CheckCircle, Star } from "@mui/icons-material";
+import { CameraAlt, CheckCircle, CloseOutlined, Star } from "@mui/icons-material";
 import {
   Avatar,
   Badge,
@@ -10,6 +10,7 @@ import {
   FormControlLabel,
   FormLabel,
   Grid,
+  IconButton,
   Modal,
   Radio,
   RadioGroup,
@@ -20,9 +21,9 @@ import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import styles from "../../styles/Things.module.css";
 import { TextField } from "@mui/material";
 import DataTable from "../tables/DataTable";
-import { IEmpire } from "../../interfaces/empireInterfaces";
+import { IBeneficiary, IEmpire, IRight } from "../../interfaces/empireInterfaces";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState, setShowForm } from "../../store";
+import { addBeneficiary, AppDispatch, getRights, RootState, setShowForm } from "../../store";
 import ReactCanvasConfetti from "react-canvas-confetti";
 
 // confetti
@@ -128,9 +129,11 @@ label.Mui-focused{
 interface Props {
   premium: boolean;
   iempire: IEmpire;
+  title: string;
+  img: string;
 }
 
-export const StepForm: FC<Props> = ({ premium, iempire }) => {
+export const StepForm: FC<Props> = ({ premium, iempire, title,img }) => {
   // confetti
   const refAnimationInstance = useRef<any>(null);
   const [intervalId, setIntervalId] = useState<any | null>(null);
@@ -171,55 +174,75 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
   // modal
   const [status, setStatus] = useState<string>("");
 
+  let currenid = useSelector((state: RootState) => state.form.userid);
+  let currentright = useSelector((state: RootState) => state.empire.currentright)
+
   const handleSubmitF = async (event: any) => {
     startAnimation();
     event.preventDefault();
-
-    const data = {
-      name: event.target.name.value,
-      birth: event.target.birth.value,
-      genre: event.target.genre.value,
-      curp: event.target.curp.value,
-      rfc: event.target.rfc.value,
-      direction: event.target.direction.value,
-      marital: event.target.marital.value,
-    };
-
-    // Send the data to the server in JSON format.
-    const JSONdata = JSON.stringify(data);
-
-    // API endpoint where we send form data.
-    const endpoint = "/api/form2";
-
-    // Form the request for sending data to the server.
-    const options = {
-      // The method is POST because we are sending data.
-      method: "POST",
-      // Tell the server we're sending JSON.
-      headers: {
-        "Content-Type": "application/json",
-      },
-      // Body of the request is the JSON data we created above.
-      body: JSONdata,
-    };
-
-    // Send the form data to our forms API on Vercel and get a response.
-    const response = await fetch(endpoint, options);
-
-    if (response.status == 200) {
-      setStatus("success");
-      handleOpen();
+    if(title === 'Beneficiario'){
+      dispatch(getRights())
+      let data: IBeneficiary = {
+        id: currenid,
+        name: event.target.name.value,
+        img: "/images/avatar/person1.jpeg",
+        properties: currentright,
+      }
+      dispatch(addBeneficiary(data))
+      console.log("Beneficiario agregado")
     }
+    else {
+      const data = {
+        name: event.target.name.value,
+        birth: event.target.birth.value,
+        genre: event.target.genre.value,
+        curp: event.target.curp.value,
+        rfc: event.target.rfc.value,
+        direction: event.target.direction.value,
+        marital: event.target.marital.value,
+      };
+  
+      // Send the data to the server in JSON format.
+      const JSONdata = JSON.stringify(data);
+  
+      // API endpoint where we send form data.
+      const endpoint = "/api/form2";
+  
+      // Form the request for sending data to the server.
+      const options = {
+        // The method is POST because we are sending data.
+        method: "POST",
+        // Tell the server we're sending JSON.
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // Body of the request is the JSON data we created above.
+        body: JSONdata,
+      };
+  
+      // Send the form data to our forms API on Vercel and get a response.
+      const response = await fetch(endpoint, options);
+  
+      if (response.status == 200) {
+        setStatus("success");
+        handleOpen();
+      }
+  
+      // Get the response data from server as JSON.
+      // If server returns the name submitted, that means the form works.
+      const result = await response.json();
+      // alert(
+      //   `nombre: ${data.name}, fecha de nacimiento: ${data.birth}, sexo: ${data.genre}, domicilio: ${data.direction}, estado civil: ${data.marital} `
+      // );
+    }
+    
 
-    // Get the response data from server as JSON.
-    // If server returns the name submitted, that means the form works.
-    const result = await response.json();
-    // alert(
-    //   `nombre: ${data.name}, fecha de nacimiento: ${data.birth}, sexo: ${data.genre}, domicilio: ${data.direction}, estado civil: ${data.marital} `
-    // );
+   
   };
 
   const [sucesion, setSucesion] = useState(true);
+
+  const [dataoption, setdataoption] = useState(true)
 
   const [formoption, setFormoption] = useState("data");
 
@@ -231,6 +254,8 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
     }
   };
 
+
+
   console.log(iempire);
 
   const dispatch = useDispatch<AppDispatch>();
@@ -240,7 +265,14 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
   };
 
   const changepage = () => {
-    setSucesion(true)
+    if(dataoption){
+      console.log("Ya lo cambie")
+      setSucesion(true)
+    }
+    else {
+      setSucesion(false)
+
+    }
   }
 
   const rights = useSelector(
@@ -307,13 +339,18 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
               : { width: "1034px", height: "542px" }
           }
         >
+           <Grid item xs= {12} justifyContent="center" alignItems={"flex-end"}  sx={{height: '5px', marginRight: "3px"}}>
+        <IconButton sx={{marginRight: '10px'}} onClick={closeform} >
+          <CloseOutlined/>
+        </IconButton>
+      </Grid>
           <CardContent align="center">
             <Grid container>
               {(() => {
                 if (formoption === "data") {
                   return (
                     <>
-                    {changepage}
+                    
                       <Grid item xs={2}>
                         <Badge
                           anchorOrigin={{
@@ -324,13 +361,13 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
                         >
                           <Avatar
                             alt="service1"
-                            src="/images/avatar/casa1.jpeg"
+                            src={img}
                             sx={{ width: "70px", height: "70px" }}
                           />
                         </Badge>
                         <br />
                         <br />
-                        <Typography>Fideicomitente</Typography>
+                        <Typography>{title}</Typography>
                       </Grid>
                       {sucesion ? (
                         <Grid
@@ -343,7 +380,7 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
                           <Grid item>
                             <div className={styles["form-title"]}>
                               <Typography variant="h4">
-                                Fideicomitente
+                              {title}
                               </Typography>
                             </div>
                             <form onSubmit={handleSubmitF}>
@@ -420,7 +457,7 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
                               >
                                 <Grid item>
                                   <Button
-                                    sx={{ marginRight: "100px" }}
+                                    sx={{ marginRight: "150px" }}
                                     type="submit"
                                     className={styles["button-form-select"]}
                                   >
@@ -652,13 +689,13 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
                         >
                           <Avatar
                             alt="service1"
-                            src="/images/avatar/casa1.jpeg"
+                            src={img}
                             sx={{ width: "70px", height: "70px" }}
                           />
                         </Badge>
                         <br />
                         <br />
-                        <Typography>SUCESION</Typography>
+                        <Typography>{title}</Typography>
                       </Grid>
                       <Grid
                         item
@@ -675,9 +712,9 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
                           <br />
                           <br />
                           <div className={styles["form-title"]}>
-                            <Typography variant="h4">Fideicomitente</Typography>
+                            <Typography variant="h4">{title}</Typography>
                           </div>
-                          <Grid item>
+                          <Grid item >
                             <DataTable
                               rights={rights}
                               beneficiarys={beneficiary}
@@ -713,13 +750,13 @@ export const StepForm: FC<Props> = ({ premium, iempire }) => {
                         >
                           <Avatar
                             alt="service1"
-                            src="/images/avatar/casa1.jpeg"
+                            src={img}
                             sx={{ width: "70px", height: "70px" }}
                           />
                         </Badge>
                         <br />
                         <br />
-                        <Typography>Persona</Typography>
+                        <Typography>{title}</Typography>
                       </Grid>
                       <Grid
                         item
