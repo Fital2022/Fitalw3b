@@ -187,7 +187,7 @@ const beneficiary: IBeneficiary[] = [
 
 export const empire: IEmpire = {
   name: "Imperio de prueba",
-  id: 1,
+  id: 0,
   rights: right,
   trustor: trustor,
   beneficiary: beneficiary,
