@@ -213,7 +213,19 @@ export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
       direction="row"
       justifyContent="center"
       alignItems="flex-end"
+      position="relative"
     >
+      <IconButton
+        onClick={closeform}
+        sx={{
+          position: "absolute",
+          top: "0px",
+          left: "500px",
+          border: "1px solid #888",
+        }}
+      >
+        <CloseOutlined />
+      </IconButton>
       <Grid
         item
         container
@@ -266,12 +278,8 @@ export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
             xs={12}
             justifyContent="flex-end"
             alignItems={"center"}
-            sx={{ marginLeft: "3px", position: "absoluta" }}
-          >
-            <IconButton onClick={closeform}>
-              <CloseOutlined />
-            </IconButton>
-          </Grid>
+            sx={{ marginLeft: "3px" }}
+          ></Grid>
           <CardContent align="center">
             <Grid container>
               {(() => {

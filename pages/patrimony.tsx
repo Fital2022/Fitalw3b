@@ -266,7 +266,7 @@ const Patrimony: NextPage = () => {
       pageDescription={"Página de patrimonio"}
     >
       
-<Box alignItems={'center'} sx={{marginTop: 20}}>
+<Box alignItems={'center'} sx={{marginTop: 10}}>
         {/* <StepForm premium={true} iempire={empire} /> */}
         <div onDrop={onDropEntry} onDragOver={allowDrop} > 
         {draggmode ?  <Grid container justifyContent="center" sx={{bgcolor: '#D3D3D3', height: '60vh', transition: 'all .3s'}} >
