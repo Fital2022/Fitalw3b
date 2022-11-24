@@ -209,6 +209,8 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
       };
       dispatch(addBeneficiary(data));
       console.log("Beneficiario agregado");
+      setStatus("success");
+      handleOpen();
     } else {
       const data = {
         name: event.target.name.value,
