@@ -129,7 +129,7 @@ export const SideBar = () => {
             Metas
           </Typography>
         </Box>
-        <Box
+        {/* <Box
           display="flex"
           flexDirection="column"
           alignItems="center"
@@ -150,7 +150,7 @@ export const SideBar = () => {
           <Typography variant="caption" sx={{ color: "white" }}>
             Ahorros
           </Typography>
-        </Box>
+        </Box> */}
         <Box
           display="flex"
           flexDirection="column"

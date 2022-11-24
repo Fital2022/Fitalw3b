@@ -1,4 +1,9 @@
-import { CameraAlt, CheckCircle, CloseOutlined, Star } from "@mui/icons-material";
+import {
+  CameraAlt,
+  CheckCircle,
+  CloseOutlined,
+  Star,
+} from "@mui/icons-material";
 import {
   Avatar,
   Badge,
@@ -21,10 +26,21 @@ import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import styles from "../../styles/Things.module.css";
 import { TextField } from "@mui/material";
 import DataTable from "../tables/DataTable";
-import { IBeneficiary, IEmpire, IRight } from "../../interfaces/empireInterfaces";
+import {
+  IBeneficiary,
+  IEmpire,
+  IRight,
+} from "../../interfaces/empireInterfaces";
 import { useDispatch, useSelector } from "react-redux";
-import { addBeneficiary, AppDispatch, getRights, RootState, setShowForm } from "../../store";
+import {
+  addBeneficiary,
+  AppDispatch,
+  getRights,
+  RootState,
+  setShowForm,
+} from "../../store";
 import ReactCanvasConfetti from "react-canvas-confetti";
+import { useRouter } from "next/router";
 
 // confetti
 function randomInRange(min: any, max: any) {
@@ -133,11 +149,12 @@ interface Props {
   img: string;
 }
 
-export const StepForm: FC<Props> = ({ premium, iempire, title,img }) => {
+export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
   // confetti
   const refAnimationInstance = useRef<any>(null);
   const [intervalId, setIntervalId] = useState<any | null>(null);
-
+  const [showPremiumModal, setShowPremiumModal] = useState<boolean>(true);
+  const router = useRouter();
   const getInstance = useCallback((instance: any) => {
     refAnimationInstance.current = instance;
   }, []);
@@ -166,7 +183,7 @@ export const StepForm: FC<Props> = ({ premium, iempire, title,img }) => {
     };
   }, [intervalId]);
   // confetti
-
+  
   // modal
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -175,23 +192,24 @@ export const StepForm: FC<Props> = ({ premium, iempire, title,img }) => {
   const [status, setStatus] = useState<string>("");
 
   let currenid = useSelector((state: RootState) => state.form.userid);
-  let currentright = useSelector((state: RootState) => state.empire.currentright)
+  let currentright = useSelector(
+    (state: RootState) => state.empire.currentright
+  );
 
   const handleSubmitF = async (event: any) => {
     startAnimation();
     event.preventDefault();
-    if(title === 'Beneficiario'){
-      dispatch(getRights())
+    if (title === "Beneficiario") {
+      dispatch(getRights());
       let data: IBeneficiary = {
         id: currenid,
         name: event.target.name.value,
         img: "/images/avatar/person1.jpeg",
         properties: currentright,
-      }
-      dispatch(addBeneficiary(data))
-      console.log("Beneficiario agregado")
-    }
-    else {
+      };
+      dispatch(addBeneficiary(data));
+      console.log("Beneficiario agregado");
+    } else {
       const data = {
         name: event.target.name.value,
         birth: event.target.birth.value,
@@ -201,13 +219,13 @@ export const StepForm: FC<Props> = ({ premium, iempire, title,img }) => {
         direction: event.target.direction.value,
         marital: event.target.marital.value,
       };
-  
+
       // Send the data to the server in JSON format.
       const JSONdata = JSON.stringify(data);
-  
+
       // API endpoint where we send form data.
       const endpoint = "/api/form2";
-  
+
       // Form the request for sending data to the server.
       const options = {
         // The method is POST because we are sending data.
@@ -219,15 +237,15 @@ export const StepForm: FC<Props> = ({ premium, iempire, title,img }) => {
         // Body of the request is the JSON data we created above.
         body: JSONdata,
       };
-  
+
       // Send the form data to our forms API on Vercel and get a response.
       const response = await fetch(endpoint, options);
-  
+
       if (response.status == 200) {
         setStatus("success");
         handleOpen();
       }
-  
+
       // Get the response data from server as JSON.
       // If server returns the name submitted, that means the form works.
       const result = await response.json();
@@ -235,14 +253,11 @@ export const StepForm: FC<Props> = ({ premium, iempire, title,img }) => {
       //   `nombre: ${data.name}, fecha de nacimiento: ${data.birth}, sexo: ${data.genre}, domicilio: ${data.direction}, estado civil: ${data.marital} `
       // );
     }
-    
-
-   
   };
 
   const [sucesion, setSucesion] = useState(true);
 
-  const [dataoption, setdataoption] = useState(true)
+  const [dataoption, setdataoption] = useState(true);
 
   const [formoption, setFormoption] = useState("data");
 
@@ -254,8 +269,6 @@ export const StepForm: FC<Props> = ({ premium, iempire, title,img }) => {
     }
   };
 
-
-
   console.log(iempire);
 
   const dispatch = useDispatch<AppDispatch>();
@@ -265,15 +278,13 @@ export const StepForm: FC<Props> = ({ premium, iempire, title,img }) => {
   };
 
   const changepage = () => {
-    if(dataoption){
-      console.log("Ya lo cambie")
-      setSucesion(true)
+    if (dataoption) {
+      console.log("Ya lo cambie");
+      setSucesion(true);
+    } else {
+      setSucesion(false);
     }
-    else {
-      setSucesion(false)
-
-    }
-  }
+  };
 
   const rights = useSelector(
     (state: RootState) => state.empire.selectedEmpire?.rights
@@ -281,6 +292,11 @@ export const StepForm: FC<Props> = ({ premium, iempire, title,img }) => {
   const beneficiary = useSelector(
     (state: RootState) => state.empire.selectedEmpire?.beneficiary
   );
+
+  useEffect(() => {
+    if (formoption !== "data" && formoption !== "resume")
+      setShowPremiumModal(true);
+  }, [formoption]);
 
   return (
     <Grid
@@ -339,18 +355,24 @@ export const StepForm: FC<Props> = ({ premium, iempire, title,img }) => {
               : { width: "1034px", height: "542px" }
           }
         >
-           <Grid item container xs= {12} justifyContent="flex-end" alignItems={"center"}  sx={{ marginLeft: '3px', position: 'absoluta'}}>
-        <IconButton  onClick={closeform} >
-          <CloseOutlined/>
-        </IconButton>
-      </Grid>
+          <Grid
+            item
+            container
+            xs={12}
+            justifyContent="flex-end"
+            alignItems={"center"}
+            sx={{ marginLeft: "3px", position: "absoluta" }}
+          >
+            <IconButton onClick={closeform}>
+              <CloseOutlined />
+            </IconButton>
+          </Grid>
           <CardContent align="center">
             <Grid container>
               {(() => {
                 if (formoption === "data") {
                   return (
                     <>
-                    
                       <Grid item xs={2}>
                         <Badge
                           anchorOrigin={{
@@ -379,9 +401,7 @@ export const StepForm: FC<Props> = ({ premium, iempire, title,img }) => {
                         >
                           <Grid item>
                             <div className={styles["form-title"]}>
-                              <Typography variant="h4">
-                              {title}
-                              </Typography>
+                              <Typography variant="h4">{title}</Typography>
                             </div>
                             <form onSubmit={handleSubmitF}>
                               <StyledTextField
@@ -714,7 +734,7 @@ export const StepForm: FC<Props> = ({ premium, iempire, title,img }) => {
                           <div className={styles["form-title"]}>
                             <Typography variant="h4">{title}</Typography>
                           </div>
-                          <Grid item >
+                          <Grid item>
                             <DataTable
                               rights={rights}
                               beneficiarys={beneficiary}
@@ -739,7 +759,65 @@ export const StepForm: FC<Props> = ({ premium, iempire, title,img }) => {
                   return (
                     <>
                       {sucesion != true ? setSucesion(true) : ""}
-
+                      <Modal
+                        open={showPremiumModal}
+                        onClose={() => setShowPremiumModal(false)}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                      >
+                        <Box
+                          sx={{
+                            position: "fixed",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                            width: "500px",
+                            bgcolor: "white",
+                            borderRadius: "10px",
+                            p: 4,
+                          }}
+                        >
+                          <IconButton
+                            sx={{
+                              bgcolor: "white",
+                              borderRadius: "100%",
+                              border: "1px solid #888",
+                              position: "absolute",
+                              top: "-40px",
+                              right: "-40px",
+                            }}
+                            onClick={() => setShowPremiumModal(false)}
+                          >
+                            <CloseOutlined />
+                          </IconButton>
+                          <Typography
+                            sx={{
+                              color: "#707070",
+                              fontWeight: "bold",
+                              fontSize: "20px",
+                              textAlign: "center",
+                            }}
+                          >
+                            Fital en su versión gratis no esta avalado bajo las
+                            leyes mexicanas. Prueba la version premium para
+                            darle validez oficial.
+                          </Typography>
+                          <Box display="flex" justifyContent="center" mt={3}>
+                            <Button
+                              sx={{
+                                color: "white",
+                                bgcolor: "#31A354",
+                                fontSize: "16px",
+                                backgroundImage: "none",
+                                textTransform: "none",
+                              }}
+                              onClick={() => router.push("/onboarding")}
+                            >
+                              Registrarse ahora
+                            </Button>
+                          </Box>
+                        </Box>
+                      </Modal>
                       <Grid item xs={2}>
                         <Badge
                           anchorOrigin={{

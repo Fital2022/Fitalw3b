@@ -3,6 +3,7 @@ import {
   AttachMoneyOutlined,
   FileOpenOutlined,
   FlagCircleOutlined,
+  HolidayVillage,
   HouseOutlined,
 } from "@mui/icons-material";
 import { Box, Card, Grid, IconButton, Link, Typography } from "@mui/material";
@@ -12,7 +13,7 @@ import { MainLayout } from "../components/Layout";
 interface IOption {
   title: string;
   icon: JSX.Element;
-  path: "/patrimony" | "/testament" | "/goals" | "/savings";
+  path: "/patrimony" | "/testament" | "/goals" | "/empire";
 }
 
 const OPTIONS: IOption[] = [
@@ -44,20 +45,15 @@ const OPTIONS: IOption[] = [
     ),
   },
   {
-    path: "/savings",
-    title: "Ahorros",
+    path: "/empire",
+    title: "Imperio",
     icon: (
-      <AttachMoneyOutlined
-        fontSize="large"
-        sx={{ color: "black", fontSize: 120 }}
-      />
+      <HolidayVillage fontSize="large" sx={{ color: "black", fontSize: 120 }} />
     ),
   },
 ];
 
 const MainMenu: NextPage = () => {
-  
-
   return (
     <MainLayout title={"Fital"} pageDescription={"Página principal"}>
       <Box

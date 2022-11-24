@@ -17,9 +17,9 @@ export const BottomMenu: FC<Props> = ({ data }) => {
         bottom: 20,
         left: "50%",
         transform: "translate(-45%)",
-        bgcolor: "rgba(255,255,255,0.5)",
+        bgcolor: "rgba(255,255,255,0.3)",
         borderRadius: "10px",
-        backdropFilter: "blur(20px)",
+        backdropFilter: "blur(10px)",
         display: "flex",
       }}
     >
@@ -38,7 +38,7 @@ export const BottomMenu: FC<Props> = ({ data }) => {
                   height: "110px",
                   visibility: "hidden",
                   opacity: 0,
-                  transition: "all 0.3s ease",
+                  transition: "all 0.5s ease",
                 },
                 element.link.id === currentId && {
                   visibility: "visible",
@@ -58,7 +58,12 @@ export const BottomMenu: FC<Props> = ({ data }) => {
             </Box>
             <Button
               key={element.link.id}
-              sx={{ padding: "15px", width: "180px", color: "black" }}
+              sx={{
+                padding: "15px",
+                width: "180px",
+                color: "black",
+                bgcolor: "transparent",
+              }}
               onClick={() =>
                 setCurrentId((prevId) =>
                   prevId === element.link.id ? undefined : element.link.id
