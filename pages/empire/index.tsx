@@ -175,7 +175,7 @@ const ResponsiveGrid: FC<Props> = ({ rights }) => {
 
   return (
     <ActionsLayout pageDescription="" title="">
-      <Box sx={{ flexGrow: 1, paddingTop: 2, paddingLeft: 2 }}>
+      <Box sx={{ flexGrow: 1, paddingTop: 2, paddingLeft: 2}}>
         <Grid
           container
           spacing={{ xs: 2, md: 3 }}
@@ -189,8 +189,8 @@ const ResponsiveGrid: FC<Props> = ({ rights }) => {
                 <Grid key={index} item xs={2} sm={2} md={2}>
                   <Card
                     sx={{
-                      height: 150,
-                      width: 240,
+                      height: 160,
+                      width: 300,
                       backgroundColor: "transparent",
                       boxShadow: "none",
                     }}
