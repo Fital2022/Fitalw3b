@@ -72,7 +72,7 @@ const Testament: NextPage = () => {
       title={"Fital - Testamento Digital"}
       pageDescription={"Página de testamento digital"}
     >
-      <Box alignItems={"center"} sx={{ marginTop: 20 }}>
+      <Box alignItems={"center"} sx={{ marginTop: 10 }}>
         {/* <StepForm premium={true} iempire={empire} /> */}
         <div onDrop={onDropEntry} onDragOver={allowDrop}>
           {draggmode ? (

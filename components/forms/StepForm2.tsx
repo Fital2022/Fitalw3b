@@ -1,6 +1,7 @@
 import {
   CameraAlt,
   CheckCircle,
+  CloseOutlined,
   InputOutlined,
   Star,
 } from "@mui/icons-material";
@@ -16,6 +17,7 @@ import {
   FormControlLabel,
   FormLabel,
   Grid,
+  IconButton,
   Radio,
   RadioGroup,
   styled,
@@ -239,6 +241,11 @@ export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
           className={styles["form"]}
           sx={{ width: "717px", height: "540px" }}
         >
+           <Grid item container xs= {12} justifyContent="flex-end" alignItems={"center"}  sx={{ marginLeft: '3px', position: 'absoluta'}}>
+        <IconButton  onClick={closeform} >
+          <CloseOutlined/>
+        </IconButton>
+      </Grid>
           <CardContent align="center">
             <Grid container>
               {(() => {

@@ -339,8 +339,8 @@ export const StepForm: FC<Props> = ({ premium, iempire, title,img }) => {
               : { width: "1034px", height: "542px" }
           }
         >
-           <Grid item xs= {12} justifyContent="center" alignItems={"flex-end"}  sx={{height: '5px', marginRight: "3px"}}>
-        <IconButton sx={{marginRight: '10px'}} onClick={closeform} >
+           <Grid item container xs= {12} justifyContent="flex-end" alignItems={"center"}  sx={{ marginLeft: '3px', position: 'absoluta'}}>
+        <IconButton  onClick={closeform} >
           <CloseOutlined/>
         </IconButton>
       </Grid>
