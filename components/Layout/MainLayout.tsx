@@ -28,7 +28,7 @@ export const MainLayout: FC<PropsWithChildren<Props>> = ({
       </nav>
       <main
         style={{
-          backgroundImage: 'url("backgrounds/Pagina-Web.jpg")',
+          backgroundImage: 'url("backgrounds/bg-domi.jpg")',
           width: "100vw",
           minHeight: "calc(100vh - 90px)",
           marginTop: "90px",

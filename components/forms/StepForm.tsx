@@ -183,7 +183,7 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
     };
   }, [intervalId]);
   // confetti
-  
+
   // modal
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -306,7 +306,19 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
       direction="row"
       justifyContent="center"
       alignItems="flex-end"
+      position="relative"
     >
+      <IconButton
+        onClick={closeform}
+        sx={{
+          position: "absolute",
+          top: "0px",
+          left: "500px",
+          border: "1px solid #888",
+        }}
+      >
+        <CloseOutlined />
+      </IconButton>
       <Grid
         item
         container
@@ -364,11 +376,7 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
             justifyContent="flex-end"
             alignItems={"center"}
             sx={{ marginLeft: "3px", position: "absoluta" }}
-          >
-            <IconButton onClick={closeform}>
-              <CloseOutlined />
-            </IconButton>
-          </Grid>
+          ></Grid>
           <CardContent align="center">
             <Grid container>
               {(() => {

@@ -37,7 +37,7 @@ export const ActionsLayout: FC<PropsWithChildren<Props>> = ({
       </nav>
       <main
         style={{
-          backgroundImage: 'url("backgrounds/Pagina-Web.jpg")',
+          backgroundImage: 'url("backgrounds/bg-domi.jpg")',
           width: "calc(100vw - 90px)",
           minHeight: "100vh",
           float: "right",
