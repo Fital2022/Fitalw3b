@@ -191,12 +191,12 @@ const beneficiary : IBeneficiary [] = [
   },
 ]
 
-const empire : IEmpire = 
-{  name: "prueba1",
-  id: 1,
-  rights: right,
-  trustor: trustor,
-  beneficiary:beneficiary}
+// const empire : IEmpire = 
+// {  name: "prueba1",
+//   id: 1,
+//   rights: right,
+//   trustor: trustor,
+//   beneficiary:beneficiary}
 
 
 const MENU_ACTIONS: IBottomMenuData[] = [
@@ -253,6 +253,8 @@ const Patrimony: NextPage = () => {
   let draggmode = useSelector((state: RootState) => state.form.isDraggin);
   
   let formmode = useSelector((state: RootState) => state.form.showform2);
+
+  let empire = useSelector((state: RootState) => state.empire.selectedEmpire);
   
   const  allowDrop = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();

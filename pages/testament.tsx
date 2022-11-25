@@ -14,7 +14,7 @@ import { IBottomMenuData } from "../interfaces";
 import { useDispatch, useSelector } from "react-redux";
 import { NextPage } from "next";
 import { AppDispatch, RootState, setShowForm } from "../store";
-import { empire } from "../data";
+
 
 const MENU_ACTIONS: IBottomMenuData[] = [
   {
@@ -61,6 +61,9 @@ const Testament: NextPage = () => {
   let draggmode = useSelector((state: RootState) => state.form.isDraggin);
 
   let formmode = useSelector((state: RootState) => state.form.showform);
+
+  let empire = useSelector((state: RootState) => state.empire.selectedEmpire);
+  
 
   const allowDrop = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();

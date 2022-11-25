@@ -30,10 +30,12 @@ import {
   IBeneficiary,
   IEmpire,
   IRight,
+  IRightBeneficiary,
 } from "../../interfaces/empireInterfaces";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addBeneficiary,
+  adduser,
   AppDispatch,
   getRights,
   RootState,
@@ -150,10 +152,29 @@ interface Props {
 }
 
 export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
+  const [formValue, setformValue] = useState({
+    name: "",
+    birth: "",
+    genre: "",
+    curp: "",
+    rfc: "",
+    direction: "",
+    marital: "",
+  });
+
+  const onFormFieldChanges = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(event.target.name + ": " + event.target.value);
+    setformValue((prevState) => ({
+      ...prevState,
+      [event.target.name]: event.target.value,
+    }));
+  };
   // confetti
   const refAnimationInstance = useRef<any>(null);
   const [intervalId, setIntervalId] = useState<any | null>(null);
   const [showPremiumModal, setShowPremiumModal] = useState<boolean>(true);
+  const [showBeneficiaryModal, setShowBeneficiaryModal] =
+    useState<boolean>(false);
   const router = useRouter();
   const getInstance = useCallback((instance: any) => {
     refAnimationInstance.current = instance;
@@ -195,22 +216,45 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
   let currentright = useSelector(
     (state: RootState) => state.empire.currentright
   );
+  useEffect(() => {
+    console.log("Aqui estan los valores");
+    console.log(currentright);
+  }, [currentright]);
+
+  const [submit, setSubmit] = useState(false);
+
+  useEffect(() => {
+    if (submit) {
+      startAnimation();
+      console.log("Estos son los rights");
+      console.log(currentright);
+      console.log(currentright.length);
+      if (currentright.length > 0) {
+        let data: IBeneficiary = {
+          id: currenid,
+          name: formValue.name,
+          img: "/images/avatar/person1.jpeg",
+          properties: currentright.map((item: IRightBeneficiary) => item),
+        };
+        console.log(data);
+        dispatch(addBeneficiary(data));
+        console.log("Beneficiario agregado");
+        dispatch(adduser());
+        setStatus("success");
+        handleOpen();
+      } else {
+        console.log("Se abre el modal")
+        setShowBeneficiaryModal(true);
+        console.log(showBeneficiaryModal)
+      }
+    }
+  }, [submit]);
 
   const handleSubmitF = async (event: any) => {
-    startAnimation();
     event.preventDefault();
     if (title === "Beneficiario") {
       dispatch(getRights());
-      let data: IBeneficiary = {
-        id: currenid,
-        name: event.target.name.value,
-        img: "/images/avatar/person1.jpeg",
-        properties: currentright,
-      };
-      dispatch(addBeneficiary(data));
-      console.log("Beneficiario agregado");
-      setStatus("success");
-      handleOpen();
+      setSubmit(true);
     } else {
       const data = {
         name: event.target.name.value,
@@ -278,6 +322,12 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
   const closeform = () => {
     dispatch(setShowForm(false));
   };
+
+  const closemodalform = () => {
+    dispatch(setShowForm(false));
+    setShowBeneficiaryModal(false);
+
+  }
 
   const changepage = () => {
     if (dataoption) {
@@ -383,6 +433,67 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
                 if (formoption === "data") {
                   return (
                     <>
+                      <Modal
+                        open={showBeneficiaryModal}
+                        onClose={() => closemodalform()}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                      >
+                        <Box
+                          sx={{
+                            position: "fixed",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                            width: "500px",
+                            bgcolor: "white",
+                            borderRadius: "10px",
+                            p: 4,
+                          }}
+                        >
+                          <IconButton
+                            sx={{
+                              bgcolor: "white",
+                              borderRadius: "100%",
+                              border: "1px solid #888",
+                              position: "absolute",
+                              top: "-40px",
+                              right: "-40px",
+                            }}
+                            onClick={() => closemodalform()}
+                          >
+                            <CloseOutlined />
+                          </IconButton>
+                          <Typography variant="h3" sx={{ color: "red", textAlign: "center" }}>
+                            Error
+                          </Typography>
+                          <Typography
+                            sx={{
+                              color: "#707070",
+                              fontWeight: "bold",
+                              fontSize: "20px",
+                              textAlign: "center",
+                            }}
+                          >
+                            Debes de ingresar al menos un bien en tu fideicomiso
+                            para agregar un beneficiario.
+                          </Typography>
+                          <Box display="flex" justifyContent="center" mt={3}>
+                            <Button
+                              sx={{
+                                color: "white",
+                                bgcolor: "#31A354",
+                                fontSize: "16px",
+                                backgroundImage: "none",
+                                textTransform: "none",
+                              }}
+                              onClick={() => closemodalform()}
+                            >
+                              Ok
+                            </Button>
+                          </Box>
+                        </Box>
+                      </Modal>
                       <Grid item xs={2}>
                         <Badge
                           anchorOrigin={{
@@ -418,6 +529,9 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
                                 required
                                 placeholder="Nombre Completo"
                                 name="name"
+                                id="name"
+                                value={formValue.name}
+                                onChange={onFormFieldChanges}
                               />
                               <br />
                               <br />
@@ -427,6 +541,9 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
                                 type={"date"}
                                 placeholder="Fecha de nacimiento"
                                 name="birth"
+                                id="birth"
+                                value={formValue.birth}
+                                onChange={onFormFieldChanges}
                               />
                               <br />
                               <FormControl component="fieldset">
@@ -436,6 +553,9 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
                                   aria-label="genre"
                                   defaultValue="null"
                                   name="genre"
+                                  id="genre"
+                                  value={formValue.genre}
+                                  onChange={onFormFieldChanges}
                                 >
                                   <FormControlLabel
                                     value="Mujer"
@@ -455,6 +575,9 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
                                 required
                                 placeholder="Curp"
                                 name="curp"
+                                id="curp"
+                                value={formValue.curp}
+                                onChange={onFormFieldChanges}
                               />
                               <br />
                               <br />
@@ -462,6 +585,9 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
                                 required
                                 placeholder="RFC"
                                 name="rfc"
+                                id="rfc"
+                                value={formValue.rfc}
+                                onChange={onFormFieldChanges}
                               />
                               <br />
                               <br />
@@ -469,6 +595,9 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
                                 required
                                 placeholder="Domicilio"
                                 name="direction"
+                                id="direction"
+                                value={formValue.direction}
+                                onChange={onFormFieldChanges}
                               />
                               <br />
                               <br />
@@ -476,6 +605,9 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
                                 required
                                 placeholder="Estado civil"
                                 name="marital"
+                                id="marital"
+                                value={formValue.marital}
+                                onChange={onFormFieldChanges}
                               />
                               <br />
                               <br />
@@ -520,17 +652,23 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
                               <form onSubmit={handleSubmitF}>
                                 <StyledTextField
                                   required
+                                  onChange={onFormFieldChanges}
                                   placeholder="Nombre Completo"
                                   name="name"
+                                  id="name"
+                                  value={formValue.name}
                                 />
                                 <br />
                                 <br />
 
                                 <StyledTextField
                                   required
+                                  onChange={onFormFieldChanges}
                                   type={"date"}
                                   placeholder="Fecha de nacimiento"
                                   name="birth"
+                                  id="birth"
+                                  value={formValue.birth}
                                 />
                                 <br />
                                 <FormControl component="fieldset">
@@ -540,6 +678,9 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
                                     aria-label="Genre"
                                     defaultValue="null"
                                     name="genre"
+                                    id="genre"
+                                    value={formValue.genre}
+                                    onChange={onFormFieldChanges}
                                   >
                                     <FormControlLabel
                                       value="Mujer"
@@ -559,6 +700,9 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
                                   required
                                   placeholder="Curp"
                                   name="curp"
+                                  id="curp"
+                                  value={formValue.curp}
+                                  onChange={onFormFieldChanges}
                                 />
                                 <br />
                                 <br />
@@ -566,6 +710,9 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
                                   required
                                   placeholder="RFC"
                                   name="rfc"
+                                  id="rfc"
+                                  value={formValue.rfc}
+                                  onChange={onFormFieldChanges}
                                 />
                                 <br />
                                 <br />
@@ -573,6 +720,9 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
                                   required
                                   placeholder="Domicilio"
                                   name="direction"
+                                  id="direction"
+                                  value={formValue.direction}
+                                  onChange={onFormFieldChanges}
                                 />
                                 <br />
                                 <br />
@@ -580,6 +730,9 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
                                   required
                                   placeholder="Estado civil"
                                   name="marital"
+                                  id="marital"
+                                  value={formValue.marital}
+                                  onChange={onFormFieldChanges}
                                 />
                                 <br />
                                 <br />

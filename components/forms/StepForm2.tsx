@@ -122,8 +122,13 @@ interface Props {
 }
 
 export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
+
+  const fidename =
+    useSelector((state: RootState) => state.empire.selectedEmpire as IEmpire) ||
+    {};
   const [formoption, setFormoption] = useState("data");
   const [showPremiumModal, setShowPremiumModal] = useState<boolean>(false);
+  const [showPatriModalD, setShowPatriModalD] = useState<boolean>(false)
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   let idvalue = useSelector((state: RootState) => state.form.currentid);
@@ -199,13 +204,20 @@ export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
     console.log(dataright);
     dispatch(addRight(dataright));
     dispatch(addBeneficiaryProperties(propertie));
-    dispatch(setShowForm2(false));
+    // dispatch(setShowForm2(false));
+    setShowPatriModalD(true);
   };
 
   useEffect(() => {
     if (formoption !== "resume" && formoption !== "data")
       setShowPremiumModal(true);
   }, [formoption]);
+
+  const closemodalform = () => {
+    dispatch(setShowForm2(false));
+    setShowPatriModalD(false);
+
+  }
 
   return (
     <Grid
@@ -286,6 +298,63 @@ export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
                 if (formoption === "data") {
                   return (
                     <>
+                    <Modal
+                        open={showPatriModalD}
+                        onClose={() => closemodalform()}
+                        aria-labelledby="modal-modal-title"
+                        aria-describedby="modal-modal-description"
+                      >
+                        <Box
+                          sx={{
+                            position: "fixed",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                            width: "500px",
+                            bgcolor: "white",
+                            borderRadius: "10px",
+                            p: 4,
+                          }}
+                        >
+                          <IconButton
+                            sx={{
+                              bgcolor: "white",
+                              borderRadius: "100%",
+                              border: "1px solid #888",
+                              position: "absolute",
+                              top: "-40px",
+                              right: "-40px",
+                            }}
+                            onClick={() => closemodalform()}
+                          >
+                            <CloseOutlined />
+                          </IconButton>
+                          <Typography
+                            sx={{
+                              color: "#707070",
+                              fontWeight: "bold",
+                              fontSize: "20px",
+                              textAlign: "center",
+                            }}
+                          >
+                            Se ha agregado {name} a {fidename.name}
+                          </Typography>
+                          <Box display="flex" justifyContent="center" mt={3}>
+                            <Button
+                              sx={{
+                                color: "white",
+                                bgcolor: "#31A354",
+                                fontSize: "16px",
+                                backgroundImage: "none",
+                                textTransform: "none",
+                              }}
+                              onClick={() => closemodalform()}
+                            >
+                              Ok
+                            </Button>
+                          </Box>
+                        </Box>
+                      </Modal>
                       <Grid item xs={2}>
                         <Badge
                           anchorOrigin={{

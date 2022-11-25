@@ -45,7 +45,7 @@ export const empireSlice = createSlice({
       ) {
         state.selectedEmpire.beneficiary[index].properties.push(payload);
       }
-      console.log(state.selectedEmpire);
+      console.log(state.selectedEmpire.beneficiary);
     },
 
     updateBeneficiaryProperties: (
@@ -141,12 +141,17 @@ export const empireSlice = createSlice({
           idRight: state.selectedEmpire.rights[index].id!,
           percentage: 0,
         };
+        console.log("Voy a añadirel id: " + state.selectedEmpire.rights[index].id!)
         result.push(data);
       }
+      console.log(result)
       state.currentright = result;
+      console.log( state.currentright)
     },
     addBeneficiary: (state, { payload }: PayloadAction<IBeneficiary>) => {
       state.selectedEmpire.beneficiary.push(payload);
+      console.log(payload);
+      console.log(state.selectedEmpire.beneficiary)
     },
   },
 });

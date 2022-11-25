@@ -127,202 +127,210 @@ const DataTable: FC<Props> = ({ rights, beneficiarys }) => {
 
   return (
     <>
-      <Box>
-        {/* <Typography
-            variant="h2"
-            component="h1"
-            sx={{ textAlign: "center", mt: 5, color: "black" }}
-          >
-            Testamento Digital
-          </Typography> */}
+    {beneficiarys.length > 0 && rights.length > 0 ? 
+    <Box>
+    {/* <Typography
+        variant="h2"
+        component="h1"
+        sx={{ textAlign: "center", mt: 5, color: "black" }}
+      >
+        Testamento Digital
+      </Typography> */}
 
-        <Box display="flex" justifyContent="center"  sx={{width: '600px', height: '400px', overflowX: 'auto'}}>
-          <TableContainer component={Paper} className={styles['table-style']} sx={{overflow: 'scroll'}} >
-            <Table aria-label="simple table" stickyHeader className={styles['table-style']}>
-              <TableHead>
-                <TableRow>
-                  <TableCell>&nbsp;&nbsp;&nbsp;</TableCell>
-                  {rights.map(({ id, name, value, type, img }, index) => (
-                    <>
-                      <TableCell align="right">
-                        <Tooltip title={name} placement="top">
-                          <Avatar alt="service1" key={index} src={img} />
-                        </Tooltip>
-                      </TableCell>
-                    </>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {beneficiarys.map(({ id, name, img, properties }) => (
-                  <>
-                    <TableRow key={id}>
-                      <TableCell component="th" scope="row">
-                        <Grid container direction="row">
-                          {" "}
-                          <Tooltip
-                            title={"Beneficiario: " + id}
-                            placement="top"
-                          >
-                            <Avatar alt="person" src={img}></Avatar>
-                          </Tooltip>
-                          {name}
-                        </Grid>
-                      </TableCell>
-                      <>
-                        {properties.map((items: IRightBeneficiary, index) => (
-                          <>
-                            <TableCell>
-                              {items.percentage > 0 ? (
-                                <>
-                                  <Tooltip
-                                    title={
-                                      "Porcentaje de derechos: " +
-                                      items.percentage +
-                                      "%"
-                                    }
-                                    placement="left"
-                                  >
-                                    <IconButton
-                                      onClick={() =>
-                                        quitmatrixdata(id, index, items.idRight)
-                                      }
-                                    >
-                                      <FiberManualRecord
-                                        fontSize="large"
-                                        sx={{ color: "gray" }}
-                                      />
-                                    </IconButton>
-                                  </Tooltip>
-                                </>
-                              ) : (
-                                <>
-                                  <Tooltip
-                                    title={
-                                      "Porcentaje de derechos: " +
-                                      items.percentage +
-                                      "%"
-                                    }
-                                    placement="left"
-                                  >
-                                    <IconButton
-                                      onClick={() =>
-                                        getmatrixdata(id, index, items.idRight)
-                                      }
-                                    >
-                                      <FiberManualRecordOutlined
-                                        fontSize="large"
-                                        sx={{ color: "gray" }}
-                                      />
-                                    </IconButton>
-                                  </Tooltip>
-                                </>
-                              )}
-                            </TableCell>
-                          </>
-                        ))}
-                      </>
-                    </TableRow>
-                  </>
-                ))}
-
-                {/* {beneficiarys.map((id, name, img, properties) => (
-                  <TableRow key={id}>
-                    <TableCell component="th" scope="row">
+    <Box display="flex" justifyContent="center"  sx={{width: '600px', height: '400px', overflowX: 'auto'}}>
+      <TableContainer component={Paper} className={styles['table-style']} sx={{overflow: 'scroll'}} >
+        <Table aria-label="simple table" stickyHeader className={styles['table-style']}>
+          <TableHead>
+            <TableRow>
+              <TableCell>&nbsp;&nbsp;&nbsp;</TableCell>
+              {rights.map(({ id, name, value, type, img }, index) => (
+                <>
+                  <TableCell align="right">
+                    <Tooltip title={name} placement="top">
+                      <Avatar alt="service1" key={index} src={img} />
+                    </Tooltip>
+                  </TableCell>
+                </>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {beneficiarys.map(({ id, name, img, properties }) => (
+              <>
+                <TableRow key={id}>
+                  <TableCell component="th" scope="row">
                     <Grid container direction="row">
-                          {" "}
-                          <Avatar
-                            alt="person"
-                            src={img}
-                          ></Avatar>{" "}
-                          {name}
-                        </Grid>
-                    </TableCell>
-                    <TableCell>
-                      {row.h1 ? (
-                        <FiberManualRecord
-                          fontSize="large"
-                          sx={{ color: "gray" }}
-                        />
-                      ) : (
-                        <FiberManualRecordOutlined
-                          fontSize="large"
-                          sx={{ color: "gray" }}
-                        />
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      {row.h2 ? (
-                        <FiberManualRecord
-                          fontSize="large"
-                          sx={{ color: "gray" }}
-                        />
-                      ) : (
-                        <FiberManualRecordOutlined
-                          fontSize="large"
-                          sx={{ color: "gray" }}
-                        />
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      {row.c1 ? (
-                        <FiberManualRecord
-                          fontSize="large"
-                          sx={{ color: "gray" }}
-                        />
-                      ) : (
-                        <FiberManualRecordOutlined
-                          fontSize="large"
-                          sx={{ color: "gray" }}
-                        />
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      {row.c2 ? (
-                        <FiberManualRecord
-                          fontSize="large"
-                          sx={{ color: "gray" }}
-                        />
-                      ) : (
-                        <FiberManualRecordOutlined
-                          fontSize="large"
-                          sx={{ color: "gray" }}
-                        />
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      {row.axa ? (
-                        <FiberManualRecord
-                          fontSize="large"
-                          sx={{ color: "gray" }}
-                        />
-                      ) : (
-                        <FiberManualRecordOutlined
-                          fontSize="large"
-                          sx={{ color: "gray" }}
-                        />
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      {row.gnp ? (
-                        <FiberManualRecord
-                          fontSize="large"
-                          sx={{ color: "gray" }}
-                        />
-                      ) : (
-                        <FiberManualRecordOutlined
-                          fontSize="large"
-                          sx={{ color: "gray" }}
-                        />
-                      )}
-                    </TableCell>
-                  </TableRow>
-                ))} */}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Box>
-      </Box>
+                      {" "}
+                      <Tooltip
+                        title={"Beneficiario: " + id}
+                        placement="top"
+                      >
+                        <Avatar alt="person" src={img}></Avatar>
+                      </Tooltip>
+                      {name}
+                    </Grid>
+                  </TableCell>
+                  <>
+                    {properties.map((items: IRightBeneficiary, index) => (
+                      <>
+                        <TableCell key={index}>
+                          {items.percentage > 0 ? (
+                            <>
+                              <Tooltip
+                                title={
+                                  "Porcentaje de derechos: " +
+                                  items.percentage +
+                                  "%"
+                                }
+                                placement="left"
+                              >
+                                <IconButton
+                                  onClick={() =>
+                                    quitmatrixdata(id, index, items.idRight)
+                                  }
+                                >
+                                  <FiberManualRecord
+                                    fontSize="large"
+                                    sx={{ color: "gray" }}
+                                  />
+                                </IconButton>
+                              </Tooltip>
+                            </>
+                          ) : (
+                            <>
+                              <Tooltip
+                                title={
+                                  "Porcentaje de derechos: " +
+                                  items.percentage +
+                                  "%"
+                                }
+                                placement="left"
+                              >
+                                <IconButton
+                                  onClick={() =>
+                                    getmatrixdata(id, index, items.idRight)
+                                  }
+                                >
+                                  <FiberManualRecordOutlined
+                                    fontSize="large"
+                                    sx={{ color: "gray" }}
+                                  />
+                                </IconButton>
+                              </Tooltip>
+                            </>
+                          )}
+                        </TableCell>
+                      </>
+                    ))}
+                  </>
+                </TableRow>
+              </>
+            ))}
+
+            {/* {beneficiarys.map((id, name, img, properties) => (
+              <TableRow key={id}>
+                <TableCell component="th" scope="row">
+                <Grid container direction="row">
+                      {" "}
+                      <Avatar
+                        alt="person"
+                        src={img}
+                      ></Avatar>{" "}
+                      {name}
+                    </Grid>
+                </TableCell>
+                <TableCell>
+                  {row.h1 ? (
+                    <FiberManualRecord
+                      fontSize="large"
+                      sx={{ color: "gray" }}
+                    />
+                  ) : (
+                    <FiberManualRecordOutlined
+                      fontSize="large"
+                      sx={{ color: "gray" }}
+                    />
+                  )}
+                </TableCell>
+                <TableCell>
+                  {row.h2 ? (
+                    <FiberManualRecord
+                      fontSize="large"
+                      sx={{ color: "gray" }}
+                    />
+                  ) : (
+                    <FiberManualRecordOutlined
+                      fontSize="large"
+                      sx={{ color: "gray" }}
+                    />
+                  )}
+                </TableCell>
+                <TableCell>
+                  {row.c1 ? (
+                    <FiberManualRecord
+                      fontSize="large"
+                      sx={{ color: "gray" }}
+                    />
+                  ) : (
+                    <FiberManualRecordOutlined
+                      fontSize="large"
+                      sx={{ color: "gray" }}
+                    />
+                  )}
+                </TableCell>
+                <TableCell>
+                  {row.c2 ? (
+                    <FiberManualRecord
+                      fontSize="large"
+                      sx={{ color: "gray" }}
+                    />
+                  ) : (
+                    <FiberManualRecordOutlined
+                      fontSize="large"
+                      sx={{ color: "gray" }}
+                    />
+                  )}
+                </TableCell>
+                <TableCell>
+                  {row.axa ? (
+                    <FiberManualRecord
+                      fontSize="large"
+                      sx={{ color: "gray" }}
+                    />
+                  ) : (
+                    <FiberManualRecordOutlined
+                      fontSize="large"
+                      sx={{ color: "gray" }}
+                    />
+                  )}
+                </TableCell>
+                <TableCell>
+                  {row.gnp ? (
+                    <FiberManualRecord
+                      fontSize="large"
+                      sx={{ color: "gray" }}
+                    />
+                  ) : (
+                    <FiberManualRecordOutlined
+                      fontSize="large"
+                      sx={{ color: "gray" }}
+                    />
+                  )}
+                </TableCell>
+              </TableRow>
+            ))} */}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
+  </Box>
+     : <Box display="flex" justifyContent="center"  sx={{width: '600px', height: '400px', overflowX: 'auto'}}> 
+     <Grid container justifyContent="center" alignItems="center">
+      <Grid item >
+        <Typography variant="h5">Debes insertar al menos 1 bien y 1 beneficiario para visualizar su informacion</Typography>
+      </Grid>
+     </Grid>
+     </Box> }
       <Box alignItems={"center"}></Box>
     </>
   );
