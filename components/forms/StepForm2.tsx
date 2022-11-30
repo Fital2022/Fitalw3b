@@ -122,13 +122,12 @@ interface Props {
 }
 
 export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
-
   const fidename =
     useSelector((state: RootState) => state.empire.selectedEmpire as IEmpire) ||
     {};
   const [formoption, setFormoption] = useState("data");
   const [showPremiumModal, setShowPremiumModal] = useState<boolean>(false);
-  const [showPatriModalD, setShowPatriModalD] = useState<boolean>(false)
+  const [showPatriModalD, setShowPatriModalD] = useState<boolean>(false);
   const router = useRouter();
   const dispatch = useDispatch<AppDispatch>();
   let idvalue = useSelector((state: RootState) => state.form.currentid);
@@ -216,8 +215,7 @@ export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
   const closemodalform = () => {
     dispatch(setShowForm2(false));
     setShowPatriModalD(false);
-
-  }
+  };
 
   return (
     <Grid
@@ -247,10 +245,37 @@ export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
       >
         <Button
           onClick={() => setFormoption("data")}
-          className={
+          sx={
             formoption === "data"
-              ? styles["button-form-select"]
-              : styles["button-form-unselect"]
+              ? {
+                  bgcolor: "#31A354",
+                  color: "white",
+                  borderRadius: "10px",
+                  width: "130px",
+                  height: "37px",
+                  ":hover": {
+                    bgcolor: "#31A354",
+                    color: "white",
+                    borderRadius: "10px",
+                    width: "130px",
+                    height: "37px",
+                  },
+                }
+              : {
+                  bgcolor: "white",
+                  border: "0.5px solid black",
+                  color: "black",
+                  borderRadius: "10px",
+                  width: "130px",
+                  height: "37px",
+                  ":hover": {
+                    bgcolor: "#31A354",
+                    color: "white",
+                    borderRadius: "10px",
+                    width: "130px",
+                    height: "37px",
+                  },
+                }
           }
         >
           Datos
@@ -258,10 +283,37 @@ export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
         &nbsp;&nbsp;&nbsp;
         <Button
           onClick={() => setFormoption("resume")}
-          className={
+          sx={
             formoption === "resume"
-              ? styles["button-form-select"]
-              : styles["button-form-unselect"]
+              ? {
+                  bgcolor: "#31A354",
+                  color: "white",
+                  borderRadius: "10px",
+                  width: "130px",
+                  height: "37px",
+                  ":hover": {
+                    bgcolor: "#31A354",
+                    color: "white",
+                    borderRadius: "10px",
+                    width: "130px",
+                    height: "37px",
+                  },
+                }
+              : {
+                  bgcolor: "white",
+                  border: "0.5px solid black",
+                  color: "black",
+                  borderRadius: "10px",
+                  width: "130px",
+                  height: "37px",
+                  ":hover": {
+                    bgcolor: "#31A354",
+                    color: "white",
+                    borderRadius: "10px",
+                    width: "130px",
+                    height: "37px",
+                  },
+                }
           }
         >
           Resumen
@@ -269,10 +321,37 @@ export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
         &nbsp;&nbsp;&nbsp;
         <Button
           onClick={() => setFormoption("premium")}
-          className={
+          sx={
             formoption === "premium"
-              ? styles["button-form-select"]
-              : styles["button-form-unselect"]
+              ? {
+                  bgcolor: "#31A354",
+                  color: "white",
+                  borderRadius: "10px",
+                  width: "130px",
+                  height: "37px",
+                  ":hover": {
+                    bgcolor: "#31A354",
+                    color: "white",
+                    borderRadius: "10px",
+                    width: "130px",
+                    height: "37px",
+                  },
+                }
+              : {
+                  bgcolor: "white",
+                  border: "0.5px solid black",
+                  color: "black",
+                  borderRadius: "10px",
+                  width: "130px",
+                  height: "37px",
+                  ":hover": {
+                    bgcolor: "#31A354",
+                    color: "white",
+                    borderRadius: "10px",
+                    width: "130px",
+                    height: "37px",
+                  },
+                }
           }
           startIcon={<Star />}
         >
@@ -282,7 +361,7 @@ export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
       <Grid item xs={5}>
         <Card
           className={styles["form"]}
-          sx={{ width: "717px", height: "540px" }}
+          sx={{ width: "717px", height: "540px", borderRadius: "40px",border: "0.5px solid black" }}
         >
           <Grid
             item
@@ -298,7 +377,7 @@ export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
                 if (formoption === "data") {
                   return (
                     <>
-                    <Modal
+                      <Modal
                         open={showPatriModalD}
                         onClose={() => closemodalform()}
                         aria-labelledby="modal-modal-title"
@@ -418,16 +497,31 @@ export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
                             >
                               <Grid item>
                                 <Button
-                                  sx={{ marginRight: "100px" }}
+                                  sx={{
+                                    marginRight: "100px",
+                                    bgcolor: "#31A354",
+                                    color: "white",
+                                    borderRadius: "10px",
+                                    width: "130px",
+                                    height: "37px",
+                                  }}
                                   onClick={closeform}
                                   className={styles["button-form-select"]}
                                 >
                                   Cancelar
                                 </Button>
                                 <Button
-                                  sx={{ marginRight: "100px" }}
+                                  sx={{
+                                    marginRight: "100px",
+                                    bgcolor: "#31A354",
+                                    color: "white",
+                                    borderRadius: "10px",
+                                    width: "130px",
+                                    height: "37px",
+                                  }}
                                   type="submit"
                                   className={styles["button-form-select"]}
+                                  onClick={closeform}
                                 >
                                   Finalizar
                                 </Button>
@@ -464,21 +558,22 @@ export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
                         container
                         xs={8}
                         justifyContent="center"
+                        alignItems="center"
                         direction="column"
                         className={styles["table-data"]}
                       >
-                        <Grid item container direction="row">
+                        <Grid item container direction="row" sx={{mt: "50px"}} justifyContent="center">
                           <div className={styles["form-title"]}>
                             <Typography variant="h4">Fideicomitente</Typography>
                           </div>
                           <br />
                           <br />
                           <br />
-                          <Grid item xs={5}>
+                          <Grid item  xs={5} sx={{mt: "5px"}}>
                             <Typography>Rentabilidad Estimada</Typography>
                             <hr />
                           </Grid>
-                          <Grid item container direction="row">
+                          <Grid item container justifyContent="center" alignItems="center" direction="row">
                             <Grid
                               item
                               xs={5}
@@ -513,6 +608,7 @@ export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
                               <Grid
                                 item
                                 container
+                                alignItems="center"
                                 spacing={2}
                                 justifyContent="space-evenly"
                                 direction="row"
@@ -563,8 +659,20 @@ export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
                             container
                             direction="row"
                             justifyContent="flex-end"
+                            
                           >
-                            <Button className={styles["button-form-select"]}>
+                            <Button
+                              className={styles["button-form-select"]}
+                              sx={{
+                                bgcolor: "#31A354",
+                                color: "white",
+                                borderRadius: "10px",
+                                width: "130px",
+                                height: "37px",
+                                mt: "40px",
+                              }}
+                              onClick={closeform}
+                            >
                               Finalizar
                             </Button>
                           </Grid>
@@ -741,8 +849,16 @@ export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
                           justifyContent="flex-end"
                         >
                           <Button
-                            sx={{ marginRight: "80px" }}
+                            sx={{
+                              marginRight: "80px",
+                              bgcolor: "#31A354",
+                              color: "white",
+                              borderRadius: "10px",
+                              width: "130px",
+                              height: "37px",
+                            }}
                             className={styles["button-form-select"]}
+                            onClick={closeform}
                           >
                             Finalizar
                           </Button>
@@ -784,6 +900,7 @@ const FileField: FC<FileFieldProps> = ({ description }) => {
       >
         <input
           className={styles["form-input-file"]}
+          disabled
           required
           readOnly
           onClick={() => openFileSelector()}

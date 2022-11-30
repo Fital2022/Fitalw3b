@@ -275,7 +275,7 @@ const Patrimony: NextPage = () => {
         <Typography sx={{align: 'center'}}>Suelta aqui</Typography>
         </Grid> : '' }
         </div>
-        {formmode ? <Grid item sx={{transition: 'all .1s'}}> <StepForm2 premium={true} iempire={empire} title={tipo} img={img} /></Grid>  : '' }
+        {formmode ? <Grid item sx={{transition: 'all .1s'}}> <StepForm2 premium={false} iempire={empire} title={tipo} img={img} /></Grid>  : '' }
       </Box>
       <BottomMenu data={MENU_ACTIONS} />
     </ActionsLayout>

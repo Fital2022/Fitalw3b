@@ -24,6 +24,7 @@ import { FC, useCallback, useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import ReactCanvasConfetti from "react-canvas-confetti";
+import router from "next/router";
 
 // confetti
 function randomInRange(min: any, max: any) {
@@ -175,7 +176,7 @@ const ResponsiveGrid: FC<Props> = ({ rights }) => {
 
   return (
     <ActionsLayout pageDescription="" title="">
-      <Box sx={{ flexGrow: 1, paddingTop: 2, paddingLeft: 2}}>
+      <Box sx={{ flexGrow: 1, paddingTop: 2, paddingLeft: 2 }}>
         <Grid
           container
           spacing={{ xs: 2, md: 3 }}
@@ -320,11 +321,17 @@ const ResponsiveGrid: FC<Props> = ({ rights }) => {
             <Box display="flex" justifyContent="center" alignItems="center">
               <Button
                 className={styles.buttonGreen}
-                variant="contained"
-                color="primary"
+                sx={{
+                  borderRadius: "30px",
+                  color: "white",
+                  bgcolor: "#31a354",
+                  opacity: "1",
+                }}
+                
                 onClick={function (event) {
                   handleClose();
                   pauseAnimation();
+                  router.push("/onboarding");
                 }}
               >
                 OK
