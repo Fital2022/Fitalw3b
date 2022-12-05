@@ -521,7 +521,6 @@ export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
                                   }}
                                   type="submit"
                                   className={styles["button-form-select"]}
-                                  onClick={closeform}
                                 >
                                   Finalizar
                                 </Button>
