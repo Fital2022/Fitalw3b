@@ -18,14 +18,18 @@ export const BottomMenu: FC<Props> = ({ data }) => {
         left: "50%",
         transform: "translate(-45%)",
         bgcolor: "rgba(255,255,255,0.3)",
+        // bgcolor: "red",
         borderRadius: "10px",
-        backdropFilter: "blur(10px)",
+        backdropFilter: "blur(2px)",
         display: "flex",
       }}
     >
       {data.map((element) => {
         return (
-          <Box key={element.link.id} sx={{ position: "relative" }}>
+          <Box
+            key={element.link.id}
+            sx={{ position: "relative", bgcolor: "transparent" }}
+          >
             <Box
               sx={[
                 {
