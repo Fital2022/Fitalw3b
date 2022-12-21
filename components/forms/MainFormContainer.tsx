@@ -21,11 +21,11 @@ export const MainFormContainer: FC<Props> = ({
   return show ? (
     <Box
       sx={{
-        position: "absolute",
+        position: "relative",
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        minWidth: "600px",
+        minWidth: "700px",
       }}
     >
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
@@ -53,7 +53,8 @@ export const MainFormContainer: FC<Props> = ({
           border: "1px solid #707070",
           p: 3,
           bgcolor: "#fff",
-          position: "relative",
+          position: "absolute",
+          width: "100%",
         }}
       >
         <IconButton
