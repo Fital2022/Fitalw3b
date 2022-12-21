@@ -25,6 +25,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import router from "next/router";
+import { RightsList } from "../../components/List";
 
 // confetti
 function randomInRange(min: any, max: any) {
@@ -111,161 +112,18 @@ const ResponsiveGrid: FC<Props> = ({ rights }) => {
   // modal
   const [status, setStatus] = useState<string>("");
 
-  const right: IRight[] = [
-    {
-      name: "casa 1",
-      value: 2000000,
-      type: "casa",
-      id: 1,
-      img: "/images/avatar/casa1.jpeg",
-    },
-    {
-      name: "casa 2",
-      value: 20000000,
-      type: "casa",
-      id: 2,
-      img: "/images/avatar/casa2.jpeg",
-    },
-    {
-      name: "auto 1",
-      value: 2000000,
-      type: "auto",
-      id: 3,
-      img: "/images/avatar/coche1.jpeg",
-    },
-    {
-      name: "auto 2",
-      value: 2000000,
-      type: "auto",
-      id: 4,
-      img: "images/avatar/coche2.jpeg",
-    },
-    {
-      name: "Seguro AXA",
-      value: 2000000,
-      type: "seguro",
-      id: 5,
-      img: "/images/avatar/axa.png",
-    },
-    {
-      name: "Seguro gnp",
-      value: 2000000,
-      type: "seguro",
-      id: 6,
-      img: "/images/avatar/gnp.png",
-    },
-    {
-      name: "Seguro AC/DC",
-      value: 2000000,
-      type: "seguro",
-      id: 7,
-      img: "/images/avatar/gnp.png",
-    },
-    {
-      name: "Seguro Fital",
-      value: 2000000,
-      type: "seguro",
-      id: 8,
-      img: "/images/avatar/gnp.png",
-    },
-  ];
+  const handleClick = () => {
+    startAnimation();
+    handleOpen();
+  }
 
   const rightss = useSelector(
     (state: RootState) => state.empire.selectedEmpire?.rights
   );
-
+  
   return (
     <ActionsLayout pageDescription="" title="">
-      <Box sx={{ flexGrow: 1, paddingTop: 2, paddingLeft: 2 }}>
-        <Grid
-          container
-          spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
-        >
-          {/* {Array.from(Array(right.length)).map((_, index) => ( */}
-          <>
-            {rightss &&
-              rightss.length > 0 &&
-              rightss.map(({ name, img }, index) => (
-                <Grid key={index} item xs={2} sm={2} md={2}>
-                  <Card
-                    sx={{
-                      height: 160,
-                      width: 300,
-                      backgroundColor: "transparent",
-                      boxShadow: "none",
-                    }}
-                  >
-                    <CardContent sx={{ marginLeft: 1 }}>
-                      <Grid
-                        container
-                        spacing={1}
-                        alignItems="center"
-                        justifyContent="center"
-                        paddingTop={1}
-                      >
-                        <Grid item>
-                          <Avatar
-                            alt="Remy Sharp"
-                            src={img}
-                            sx={{ width: 56, height: 56 }}
-                          />
-                          {name}
-                        </Grid>
-                      </Grid>
-                    </CardContent>
-                    <CardActions disableSpacing sx={{ marginLeft: 1 }}>
-                      {/* {object.length > 0 &&
-                    object.map((bien, index) => ( */}
-                      <Grid container wrap="nowrap" spacing={0}>
-                        <IconButton
-                          onClick={function (event) {
-                            startAnimation();
-                            handleOpen();
-                          }}
-                        >
-                          <Grid item>
-                            <EditIcon sx={{ color: "black" }} />
-                          </Grid>
-                          <Grid item xs>
-                            <Typography
-                              sx={{ paddingRight: 5, color: "black" }}
-                            >
-                              Editar
-                            </Typography>
-                          </Grid>
-                        </IconButton>
-                      </Grid>
-
-                      <Grid container wrap="nowrap" spacing={0}>
-                        <IconButton
-                          onClick={function (event) {
-                            startAnimation();
-                            handleOpen();
-                          }}
-                        >
-                          <Grid item>
-                            <DeleteIcon sx={{ color: "black" }} />
-                          </Grid>
-                          <Grid item xs>
-                            <Typography
-                              sx={{ paddingRight: 9, color: "black" }}
-                            >
-                              Eliminar
-                            </Typography>
-                          </Grid>
-                        </IconButton>
-                      </Grid>
-
-                      {/* ))} */}
-                    </CardActions>
-                  </Card>
-                </Grid>
-              ))}
-          </>
-          {/* // ))} */}
-        </Grid>
-      </Box>
+      <RightsList data={rightss} onClick={handleClick}/>
       <>
         <Modal
           open={open}
