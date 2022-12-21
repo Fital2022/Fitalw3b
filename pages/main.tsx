@@ -62,9 +62,24 @@ const MainMenu: NextPage = () => {
         alignItems="center"
         sx={{ width: "100%", minHeight: "calc(100vh - 90px)" }}
       >
-        <Grid container spacing={2} sx={{ maxWidth: 1300 }}>
+        <Grid
+          container
+          spacing={2}
+          sx={{
+            maxWidth: { xs: "95%", md: 1300 },
+          }}
+        >
           {OPTIONS.map((item) => (
-            <Grid key={item.path} item xs={3}>
+            <Grid
+              key={item.path}
+              item
+              xs={12}
+              sm={6}
+              md={3}
+              display="flex"
+              justifyContent="center"
+              sx={{ mb: { xs: 0, sm: 4, md: 0 }, p: 0 }}
+            >
               <Card
                 key={item.title}
                 sx={{

@@ -60,15 +60,24 @@ const Home = () => {
       <Box
         display="flex"
         justifyContent="center"
-        alignItems="center"
+        // alignItems="center"
+        alignContent="center"
+        flexWrap="wrap"
         sx={{ width: "100%", height: "calc(100vh - 90px)" }}
       >
         <Grid
           container
           spacing={2}
-          sx={{ maxWidth: 1300, justifyContent: "center" }}
+          sx={{ display: "flex", justifyContent: "center" }}
         >
-          <Grid item xs={3}>
+          <Grid
+            item
+            xs={12}
+            sm={4}
+            md={3}
+            lg={2}
+            sx={{ display: "flex", justifyContent: "center" }}
+          >
             <Card
               sx={{
                 borderRadius: "50%",
@@ -88,7 +97,15 @@ const Home = () => {
           {empires &&
             empires.length > 0 &&
             empires.map((emp) => (
-              <Grid item xs={3}>
+              <Grid
+                item
+                xs={12}
+                sm={4}
+                md={3}
+                lg={2}
+                key={emp.id}
+                sx={{ display: "flex", justifyContent: "center" }}
+              >
                 <Card
                   sx={{
                     height: "190px",

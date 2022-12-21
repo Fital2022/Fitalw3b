@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React, { FC, PropsWithChildren } from "react";
 import { TopBar } from "../Ui";
-  
+
 interface Props {
   title: string;
   pageDescription: string;
@@ -28,7 +28,7 @@ export const FirstLayout: FC<PropsWithChildren<Props>> = ({
           backgroundImage: 'url("backgrounds/backfirst.svg")',
           width: "100vw",
           height: "100vh",
-          paddingTop: "90px"
+          paddingTop: "90px",
         }}
       >
         {children}

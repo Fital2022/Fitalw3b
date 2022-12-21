@@ -40,6 +40,7 @@ export const ActionsLayout: FC<PropsWithChildren<Props>> = ({
           backgroundImage: 'url("backgrounds/bg-domi.jpg")',
           width: "calc(100vw - 90px)",
           minHeight: "100vh",
+          position: 'relative',
           float: "right",
         }}
       >

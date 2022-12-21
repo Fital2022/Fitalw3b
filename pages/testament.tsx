@@ -20,9 +20,9 @@ const MENU_ACTIONS: IBottomMenuData[] = [
   {
     link: { id: 1, name: "Arbol" },
     sublinks: [
-      { id: 1, name: "Fideicomitente", img: "/images/casa.png" },
-      { id: 2, name: "Fiduciario", img: "/images/casa.png" },
-      { id: 3, name: "Beneficiario", img: "/images/autos.png" },
+      { id: 1, name: "Fideicomitente", img: "/images/profile.png" },
+      { id: 2, name: "Fiduciario", img: "/images/profile.png" },
+      { id: 3, name: "Beneficiario", img: "/images/profile.png" },
     ],
   },
   {
