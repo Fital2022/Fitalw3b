@@ -64,7 +64,7 @@ export const BottomMenu: FC<Props> = ({ data }) => {
               key={element.link.id}
               sx={{
                 padding: "15px",
-                width: "180px",
+                width: { xs: "150px", md: "180px" },
                 color: "black",
                 bgcolor: "transparent",
               }}
