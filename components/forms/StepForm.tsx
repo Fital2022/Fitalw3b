@@ -43,6 +43,8 @@ import {
 } from "../../store";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import { useRouter } from "next/router";
+import { DataFormT } from "./DataFormT";
+import { ResumeFormT } from './ResumeFormT';
 
 // confetti
 function randomInRange(min: any, max: any) {
@@ -222,6 +224,7 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
   }, [currentright]);
 
   const [submit, setSubmit] = useState(false);
+  const [nameb, setNameb] = useState("");
 
   useEffect(() => {
     if (submit) {
@@ -232,7 +235,7 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
       if (currentright.length > 0) {
         let data: IBeneficiary = {
           id: currenid,
-          name: formValue.name,
+          name: nameb,
           img: "/images/avatar/person1.jpeg",
           properties: currentright.map((item: IRightBeneficiary) => item),
         };
@@ -495,8 +498,18 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
           className={styles["form"]}
           sx={
             sucesion
-              ? { width: "717px", height: "540px", borderRadius: "40px",border: "0.5px solid black" }
-              : { width: "1034px", height: "542px", borderRadius: "40px",border: "0.5px solid black" }
+              ? {
+                  width: "717px",
+                  height: "540px",
+                  borderRadius: "40px",
+                  border: "0.5px solid black",
+                }
+              : {
+                  width: "1034px",
+                  height: "542px",
+                  borderRadius: "40px",
+                  border: "0.5px solid black",
+                }
           }
         >
           <Grid
@@ -507,536 +520,30 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
             alignItems={"center"}
             sx={{ marginLeft: "3px", position: "absoluta" }}
           ></Grid>
-          <CardContent align="center">
+          <CardContent>
             <Grid container>
               {(() => {
                 if (formoption === "data") {
                   return (
-                    <>
-                      <Modal
-                        open={showBeneficiaryModal}
-                        onClose={() => closemodalform()}
-                        aria-labelledby="modal-modal-title"
-                        aria-describedby="modal-modal-description"
-                      >
-                        <Box
-                          sx={{
-                            position: "fixed",
-                            top: "50%",
-                            left: "50%",
-                            transform: "translate(-50%, -50%)",
-                            width: "500px",
-                            bgcolor: "white",
-                            borderRadius: "10px",
-                            p: 4,
-                          }}
-                        >
-                          <IconButton
-                            sx={{
-                              bgcolor: "white",
-                              borderRadius: "100%",
-                              border: "1px solid #888",
-                              position: "absolute",
-                              top: "-40px",
-                              right: "-40px",
-                            }}
-                            onClick={() => closemodalform()}
-                          >
-                            <CloseOutlined />
-                          </IconButton>
-                          <Typography
-                            variant="h3"
-                            sx={{ color: "red", textAlign: "center" }}
-                          >
-                            Error
-                          </Typography>
-                          <Typography
-                            sx={{
-                              color: "#707070",
-                              fontWeight: "bold",
-                              fontSize: "20px",
-                              textAlign: "center",
-                            }}
-                          >
-                            Debes de ingresar al menos un bien en tu fideicomiso
-                            para agregar un beneficiario.
-                          </Typography>
-                          <Box display="flex" justifyContent="center" mt={3}>
-                            <Button
-                              sx={{
-                                color: "white",
-                                bgcolor: "#31A354",
-                                fontSize: "16px",
-                                backgroundImage: "none",
-                                textTransform: "none",
-                              }}
-                              onClick={() => closemodalform()}
-                            >
-                              Ok
-                            </Button>
-                          </Box>
-                        </Box>
-                      </Modal>
-                      <Grid item xs={2}>
-                        <Badge
-                          anchorOrigin={{
-                            vertical: "bottom",
-                            horizontal: "right",
-                          }}
-                          badgeContent={<CameraAlt />}
-                        >
-                          <Avatar
-                            alt="service1"
-                            src={img}
-                            sx={{ width: "70px", height: "70px" }}
-                          />
-                        </Badge>
-                        <br />
-                        <br />
-                        <Typography>{title}</Typography>
-                      </Grid>
-                      {sucesion ? (
-                        <Grid
-                          item
-                          container
-                          xs={10}
-                          justifyContent="center"
-                          direction="column"
-                        >
-                          <Grid item>
-                            <div className={styles["form-title"]}>
-                              <Typography variant="h4">{title}</Typography>
-                            </div>
-                            <form onSubmit={handleSubmitF}>
-                              <StyledTextField
-                                required
-                                placeholder="Nombre Completo"
-                                name="name"
-                                id="name"
-                                value={formValue.name}
-                                onChange={onFormFieldChanges}
-                              />
-                              <br />
-                              <br />
-
-                              <StyledTextField
-                                required
-                                type={"date"}
-                                placeholder="Fecha de nacimiento"
-                                name="birth"
-                                id="birth"
-                                value={formValue.birth}
-                                onChange={onFormFieldChanges}
-                              />
-                              <br />
-                              <FormControl component="fieldset">
-                                <FormLabel component="legend">Sexo</FormLabel>
-                                <RadioGroup
-                                  row
-                                  aria-label="genre"
-                                  defaultValue="null"
-                                  name="genre"
-                                  id="genre"
-                                  value={formValue.genre}
-                                  onChange={onFormFieldChanges}
-                                >
-                                  <FormControlLabel
-                                    value="Mujer"
-                                    control={<Radio color="primary" />}
-                                    label="Mujer"
-                                  />
-                                  <FormControlLabel
-                                    value="Hombre"
-                                    control={<Radio color="primary" />}
-                                    label="Hombre"
-                                  />
-                                </RadioGroup>
-                              </FormControl>
-                              <br />
-                              <br />
-                              <StyledTextField
-                                required
-                                placeholder="Curp"
-                                name="curp"
-                                id="curp"
-                                value={formValue.curp}
-                                onChange={onFormFieldChanges}
-                              />
-                              <br />
-                              <br />
-                              <StyledTextField
-                                required
-                                placeholder="RFC"
-                                name="rfc"
-                                id="rfc"
-                                value={formValue.rfc}
-                                onChange={onFormFieldChanges}
-                              />
-                              <br />
-                              <br />
-                              <StyledTextField
-                                required
-                                placeholder="Domicilio"
-                                name="direction"
-                                id="direction"
-                                value={formValue.direction}
-                                onChange={onFormFieldChanges}
-                              />
-                              <br />
-                              <br />
-                              <StyledTextField
-                                required
-                                placeholder="Estado civil"
-                                name="marital"
-                                id="marital"
-                                value={formValue.marital}
-                                onChange={onFormFieldChanges}
-                              />
-                              <br />
-                              <br />
-                              <Grid
-                                container
-                                justifyContent="center"
-                                item
-                                direction="row"
-                              >
-                                <Grid item>
-                                  <Button
-                                    sx={{
-                                      marginRight: "150px",
-                                      bgcolor: "#31A354",
-                                      color: "white",
-                                      borderRadius: "10px",
-                                      width: "130px",
-                                      height: "37px",
-                                    }}
-                                    type="submit"
-                                  >
-                                    Finalizar
-                                  </Button>
-                                  <Button
-                                    className={styles["button-form-select"]}
-                                    sx={{
-                                      bgcolor: "#31A354",
-                                      color: "white",
-                                      borderRadius: "10px",
-                                      width: "130px",
-                                      height: "37px",
-                                    }}
-                                    onClick={changecontent}
-                                  >
-                                    Sucesion
-                                  </Button>
-                                </Grid>
-                              </Grid>
-                            </form>
-                          </Grid>
-                        </Grid>
-                      ) : (
-                        <>
-                          <Grid
-                            item
-                            container
-                            xs={5}
-                            justifyContent="center"
-                            direction="column"
-                          >
-                            <Grid item>
-                              <div className={styles["form-title"]}>
-                                <Typography variant="h4">SUCESIÓN</Typography>
-                              </div>
-                              <form onSubmit={handleSubmitF}>
-                                <StyledTextField
-                                  required
-                                  onChange={onFormFieldChanges}
-                                  placeholder="Nombre Completo"
-                                  name="name"
-                                  id="name"
-                                  value={formValue.name}
-                                />
-                                <br />
-                                <br />
-
-                                <StyledTextField
-                                  required
-                                  onChange={onFormFieldChanges}
-                                  type={"date"}
-                                  placeholder="Fecha de nacimiento"
-                                  name="birth"
-                                  id="birth"
-                                  value={formValue.birth}
-                                />
-                                <br />
-                                <FormControl component="fieldset">
-                                  <FormLabel component="legend">Sexo</FormLabel>
-                                  <RadioGroup
-                                    row
-                                    aria-label="Genre"
-                                    defaultValue="null"
-                                    name="genre"
-                                    id="genre"
-                                    value={formValue.genre}
-                                    onChange={onFormFieldChanges}
-                                  >
-                                    <FormControlLabel
-                                      value="Mujer"
-                                      control={<Radio color="primary" />}
-                                      label="Mujer"
-                                    />
-                                    <FormControlLabel
-                                      value="Hombre"
-                                      control={<Radio color="primary" />}
-                                      label="Hombre"
-                                    />
-                                  </RadioGroup>
-                                </FormControl>
-                                <br />
-                                <br />
-                                <StyledTextField
-                                  required
-                                  placeholder="Curp"
-                                  name="curp"
-                                  id="curp"
-                                  value={formValue.curp}
-                                  onChange={onFormFieldChanges}
-                                />
-                                <br />
-                                <br />
-                                <StyledTextField
-                                  required
-                                  placeholder="RFC"
-                                  name="rfc"
-                                  id="rfc"
-                                  value={formValue.rfc}
-                                  onChange={onFormFieldChanges}
-                                />
-                                <br />
-                                <br />
-                                <StyledTextField
-                                  required
-                                  placeholder="Domicilio"
-                                  name="direction"
-                                  id="direction"
-                                  value={formValue.direction}
-                                  onChange={onFormFieldChanges}
-                                />
-                                <br />
-                                <br />
-                                <StyledTextField
-                                  required
-                                  placeholder="Estado civil"
-                                  name="marital"
-                                  id="marital"
-                                  value={formValue.marital}
-                                  onChange={onFormFieldChanges}
-                                />
-                                <br />
-                                <br />
-                                <Grid
-                                  container
-                                  justifyContent="center"
-                                  item
-                                  direction="row"
-                                >
-                                  <Grid item>
-                                    <Button
-                                      sx={{
-                                        marginRight: "100px",
-                                        bgcolor: "#31A354",
-                                        color: "white",
-                                        borderRadius: "10px",
-                                        width: "130px",
-                                        height: "37px",
-                                      }}
-                                      type="submit"
-                                      className={styles["button-form-select"]}
-                                      onClick={closeform}
-                                    >
-                                      Finalizar
-                                    </Button>
-                                    <Button
-                                      sx={{
-                                        bgcolor: "#31A354",
-                                        color: "white",
-                                        borderRadius: "10px",
-                                        width: "130px",
-                                        height: "37px",
-                                      }}
-                                      className={styles["button-form-select"]}
-                                      onClick={changecontent}
-                                    >
-                                      Atras
-                                    </Button>
-                                  </Grid>
-                                </Grid>
-                              </form>
-                            </Grid>
-                          </Grid>
-                          <Grid
-                            item
-                            container
-                            xs={5}
-                            justifyContent="center"
-                            direction="column"
-                          >
-                            <Grid item>
-                              <div className={styles["form-title"]}>
-                                <Typography variant="subtitle1">
-                                  Condiciones
-                                </Typography>
-                              </div>
-                              <br />
-                              <Typography>Educación</Typography>
-                              <hr className={styles["form-line"]} />
-                              <Grid
-                                container
-                                justifyContent="center"
-                                item
-                                direction="row"
-                              >
-                                <Typography>Licenciatura</Typography>{" "}
-                                &nbsp;&nbsp;
-                                <CheckCircle className={styles["icon-check"]} />
-                              </Grid>
-                              <Grid
-                                container
-                                justifyContent="center"
-                                item
-                                direction="row"
-                              >
-                                <Typography>Maestria</Typography> &nbsp;&nbsp;
-                                <CheckCircle className={styles["icon-check"]} />
-                              </Grid>
-                              <br />
-                              <Typography>Familia</Typography>
-                              <hr className={styles["form-line"]} />
-                              <Grid
-                                container
-                                justifyContent="center"
-                                item
-                                direction="row"
-                              >
-                                <Typography>Prueba de paternidad</Typography>{" "}
-                                &nbsp;&nbsp;
-                                <CheckCircle className={styles["icon-check"]} />
-                              </Grid>
-                              <Grid
-                                container
-                                justifyContent="center"
-                                item
-                                direction="row"
-                              >
-                                <Typography>Casa</Typography> &nbsp;&nbsp;
-                                <CheckCircle className={styles["icon-check"]} />
-                              </Grid>
-                              <Grid
-                                container
-                                justifyContent="center"
-                                item
-                                direction="row"
-                              >
-                                <Typography>Tener un hijo</Typography>{" "}
-                                &nbsp;&nbsp;
-                                <CheckCircle className={styles["icon-check"]} />
-                              </Grid>
-                              <br />
-                              <Typography>Patrimonio</Typography>
-                              <hr className={styles["form-line"]} />
-                              <Grid
-                                container
-                                justifyContent="center"
-                                item
-                                direction="row"
-                              >
-                                <Typography>Tener $1,000,000,000</Typography>{" "}
-                                &nbsp;&nbsp;
-                                <CheckCircle className={styles["icon-check"]} />
-                              </Grid>
-                              <br />
-                              <Typography>Otra</Typography>
-                              <hr className={styles["form-line"]} />
-                              <Grid
-                                container
-                                justifyContent="center"
-                                item
-                                direction="row"
-                              >
-                                <StyledTextField2 />
-                              </Grid>
-                            </Grid>
-                          </Grid>
-                        </>
-                      )}
-                    </>
+                    <DataFormT
+                      title={title}
+                      img={img}
+                      status={status}
+                      setStatus={setStatus}
+                      open={open}
+                      setOpen={setOpen}
+                      sucesion={sucesion}
+                      setSucesion={setSucesion}
+                      submit={submit}
+                      setSubmit={setSubmit}
+                      setNameb={setNameb}
+                    />
                   );
                 } else if (formoption === "resume") {
                   return (
                     <>
                       {sucesion != false ? setSucesion(false) : ""}
-                      <Grid item xs={2}>
-                        <Badge
-                          anchorOrigin={{
-                            vertical: "bottom",
-                            horizontal: "right",
-                          }}
-                          badgeContent={<CameraAlt />}
-                        >
-                          <Avatar
-                            alt="service1"
-                            src={img}
-                            sx={{ width: "70px", height: "70px" }}
-                          />
-                        </Badge>
-                        <br />
-                        <br />
-                        <Typography>{title}</Typography>
-                      </Grid>
-                      <Grid
-                        item
-                        container
-                        xs={8}
-                        justifyContent="center"
-                        direction="column"
-                        className={styles["table-data"]}
-                      >
-                        <Grid item container direction="column">
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                          <br />
-                          <div className={styles["form-title"]}>
-                            <Typography variant="h4">{title}</Typography>
-                          </div>
-                          <Grid item>
-                            <DataTable
-                              rights={rights}
-                              beneficiarys={beneficiary}
-                            />
-                          </Grid>
-                          <br />
-                          <Grid
-                            item
-                            container
-                            direction="row"
-                            justifyContent="flex-end"
-                          >
-                            <Button
-                              className={styles["button-form-select"]}
-                              sx={{
-                                bgcolor: "#31A354",
-                                color: "white",
-                                borderRadius: "10px",
-                                width: "130px",
-                                height: "37px",
-                              }}
-                              onClick={closeform}
-                            >
-                              Finalizar
-                            </Button>
-                          </Grid>
-                        </Grid>
-                      </Grid>
+                      <ResumeFormT title={title} img={img} beneficiary={beneficiary} rights={rights} />
                     </>
                   );
                 } else {
@@ -1209,9 +716,14 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
                           justifyContent="flex-end"
                         >
                           <Button
-                            sx={{ marginRight: "80px", bgcolor: "#31A354",
-                            color: "white",borderRadius: "10px", width: "130px",
-                            height: "37px" }}
+                            sx={{
+                              marginRight: "80px",
+                              bgcolor: "#31A354",
+                              color: "white",
+                              borderRadius: "10px",
+                              width: "130px",
+                              height: "37px",
+                            }}
                             className={styles["button-form-select"]}
                             onClick={closeform}
                           >
@@ -1284,9 +796,13 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
                 <Box display="flex" justifyContent="center" alignItems="center">
                   <Button
                     className={styles.buttonGreen}
-                    sx={{bgcolor: "#31A354",
-                    color: "white",borderRadius: "10px", width: "130px",
-                    height: "37px"}}
+                    sx={{
+                      bgcolor: "#31A354",
+                      color: "white",
+                      borderRadius: "10px",
+                      width: "130px",
+                      height: "37px",
+                    }}
                     variant="contained"
                     color="primary"
                     onClick={closeform}

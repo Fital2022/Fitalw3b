@@ -102,7 +102,6 @@ export const ResumeFormP = () => {
                           </Grid>
                           <Grid item>
                             <br />
-                            <br />
                             <Typography sx={{color: "black"}}>Rendimiento Estimado</Typography>
                             <hr />
                           </Grid>
@@ -136,7 +135,6 @@ export const ResumeFormP = () => {
                             container
                             direction="row"
                             justifyContent="flex-end"
-                            
                           >
                             <Button
                               className={styles["button-form-select"]}
@@ -146,7 +144,7 @@ export const ResumeFormP = () => {
                                 borderRadius: "10px",
                                 width: "130px",
                                 height: "37px",
-                                mt: "40px",
+                                
                               }}
                               onClick={closeform}
                             >
