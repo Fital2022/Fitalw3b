@@ -1,3 +1,4 @@
+import { DragEvent } from "react";
 import { ActionsLayout } from "../components/Layout";
 import { Box, Grid, Typography } from "@mui/material";
 import { IBottomMenuData } from "../interfaces";
@@ -234,13 +235,13 @@ const MENU_ACTIONS: IBottomMenuData[] = [
     ],
   },
 ];
-let tipo = "";
+let tipo: IRight['type'] = "casa" ;
 let img = "";
-
+ 
 const Patrimony: NextPage = () => {
   const onDropEntry = (event: DragEvent<HTMLDivElement>) => {
     console.log(event);
-    tipo = event.dataTransfer.getData("option");
+    tipo = event.dataTransfer.getData("option") as  IRight['type'];
     img = event.dataTransfer.getData("img");
     console.log({ tipo });
     console.log({ img });
@@ -286,7 +287,7 @@ const Patrimony: NextPage = () => {
             <StepForm2
               premium={false}
               iempire={empire}
-              title={tipo}
+              title={tipo} 
               img={img}
             />
           </Grid>
