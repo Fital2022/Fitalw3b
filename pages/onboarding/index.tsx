@@ -7,10 +7,9 @@ const OnboardingPage = () => {
   return (
     <Box
       sx={{
-        width: "100vw",
+        width: "100%",
         height: "100vh",
-        backgroundImage:
-          "linear-gradient(117deg, #000000 0%, #2e3192 53%, #3b1458 100%)",
+        background: "var(--top-gradient)",
         position: "relative",
         display: "flex",
         justifyContent: "center",
@@ -22,28 +21,61 @@ const OnboardingPage = () => {
         component="img"
         alt="Fital Logo"
         sx={{
-          width: "70px",
-          height: "70px",
+          width: { xs: "55px", md: "70px" },
+          height: { xs: "55px", md: "70px" },
           position: "absolute",
-          top: "40px",
-          left: "40px",
+          top: { xs: "20px", md: "40px" },
+          left: { xs: "20px", md: "40px" },
         }}
       />
-
-      <Box sx={{ minWidth: "1600px", marginX: "auto", p: 3 }}>
-        <Box sx={{marginLeft: 11}} >
-          <Typography sx={{ fontSize: "34px", bold: "" }}>
+      <Box
+        sx={{
+          display: "flex",
+          width: "100%",
+          // bgcolor: "grey",
+          justifyContent: "center",
+        }}
+      >
+        <Box sx={{ width: {xs: "95%", sm: "90%", md: "auto" } }}>
+          <OnboardingForm />
+        </Box>
+        <Box
+          sx={{
+            display: { xs: "none", md: "flex" },
+            alignItems: "center",
+            ml: 9,
+          }}
+        >
+          <CardMedia
+            image="icons/Pagina-Web-logo.png"
+            component="img"
+            alt="Fital Logo"
+            sx={{
+              width: { lg: "490px", xl: "590px" },
+              height: { lg: "490px", xl: "590px" },
+            }}
+          />
+        </Box>
+      </Box>
+      {/* <Box sx={{ marginX: "auto", p: 3, width: "1600px", maxWidth: "95%" }}>
+        <Box sx={{ marginLeft: 11 }}>
+          <Typography sx={{ fontSize: "34px", bold: "", color: "white" }}>
             Bienvenido
           </Typography>
-          <Typography sx={{ fontSize: "24px", mb: 2 }}>
+          <Typography sx={{ fontSize: "24px", mb: 2, color: "white" }}>
             Sube tus datos
           </Typography>
         </Box>
-        <Box display="flex" justifyContent="space-around" >
+        <Box display="flex" justifyContent="space-around">
           <Box display="flex" justifyContent="center">
             <OnboardingForm />
           </Box>
-          <Box display="flex" justifyContent="center">
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" },
+              justifyContent: "center",
+            }}
+          >
             <CardMedia
               image="icons/Pagina-Web-logo.png"
               component="img"
@@ -52,7 +84,7 @@ const OnboardingPage = () => {
             />
           </Box>
         </Box>
-      </Box>
+      </Box> */}
     </Box>
   );
 };

@@ -7,15 +7,14 @@ export const OnboardingForm = () => {
   return (
     <Box
       sx={{
-        p: 3,
+        px: 3,
+        py: { xs: 0, md: 1, xl: 10 },
         borderRadius: "32px",
         bgcolor: "rgba(255,255,255, 0.1)",
         backdropFilter: "blur(10px)",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        width: "625px",
-        height: "736px",
       }}
     >
       <Box mb={7} />
@@ -27,6 +26,7 @@ export const OnboardingForm = () => {
       <Button sx={{ bgcolor: "#31A354", color: "white", width: "100px" }}>
         Listo
       </Button>
+      <Box mb={7} />
     </Box>
   );
 };
@@ -50,11 +50,18 @@ const FileField: FC<FileFieldProps> = ({ description }) => {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
+          flexDirection: { xs: "column", sm: "row" },
           mb: 3,
         }}
       >
         <Typography
-          sx={{ color: "white", fontSize: "16px", maxWidth: "400px" }}
+          sx={{
+            color: "white",
+            fontSize: { xs: "13px", sm: "16px" },
+            maxWidth: "300px",
+            // mb: { xs: 2, sm: 0 },
+            alignSelf: { xs: "flex-start", sm: "none" },
+          }}
         >
           {description}
         </Typography>
@@ -63,10 +70,12 @@ const FileField: FC<FileFieldProps> = ({ description }) => {
           sx={{
             justifySelf: "end",
             textTransform: "none",
-            fontSize: "16px",
+            fontSize: { xs: "13px", sm: "16px" },
             bgcolor: "#F4F4F4",
             color: "#6A6A6A",
             py: 0,
+            alignSelf: { xs: "flex-end", sm: "none" },
+            mt: { xs: 1, sm: 0 },
           }}
         >
           SeleccionarArchivo
