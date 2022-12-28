@@ -29,9 +29,8 @@ export const MainLayout: FC<PropsWithChildren<Props>> = ({
       <main
         style={{
           backgroundImage: 'url("backgrounds/bg-domi.jpg")',
-          width: "100vw",
-          minHeight: "calc(100vh - 90px)",
-          marginTop: "90px",
+
+          paddingTop: "90px",
           backgroundColor: "green",
         }}
       >

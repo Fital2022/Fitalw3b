@@ -63,7 +63,11 @@ const Home = () => {
         // alignItems="center"
         alignContent="center"
         flexWrap="wrap"
-        sx={{ width: "100%", height: "calc(100vh - 90px)" }}
+        sx={{
+          width: "100%",
+          height: { md: "calc(100vh - 90px)", xs: "auto" },
+          py: { xs: 3, md: 0 },
+        }}
       >
         <Grid
           container
@@ -81,12 +85,14 @@ const Home = () => {
             <Card
               sx={{
                 borderRadius: "50%",
-                height: "190px",
-                width: "190px",
+                height: { xs: "170px", md: "190px" },
+                width: { xs: "170px", md: "190px" },
                 justifyContent: "center",
                 alignItems: "center",
                 display: "flex",
                 flexWrap: "wrap",
+                boxShadow: "none",
+                border: "1px solid #888",
               }}
             >
               <IconButton onClick={() => setShowModal(true)}>
@@ -108,13 +114,16 @@ const Home = () => {
               >
                 <Card
                   sx={{
-                    height: "190px",
-                    width: "190px",
+                    height: { xs: "170px", md: "190px" },
+                    width: { xs: "170px", md: "190px" },
                     justifyContent: "center",
                     alignItems: "center",
                     display: "flex",
                     cursor: "pointer",
                     flexDirection: "column",
+                    boxShadow: "none",
+                    border: "1px solid #888",
+                    borderRadius: "20px",
                   }}
                   onClick={() => {
                     dispatch(selectEscrow(emp.id));

@@ -73,8 +73,7 @@ const MainMenu: NextPage = () => {
             <Grid
               key={item.path}
               item
-              xs={12}
-              sm={6}
+              xs={6}
               md={3}
               display="flex"
               justifyContent="center"
@@ -83,11 +82,14 @@ const MainMenu: NextPage = () => {
               <Card
                 key={item.title}
                 sx={{
-                  height: "190px",
-                  width: "190px",
+                  height: { xs: "170px", md: "190px" },
+                  width: { xs: "170px", md: "190px" },
                   justifyContent: "center",
                   display: "flex",
                   flexWrap: "wrap",
+                  boxShadow: "none",
+                  border: "1px solid #888",
+                  borderRadius: "20px",
                 }}
               >
                 <NextLink href={item.path} passHref>
@@ -97,7 +99,10 @@ const MainMenu: NextPage = () => {
                 </NextLink>
                 <Typography
                   variant="h4"
-                  sx={{ textAlign: "center", fontSize: "20px" }}
+                  sx={{
+                    textAlign: "center",
+                    fontSize: { xs: "14px", md: "20px" },
+                  }}
                 >
                   {item.title}
                 </Typography>
