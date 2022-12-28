@@ -17,14 +17,20 @@ import {
   SxProps,
   Theme,
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 export const SideBar = () => {
   const { route } = useRouter();
   const [selectedPosition, setSelectedPosition] = useState<
     SxProps<Theme> | undefined
   >();
+  const { name } = useSelector(
+    (state: RootState) => state.empire.selectedEmpire
+  );
 
   // useEffect(() => {
   //   if (route == "/patrimony") setSelectedPosition({ transform: 'translateY(-2px)' });
@@ -37,14 +43,15 @@ export const SideBar = () => {
         padding: "10px",
         position: "fixed",
         left: 0,
-        height: "100vh",
+        height: { xs: "90px", md: "100vh" },
         // backgroundColor: "steelblue",
-        background: "var(--side-gradient)",
+        background: { xs: "var(--top-gradient)", md: "var(--side-gradient)" },
         display: "flex",
-        flexDirection: "column",
-        width: "90px",
+        flexDirection: { xs: "row", md: "column" },
+        width: { xs: "100%", md: "90px" },
         alignItems: "center",
         top: 0,
+        zIndex: 10,
       }}
     >
       <NextLink href="/" passHref>
@@ -53,12 +60,36 @@ export const SideBar = () => {
             image="icons/Pagina-Web-logo.png"
             component="img"
             alt="Fital Logo"
-            sx={{ width: "70px", height: "70px", marginBottom: "100px" }}
+            sx={{
+              width: { xs: "55px", md: "70px" },
+              height: { xs: "55px", md: "70px" },
+              marginBottom: { xs: "0px", md: "100px" },
+            }}
           />
         </Link>
       </NextLink>
-      {/* <Box flex={1} /> */}
-      <Box sx={{ position: "relative" }}>
+      <Box sx={{ ml: { xs: 2, md: 4 }, display: { xs: "block", md: "none" } }}>
+        <Typography
+          sx={{
+            color: "white",
+            fontSize: { xs: "14px", md: "16px" },
+            fontWeight: { xs: "400", md: "600" },
+          }}
+        >
+          ¡Buenos días Júan!
+        </Typography>
+        <Typography
+          sx={{
+            color: "white",
+            fontSize: { xs: "14px", md: "16px" },
+            fontWeight: { xs: "400", md: "600" },
+            display: { xs: "none", md: "block" },
+          }}
+        >
+          Empecemos: {name}
+        </Typography>
+      </Box>
+      <Box sx={{ position: "relative", display: { xs: "none", md: "block" } }}>
         <Box
           display="flex"
           flexDirection="column"
@@ -174,7 +205,24 @@ export const SideBar = () => {
           </Typography>
         </Box>
       </Box>
-      {/* <Box flex={1} /> */}
+      <Box flex={1} />
+      <IconButton
+        sx={{
+          display: { xs: "flex", md: "none" },
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <MenuIcon sx={{ color: "white", fontSize: "35px" }} />
+      </IconButton>
+      <CardMedia
+        image="images/profile.png"
+        sx={{
+          width: "40px",
+          height: "40px",
+          display: { xs: "block", md: "none" },
+        }}
+      />
     </Box>
   );
 };

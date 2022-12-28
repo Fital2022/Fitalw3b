@@ -6,6 +6,13 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { IEmpire } from "../../interfaces/empireInterfaces";
 import { RootState } from "../../store";
+import {
+  HouseOutlined,
+  FileOpenOutlined,
+  FlagCircleOutlined,
+  AttachMoneyOutlined,
+  HolidayVillage,
+} from "@mui/icons-material";
 
 interface Props {
   title: string;
@@ -23,6 +30,58 @@ export const ActionsLayout: FC<PropsWithChildren<Props>> = ({
   const { name, type } =
     useSelector((state: RootState) => state.empire.selectedEmpire as IEmpire) ||
     {};
+
+  const pageTacker = () => {
+    switch (route) {
+      case "/patrimony":
+        return (
+          <>
+            <HouseOutlined sx={{ fontSize: "30px", color: "#7E7E7E", mr: 2 }} />
+            <Typography sx={{ fontSize: "20px", color: "#7E7E7E" }}>
+              Patrimonio
+            </Typography>
+          </>
+        );
+
+      case "/testament":
+        return (
+          <>
+            <FileOpenOutlined
+              sx={{ fontSize: "30px", color: "#7E7E7E", mr: 2 }}
+            />
+            <Typography sx={{ fontSize: "20px", color: "#7E7E7E" }}>
+              Testamento
+            </Typography>
+          </>
+        );
+      case "/goals":
+        return (
+          <>
+            <FlagCircleOutlined
+              sx={{ fontSize: "30px", color: "#7E7E7E", mr: 2 }}
+            />
+            <Typography sx={{ fontSize: "20px", color: "#7E7E7E" }}>
+              Metas
+            </Typography>
+          </>
+        );
+      case "/empire":
+        return (
+          <>
+            <HolidayVillage
+              sx={{ fontSize: "30px", color: "#7E7E7E", mr: 2 }}
+            />
+            <Typography sx={{ fontSize: "20px", color: "#7E7E7E" }}>
+              Imperio
+            </Typography>
+          </>
+        );
+
+      default:
+        return null;
+    }
+  };
+
   return (
     <>
       <Head>
@@ -35,25 +94,28 @@ export const ActionsLayout: FC<PropsWithChildren<Props>> = ({
       <nav>
         <SideBar />
       </nav>
-      <main
-        style={{
+      <Box
+        component="main"
+        sx={{
           backgroundImage: 'url("backgrounds/bg-domi.jpg")',
-          width: "calc(100vw - 90px)",
+          width: { xs: "100%", md: "calc(100vw - 90px)" },
           minHeight: "100vh",
-          position: 'relative',
-          float: "right",
+          position: "relative",
+          float: { xs: "none", md: "right" },
+          mt: { xs: "90px", md: "0px" },
         }}
       >
         <Box sx={{ px: 3 }}>
           <Box
             sx={{
-              borderBottom: "1px solid #000",
+              borderBottom: { xs: "1px solid #7e7e7e", md: "1px solid #000" },
               display: "flex",
-              pt: 2,
-              pb: 3,
+              pt: { xs: 1, md: 2 },
+              pb: { xs: 1, md: 3 },
+              justifyContent: { xs: "center", md: "space-between" },
             }}
           >
-            <Box>
+            <Box sx={{ display: { xs: "none", md: "block" } }}>
               <Typography variant="h5" component="h5" sx={{ color: "black" }}>
                 ¡Buenos días Juan!
               </Typography>
@@ -72,8 +134,7 @@ export const ActionsLayout: FC<PropsWithChildren<Props>> = ({
                   : ""}
               </Typography>
             </Box>
-            <Box flex={1} />
-            <Box>
+            <Box sx={{ display: { xs: "none", md: "block" } }}>
               {name ? (
                 <Typography
                   variant="h5"
@@ -97,10 +158,15 @@ export const ActionsLayout: FC<PropsWithChildren<Props>> = ({
                 </Typography>
               ) : null}
             </Box>
+            <Box
+              sx={{ display: { xs: "flex", md: "none" }, alignItems: "center" }}
+            >
+              {pageTacker()}
+            </Box>
           </Box>
         </Box>
         {children}
-      </main>
+      </Box>
       {/* <footer>TODO: posible footer</footer> */}
     </>
   );
