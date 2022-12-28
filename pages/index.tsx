@@ -36,6 +36,8 @@ const ESCROW_TYPES = [
   "Remodelación de edificios",
 ];
 
+const ESCROW_PROVEES = ["Bancomer", "Fital", "Santander", "Bajio"];
+
 const PurpleTooltip = styled(({ className, ...props }: TooltipProps) => (
   <Tooltip {...props} classes={{ popper: className }} />
 ))(({ theme }) => ({
@@ -53,6 +55,10 @@ const Home = () => {
   const [switches, setSwitches] = useState<boolean[]>(
     ESCROW_TYPES.map((ele) => false)
   );
+  const [switchesProv, setSwitchesProv] = useState<boolean[]>(
+    ESCROW_PROVEES.map((ele) => false)
+  );
+  const [modalContent, setModalContent] = useState<number>(0);
   const [empireName, setEmpireName] = useState<string>("");
   const dispatch = useDispatch();
   const router = useRouter();
@@ -61,6 +67,133 @@ const Home = () => {
     setShowModal(false);
     setSwitches(ESCROW_TYPES.map((ele) => false));
     setEmpireName("");
+    setModalContent(0);
+  };
+
+  const renderModalContent = () => {
+    switch (modalContent) {
+      case 0:
+        return (
+          <>
+            <Typography sx={{ fontSize: "16px", color: "black" }}>
+              Agrega tu imperio
+            </Typography>
+            <OutlinedInput
+              placeholder="Nombre de tu imperio"
+              sx={{ width: "100%", height: "46px", my: 2 }}
+              value={empireName}
+              name="empireName"
+              onChange={(e) => setEmpireName(e.target.value)}
+            />
+            <Typography sx={{ fontSize: "16px", color: "black", mb: 2 }}>
+              Tipo de imperio
+            </Typography>
+            {ESCROW_TYPES.map((type, index) => (
+              <Box key="type" display="flex" justifyContent="space-between">
+                <Typography sx={{ color: "#7B7B7B", fontSize: "16px" }}>
+                  {type}
+                </Typography>
+                <Switch
+                  checked={switches[index]}
+                  onChange={(e, checked) =>
+                    setSwitches((prevState) =>
+                      prevState.map((typeEscrow, i) =>
+                        checked === true
+                          ? index === i
+                            ? checked
+                            : false
+                          : checked
+                      )
+                    )
+                  }
+                />
+              </Box>
+            ))}
+            <Box display="flex" justifyContent="flex-end" mt={3}>
+              <Button
+                sx={{
+                  backgroundImage: "none",
+                  bgcolor: "#31A354",
+                  color: "white",
+                  fontSize: "16px",
+                  textTransform: "none",
+                  width: "127px",
+                  height: "46px",
+                }}
+                disabled={
+                  switches.every((chk) => chk === false) || !empireName.trim()
+                }
+                onClick={() => {
+                  setModalContent((prevState) => ++prevState);
+                }}
+              >
+                Siguiente
+              </Button>
+            </Box>
+          </>
+        );
+      case 1:
+        return (
+          <>
+            <Typography sx={{ fontSize: "24px", mb: 3 }}>Proveedor</Typography>
+            {ESCROW_PROVEES.map((type, index) => (
+              <Box key="type" display="flex" justifyContent="space-between">
+                <Typography sx={{ color: "#7B7B7B", fontSize: "16px" }}>
+                  {type}
+                </Typography>
+                <Switch
+                  checked={switchesProv[index]}
+                  onChange={(e, checked) =>
+                    setSwitchesProv((prevState) =>
+                      prevState.map((typeEscrow, i) =>
+                        checked === true
+                          ? index === i
+                            ? checked
+                            : false
+                          : checked
+                      )
+                    )
+                  }
+                />
+              </Box>
+            ))}
+            <Box display="flex" justifyContent="flex-end" mt={3}>
+              <Button
+                sx={{
+                  backgroundImage: "none",
+                  bgcolor: "#31A354",
+                  color: "white",
+                  fontSize: "16px",
+                  textTransform: "none",
+                  width: "127px",
+                  height: "46px",
+                }}
+                disabled={switchesProv.every((chk) => chk === false)}
+                onClick={() => {
+                  dispatch(
+                    addEscrow({
+                      id: empires.length,
+                      name: empireName,
+                      beneficiary: [],
+                      rights: [],
+                      trustor: [],
+                      type: ESCROW_TYPES[
+                        switches.findIndex((op) => op === true)
+                      ],
+                    })
+                  );
+                  // setModalContent((prevState) => ++prevState);
+                  onCloseHandler();
+                }}
+              >
+                Aceptar
+              </Button>
+            </Box>
+          </>
+        );
+      default:
+        break;
+    }
   };
 
   useEffect(() => {
@@ -106,6 +239,8 @@ const Home = () => {
                 alignItems: "center",
                 display: "flex",
                 flexWrap: "wrap",
+                border: "1px solid #888",
+                boxShadow: "none",
               }}
             >
               <PurpleTooltip
@@ -166,9 +301,9 @@ const Home = () => {
                       cursor: "pointer",
                       flexDirection: "column",
                       boxShadow: "none",
-                    border: "1px solid #888",
-                    borderRadius: "20px",
-                  }}
+                      border: "1px solid #888",
+                      borderRadius: "20px",
+                    }}
                     onClick={() => {
                       dispatch(selectEscrow(emp.id));
                       router.push("/main");
@@ -214,6 +349,7 @@ const Home = () => {
           sx={{
             bgcolor: "white",
             width: "686px",
+            maxWidth: "95%",
             borderRadius: "10px",
             border: "1px solid #707070",
             py: 3,
@@ -224,71 +360,7 @@ const Home = () => {
             transform: "translate(-50%, -50%)",
           }}
         >
-          <Typography sx={{ fontSize: "16px", color: "black" }}>
-            Agrega tu imperio
-          </Typography>
-          <OutlinedInput
-            placeholder="Nombre de tu imperio"
-            sx={{ width: "100%", height: "46px", my: 2 }}
-            value={empireName}
-            name="empireName"
-            onChange={(e) => setEmpireName(e.target.value)}
-          />
-          <Typography sx={{ fontSize: "16px", color: "black", mb: 2 }}>
-            Tipo de imperio
-          </Typography>
-          {ESCROW_TYPES.map((type, index) => (
-            <Box key="type" display="flex" justifyContent="space-between">
-              <Typography sx={{ color: "#7B7B7B", fontSize: "16px" }}>
-                {type}
-              </Typography>
-              <Switch
-                checked={switches[index]}
-                onChange={(e, checked) =>
-                  setSwitches((prevState) =>
-                    prevState.map((typeEscrow, i) =>
-                      checked === true
-                        ? index === i
-                          ? checked
-                          : false
-                        : checked
-                    )
-                  )
-                }
-              />
-            </Box>
-          ))}
-          <Box display="flex" justifyContent="flex-end" mt={3}>
-            <Button
-              sx={{
-                backgroundImage: "none",
-                bgcolor: "#31A354",
-                color: "white",
-                fontSize: "16px",
-                textTransform: "none",
-                width: "127px",
-                height: "46px",
-              }}
-              disabled={
-                switches.every((chk) => chk === false) || !empireName.trim()
-              }
-              onClick={() => {
-                dispatch(
-                  addEscrow({
-                    id: empires.length,
-                    name: empireName,
-                    beneficiary: [],
-                    rights: [],
-                    trustor: [],
-                    type: ESCROW_TYPES[switches.findIndex((op) => op === true)],
-                  })
-                );
-                onCloseHandler();
-              }}
-            >
-              Aceptar
-            </Button>
-          </Box>
+          {renderModalContent()}
         </Box>
       </Modal>
     </MainLayout>
