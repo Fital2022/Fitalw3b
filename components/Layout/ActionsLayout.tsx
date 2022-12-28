@@ -35,13 +35,15 @@ export const ActionsLayout: FC<PropsWithChildren<Props>> = ({
       <nav>
         <SideBar />
       </nav>
-      <main
-        style={{
+      <Box
+        component="main"
+        sx={{
           backgroundImage: 'url("backgrounds/bg-domi.jpg")',
-          width: "calc(100vw - 90px)",
+          width: { xs: "100%", md: "calc(100vw - 90px)" },
           minHeight: "100vh",
-          position: 'relative',
-          float: "right",
+          position: "relative",
+          float: { xs: "none", md: "right" },
+          mt: { xs: "90px", md: "0px" },
         }}
       >
         <Box sx={{ px: 3 }}>
@@ -100,7 +102,7 @@ export const ActionsLayout: FC<PropsWithChildren<Props>> = ({
           </Box>
         </Box>
         {children}
-      </main>
+      </Box>
       {/* <footer>TODO: posible footer</footer> */}
     </>
   );
