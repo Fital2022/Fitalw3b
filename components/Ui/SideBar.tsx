@@ -305,7 +305,7 @@ export const SideBar = () => {
       </Box>
       <Box
         sx={{
-          display: "flex",
+          display: { xs: "flex", md: "none" },
           justifyContent: "center",
           alignItems: "center",
           width: "100%",
@@ -317,12 +317,13 @@ export const SideBar = () => {
       >
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "space-around",
+            display: { xs: "flex", md: "none" },
+            justifyContent: { xs: "space-around", md: "space-between" },
             flexWrap: "wrap",
             transition: "all 0.3s ease",
             opacity: !showMenu ? 0 : 1,
             height: !showMenu ? "0px" : "auto",
+            width: "100%",
           }}
         >
           {OPTIONS.map((item) => (
