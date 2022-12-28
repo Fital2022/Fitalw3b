@@ -8,7 +8,7 @@ export const OnboardingForm = () => {
     <Box
       sx={{
         px: 3,
-        py: { xs: 0, md: 1, xl: 10 },
+        py: { xs: 4, sm: 8, lg: 4, xl: 10 },
         borderRadius: "32px",
         bgcolor: "rgba(255,255,255, 0.1)",
         backdropFilter: "blur(10px)",
@@ -17,16 +17,20 @@ export const OnboardingForm = () => {
         justifyContent: "center",
       }}
     >
-      <Box mb={7} />
       <FileField description="Sube tu INE por ambos lados" />
       <FileField description="Sube tu COMPROBANTE DE DOMICILIO (agua, teléfono fijo, gas, predial, internet, luz)" />
       <FileField description="Sube tu CURP" />
       <FileField description="Sube tu RFC" />
       <FileField description="Sube tu ACTA DE MATRIMONIO (se requiere solo si es por bienes mancomunados)" />
-      <Button sx={{ bgcolor: "#31A354", color: "white", width: "100px" }}>
+      <Button
+        sx={{
+          bgcolor: "#31A354",
+          color: "white",
+          width: { xs: "100%", sm: "100px" },
+        }}
+      >
         Listo
       </Button>
-      <Box mb={7} />
     </Box>
   );
 };
@@ -39,9 +43,9 @@ const FileField: FC<FileFieldProps> = ({ description }) => {
     accept: [".png", ".jpg", ".jpeg"],
   });
 
-  useEffect(() => {
-    console.log(filesContent);
-  }, [filesContent]);
+  // useEffect(() => {
+  //   console.log(filesContent);
+  // }, [filesContent]);
 
   return (
     <>
@@ -51,16 +55,16 @@ const FileField: FC<FileFieldProps> = ({ description }) => {
           alignItems: "center",
           justifyContent: "space-between",
           flexDirection: { xs: "column", sm: "row" },
-          mb: 3,
+          mb: { xs: 2, sm: 3 },
         }}
       >
         <Typography
           sx={{
             color: "white",
-            fontSize: { xs: "13px", sm: "16px" },
+            fontSize: { xs: "11px", sm: "16px", md: "14px", xl: "16px" },
             maxWidth: "300px",
             // mb: { xs: 2, sm: 0 },
-            alignSelf: { xs: "flex-start", sm: "none" },
+            alignSelf: { xs: "flex-start", md: "none" },
           }}
         >
           {description}
@@ -70,7 +74,7 @@ const FileField: FC<FileFieldProps> = ({ description }) => {
           sx={{
             justifySelf: "end",
             textTransform: "none",
-            fontSize: { xs: "13px", sm: "16px" },
+            fontSize: { xs: "11px", sm: "16px", md: "14px", xl: "16px" },
             bgcolor: "#F4F4F4",
             color: "#6A6A6A",
             py: 0,
@@ -81,7 +85,7 @@ const FileField: FC<FileFieldProps> = ({ description }) => {
           SeleccionarArchivo
         </Button>
       </Box>
-      <Divider sx={{ bgcolor: "white", mb: 3 }} />
+      <Divider sx={{ bgcolor: "white", mb: { xs: 2, sm: 3 } }} />
     </>
   );
 };

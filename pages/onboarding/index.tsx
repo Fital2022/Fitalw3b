@@ -36,7 +36,23 @@ const OnboardingPage = () => {
           justifyContent: "center",
         }}
       >
-        <Box sx={{ width: {xs: "95%", sm: "90%", md: "auto" } }}>
+        <Box sx={{ width: { xs: "95%", sm: "90%", md: "100px", lg: "auto" } }}>
+          <Typography
+            sx={{
+              color: "white",
+              fontSize: {xs: "22px" , sm: "32px", md: "28px", xl: "34px" },
+              fontWeight: "600",
+              ml: 2
+            }}
+          >
+            Bienvenido
+          </Typography>
+          <Typography
+            sx={{ color: "white", fontSize: {xs: "16px" , sm: "22px", md: "20px", xl: "24px" }, mb: 2,
+          ml: 2 }}
+          >
+            Sube tus datos
+          </Typography>
           <OnboardingForm />
         </Box>
         <Box
@@ -51,8 +67,8 @@ const OnboardingPage = () => {
             component="img"
             alt="Fital Logo"
             sx={{
-              width: { lg: "490px", xl: "590px" },
-              height: { lg: "490px", xl: "590px" },
+              width: { lg: "400px", xl: "590px" },
+              height: { lg: "400px", xl: "590px" },
             }}
           />
         </Box>
