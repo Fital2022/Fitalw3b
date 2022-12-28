@@ -201,10 +201,7 @@ const Home = () => {
   }, []);
 
   return (
-    <MainLayout
-      title={"Fital | Menú principal"}
-      pageDescription={"Menú principal"}
-    >
+    <>
       <Box
         display="flex"
         justifyContent="center"
@@ -363,7 +360,7 @@ const Home = () => {
           {renderModalContent()}
         </Box>
       </Modal>
-    </MainLayout>
+    </>
   );
 };
 

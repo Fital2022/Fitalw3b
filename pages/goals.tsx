@@ -8,10 +8,7 @@ const GoalsPage: NextPage = () => {
   const [show, setShow] = useState<boolean>(true);
 
   return (
-    <ActionsLayout
-      title={"Fital - Metas"}
-      pageDescription={"Página de gestion de metas"}
-    >
+    <>
       <MainFormContainer
         buttons={["button1", "button2", "button3"]}
         setOption={setOption}
@@ -19,7 +16,7 @@ const GoalsPage: NextPage = () => {
         show={show}
         setShow={setShow}
       />
-    </ActionsLayout>
+    </>
   );
 };
 

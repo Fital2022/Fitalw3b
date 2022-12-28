@@ -235,13 +235,13 @@ const MENU_ACTIONS: IBottomMenuData[] = [
     ],
   },
 ];
-let tipo: IRight['type'] = "casa" ;
+let tipo: IRight["type"] = "casa";
 let img = "";
- 
+
 const Patrimony: NextPage = () => {
   const onDropEntry = (event: DragEvent<HTMLDivElement>) => {
     console.log(event);
-    tipo = event.dataTransfer.getData("option") as  IRight['type'];
+    tipo = event.dataTransfer.getData("option") as IRight["type"];
     img = event.dataTransfer.getData("img");
     console.log({ tipo });
     console.log({ img });
@@ -262,10 +262,7 @@ const Patrimony: NextPage = () => {
   };
 
   return (
-    <ActionsLayout
-      title={"Fital - Patrimonio"}
-      pageDescription={"Página de patrimonio"}
-    >
+    <>
       <Box alignItems={"center"} sx={{ marginTop: 10 }}>
         {/* <StepForm premium={true} iempire={empire} /> */}
         <div onDrop={onDropEntry} onDragOver={allowDrop}>
@@ -287,7 +284,7 @@ const Patrimony: NextPage = () => {
             <StepForm2
               premium={false}
               iempire={empire}
-              title={tipo} 
+              title={tipo}
               img={img}
             />
           </Grid>
@@ -296,7 +293,7 @@ const Patrimony: NextPage = () => {
         )}
       </Box>
       <BottomMenu data={MENU_ACTIONS} />
-    </ActionsLayout>
+    </>
   );
 };
 
