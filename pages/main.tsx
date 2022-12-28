@@ -10,13 +10,13 @@ import { Box, Card, Grid, IconButton, Link, Typography } from "@mui/material";
 import type { NextPage } from "next";
 import { MainLayout } from "../components/Layout";
 
-interface IOption {
+export interface IOption {
   title: string;
   icon: JSX.Element;
   path: "/patrimony" | "/testament" | "/goals" | "/empire";
 }
 
-const OPTIONS: IOption[] = [
+export const OPTIONS: IOption[] = [
   {
     path: "/patrimony",
     title: "Patrimonio",
