@@ -159,6 +159,7 @@ export const SideBar = () => {
         >
           {OPTIONS.map((page) => (
             <Box
+              key={page.path}
               display="flex"
               flexDirection="column"
               alignItems="center"
