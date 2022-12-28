@@ -6,13 +6,26 @@ import {
   HolidayVillage,
   HouseOutlined,
 } from "@mui/icons-material";
-import { Box, Card, Grid, IconButton, Link, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  Grid,
+  IconButton,
+  Link,
+  styled,
+  Tooltip,
+  tooltipClasses,
+  TooltipProps,
+  Typography,
+} from "@mui/material";
 import type { NextPage } from "next";
 import { MainLayout } from "../components/Layout";
 
 export interface IOption {
   title: string;
   icon: JSX.Element;
+  tooltip: string;
   path: "/patrimony" | "/testament" | "/goals" | "/empire";
 }
 
@@ -20,6 +33,7 @@ export const OPTIONS: IOption[] = [
   {
     path: "/patrimony",
     title: "Patrimonio",
+    tooltip: "Haz tu imperio",
     icon: (
       <HouseOutlined fontSize="large" sx={{ color: "black", fontSize: 120 }} />
     ),
@@ -27,6 +41,7 @@ export const OPTIONS: IOption[] = [
   {
     path: "/testament",
     title: "Testamento Digital",
+    tooltip: "Realiza tu Testamento",
     icon: (
       <FileOpenOutlined
         fontSize="large"
@@ -37,6 +52,7 @@ export const OPTIONS: IOption[] = [
   {
     path: "/goals",
     title: "Metas",
+    tooltip: "Accede a tus metas",
     icon: (
       <FlagCircleOutlined
         fontSize="large"
@@ -47,11 +63,23 @@ export const OPTIONS: IOption[] = [
   {
     path: "/empire",
     title: "Imperio",
+    tooltip: "Ver tu imperio",
     icon: (
       <HolidayVillage fontSize="large" sx={{ color: "black", fontSize: 120 }} />
     ),
   },
 ];
+
+const PurpleTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "#8E4BA8",
+    color: "white",
+    boxShadow: theme.shadows[1],
+    fontSize: 20,
+  },
+}));
 
 const MainMenu: NextPage = () => {
   return (
@@ -94,7 +122,23 @@ const MainMenu: NextPage = () => {
               >
                 <NextLink href={item.path} passHref>
                   <Link>
-                    <IconButton>{item.icon}</IconButton>
+                    <PurpleTooltip
+                      title={item.tooltip}
+                      placement="top"
+                      arrow
+                      PopperProps={{
+                        sx: {
+                          "& .MuiTooltip-arrow": {
+                            bottom: "0px !important",
+                            "&::before": {
+                              backgroundColor: "#8E4BA8",
+                            },
+                          },
+                        },
+                      }}
+                    >
+                      <IconButton>{item.icon}</IconButton>
+                    </PurpleTooltip>
                   </Link>
                 </NextLink>
                 <Typography

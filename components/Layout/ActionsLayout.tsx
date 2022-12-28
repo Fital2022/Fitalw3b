@@ -117,7 +117,7 @@ export const ActionsLayout: FC<PropsWithChildren<Props>> = ({
           >
             <Box sx={{ display: { xs: "none", md: "block" } }}>
               <Typography variant="h5" component="h5" sx={{ color: "black" }}>
-                ¡Buenos días Júan!
+                ¡Buenos días Juan!
               </Typography>
               <Typography variant="h5" component="h5" sx={{ color: "black" }}>
                 Empecemos:{" "}

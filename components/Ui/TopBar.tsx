@@ -48,7 +48,7 @@ export const TopBar = () => {
             fontWeight: { xs: "400", md: "600" },
           }}
         >
-          ¡Buenos días Júan!
+          ¡Buenos días Juan!
         </Typography>
         <Typography
           sx={{
