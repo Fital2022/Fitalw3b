@@ -8,7 +8,11 @@ import {
   Link,
   Modal,
   OutlinedInput,
+  styled,
   Switch,
+  Tooltip,
+  tooltipClasses,
+  TooltipProps,
   Typography,
 } from "@mui/material";
 import { MainLayout } from "../components/Layout/MainLayout";
@@ -31,6 +35,17 @@ const ESCROW_TYPES = [
   "Protección patrimonial",
   "Remodelación de edificios",
 ];
+
+const PurpleTooltip = styled(({ className, ...props }: TooltipProps) => (
+  <Tooltip {...props} classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "#8E4BA8",
+    color: "white",
+    boxShadow: theme.shadows[1],
+    fontSize: 20,
+  },
+}));
 
 const Home = () => {
   const { empires } = useSelector((state: RootState) => state.empire);
@@ -89,64 +104,96 @@ const Home = () => {
                 flexWrap: "wrap",
               }}
             >
-              <IconButton onClick={() => setShowModal(true)}>
-                <Add sx={{ fontSize: 120, color: "black" }} />
-              </IconButton>
+              <PurpleTooltip
+                title="Agrega tu imperio"
+                placement="top"
+                arrow
+                PopperProps={{
+                  sx: {
+                    "& .MuiTooltip-arrow": {
+                      bottom: "0px !important",
+                      "&::before": {
+                        backgroundColor: "#8E4BA8",
+                      },
+                    },
+                  },
+                }}
+              >
+                <IconButton onClick={() => setShowModal(true)}>
+                  <Add sx={{ fontSize: 120, color: "black" }} />
+                </IconButton>
+              </PurpleTooltip>
             </Card>
           </Grid>
           {empires &&
             empires.length > 0 &&
             empires.map((emp) => (
-              <Grid
-                item
-                xs={12}
-                sm={4}
-                md={3}
-                lg={2}
-                key={emp.id}
-                sx={{ display: "flex", justifyContent: "center" }}
+              <PurpleTooltip
+                title={emp.name}
+                placement="top"
+                arrow
+                PopperProps={{
+                  sx: {
+                    "& .MuiTooltip-arrow": {
+                      bottom: "0px !important",
+                      "&::before": {
+                        backgroundColor: "#8E4BA8",
+                      },
+                    },
+                  },
+                }}
               >
-                <Card
-                  sx={{
-                    height: "190px",
-                    width: "190px",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    display: "flex",
-                    cursor: "pointer",
-                    flexDirection: "column",
-                  }}
-                  onClick={() => {
-                    dispatch(selectEscrow(emp.id));
-                    router.push("/main");
-                  }}
+                <Grid
+                  item
+                  xs={12}
+                  sm={4}
+                  md={3}
+                  lg={2}
+                  key={emp.id}
+                  sx={{ display: "flex", justifyContent: "center" }}
                 >
-                  <Image src="/icons/crown.png" width={20} height={20} />
-                  <Typography
+                  <Card
                     sx={{
-                      color: "black",
-                      fontSize: 14,
-                      textAlign: "center",
-                      fontWeight: "bold",
-                      maxWidth: "185px",
-                      mb: 1,
-                      textTransform: "uppercase",
+                      height: "190px",
+                      width: "190px",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      display: "flex",
+                      cursor: "pointer",
+                      flexDirection: "column",
+                    }}
+                    onClick={() => {
+                      dispatch(selectEscrow(emp.id));
+                      router.push("/main");
                     }}
                   >
-                    {emp.name}
-                  </Typography>
-                  <Typography
-                    sx={{
-                      color: "black",
-                      fontSize: 12,
-                      textAlign: "center",
-                      maxWidth: "185px",
-                    }}
-                  >
-                    {emp.type}
-                  </Typography>
-                </Card>
-              </Grid>
+                    <Image src="/icons/crown.png" width={20} height={20} />
+                    <Typography
+                      sx={{
+                        color: "black",
+                        fontSize: 14,
+                        textAlign: "center",
+                        fontWeight: "bold",
+                        maxWidth: "185px",
+                        mb: 1,
+                        textTransform: "uppercase",
+                      }}
+                    >
+                      {emp.name}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: "black",
+                        fontSize: 12,
+                        textAlign: "center",
+                        maxWidth: "185px",
+                      }}
+                    >
+                      {emp.type}
+                    </Typography>
+                  </Card>
+                </Grid>
+              </PurpleTooltip>
             ))}
         </Grid>
       </Box>
