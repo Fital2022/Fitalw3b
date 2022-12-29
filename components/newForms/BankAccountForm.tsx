@@ -16,8 +16,9 @@ interface ICashForm {
 interface Props {
   accountName: string;
   img: string;
+  isWallet: boolean;
 }
-export const BankAccountForm: FC<Props> = ({ accountName, img }) => {
+export const BankAccountForm: FC<Props> = ({ accountName, img, isWallet }) => {
   const [data, onChange, onReset] = useForm<ICashForm>({ banco: "" });
   const { banco } = data;
   const onSubmit = (event: FormEvent) => {
@@ -33,6 +34,7 @@ export const BankAccountForm: FC<Props> = ({ accountName, img }) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        // bgcolor: "grey",
         mt: { xs: 7, sm: 10 },
       }}
     >
@@ -68,22 +70,35 @@ export const BankAccountForm: FC<Props> = ({ accountName, img }) => {
           name="banco"
           onChange={onChange}
         />
-        <OutlinedInput
-          placeholder="Tipo(tarjeta debito)*"
-          sx={inputStyles}
-          disabled
-        />
-        <OutlinedInput
-          placeholder="Tipo(tarjeta debito)"
-          sx={inputStyles}
-          disabled
-        />
-        <OutlinedInput
-          placeholder="Tipo(tarjeta credito)*"
-          sx={inputStyles}
-          disabled
-        />
-        <OutlinedInput placeholder="Monto* " sx={inputStyles} disabled />
+        {!isWallet ? (
+          <>
+            <OutlinedInput
+              placeholder="Tipo(tarjeta debito)*"
+              sx={inputStyles}
+              disabled
+            />
+            <OutlinedInput
+              placeholder="Tipo(tarjeta debito)"
+              sx={inputStyles}
+              disabled
+            />
+            <OutlinedInput
+              placeholder="Tipo(tarjeta credito)*"
+              sx={inputStyles}
+              disabled
+            />
+            <OutlinedInput placeholder="Monto* " sx={inputStyles} disabled />
+          </>
+        ) : (
+          <>
+            <OutlinedInput placeholder="Monto*" sx={inputStyles} disabled />
+            <OutlinedInput
+              placeholder="Rendimiento*"
+              sx={inputStyles}
+              disabled
+            />
+          </>
+        )}
         <Button
           type="submit"
           variant="submit"

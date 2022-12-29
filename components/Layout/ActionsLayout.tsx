@@ -103,6 +103,7 @@ export const ActionsLayout: FC<PropsWithChildren<Props>> = ({
           position: "relative",
           float: { xs: "none", md: "right" },
           mt: { xs: "90px", md: "0px" },
+          pb: { xs: 0, md: 12 },
         }}
       >
         <Box sx={{ px: 3 }}>
