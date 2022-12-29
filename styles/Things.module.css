@@ -108,3 +108,16 @@
   padding: 12px;
   font-size: 20px;
 }
+
+.infoMember {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  bottom: 6px;
+  right: 120px;
+  top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

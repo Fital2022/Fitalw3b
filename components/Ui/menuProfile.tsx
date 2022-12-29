@@ -6,10 +6,14 @@ import {
   Avatar,
   Typography,
   Button,
+  CardMedia,
 } from "@mui/material";
 import router from "next/router";
 import React from "react";
-
+import PersonIcon from "@mui/icons-material/Person";
+import SettingsIcon from "@mui/icons-material/Settings";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import styles from "../../styles/Things.module.css";
 
 export const MenuProfile = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -22,6 +26,14 @@ export const MenuProfile = () => {
   };
   return (
     <>
+      <CardMedia
+        image="images/profile.png"
+        sx={{
+          width: { xs: "45px", md: "55px" },
+          height: { xs: "45px", md: "55px" },
+        }}
+        onClick={handleClick}
+      />
       <Menu
         id="demo-positioned-menu"
         aria-labelledby="demo-positioned-button"
@@ -40,7 +52,7 @@ export const MenuProfile = () => {
         <Grid item xs={3}>
           <Card
             sx={{
-              height: 190,
+              height: 280,
               width: 290,
               boxShadow: "none",
             }}
@@ -61,50 +73,45 @@ export const MenuProfile = () => {
                     src="/img/test/avatar.png"
                     sx={{ width: 50, height: 50 }}
                   />
-                  <Typography sx={{ marginTop: 1 }}>
-                    Cambia tu imagen
-                  </Typography>
+                  <span className={styles.infoMember}>
+                    <CameraAltIcon fontSize="small" />
+                  </span>
+                  <Typography sx={{ marginTop: 1 }}>Juan</Typography>
+                  <Typography sx={{ marginTop: 0 }}>juan@gmail.com</Typography>
                 </Grid>
-
-                {/* <IconButton
-                      // className={styles.iconCamera}
-                      // onClick={() => openFilePicker()}
-                    >
-                      <PhotoCameraIcon
-                        sx={{ color: "gray", fontSize: "30px" }}
-                      />
-                    </IconButton> */}
-                <Grid item xs>
-                  {/* <Typography sx={{ marginTop: 3.5 }}>
-                        Cambia tu imagen
-                      </Typography> */}
-                </Grid>
+                <Grid item xs></Grid>
               </Grid>
-              <br />
-              <Grid
-                container
-                spacing={1}
-                alignItems="center"
-                justifyContent="center"
-                paddingTop={1}
-              >
-                <Grid item>
-                  <Button
-                    sx={{
-                      color: "gray",
-                      background: "white",
-                      borderColor: "gray",
-                      border: "1px solid #ced4da",
-                      textTransform: "none",
-                    }}
-                    onClick={() => {
-                      // dispatch(logout());
-                      router.push("/login");
-                    }}
-                  >
-                    Cerrar sesión
-                  </Button>
+              <hr />
+              <Grid container wrap="nowrap" spacing={2}>
+                <Grid
+                  item
+                  container
+                  spacing={1}
+                  alignItems="left"
+                  paddingTop={1}
+                >
+                  <PersonIcon
+                    sx={{ marginTop: "6px", marginLeft: "5px" }}
+                  ></PersonIcon>
+                  <Typography sx={{ marginTop: 1 }}>Editar perfil</Typography>
                 </Grid>
+                <Grid item xs></Grid>
+              </Grid>
+              <hr />
+              <Grid container wrap="nowrap" spacing={2}>
+                <Grid
+                  item
+                  container
+                  spacing={1}
+                  alignItems="left"
+                  paddingTop={1}
+                >
+                  <SettingsIcon
+                    sx={{ marginTop: "6px", marginLeft: "5px" }}
+                  ></SettingsIcon>
+                  <Typography sx={{ marginTop: 1 }}>Configuraciones</Typography>
+                </Grid>
+                <Grid item xs></Grid>
               </Grid>
               <hr />
               <Grid
@@ -124,7 +131,6 @@ export const MenuProfile = () => {
                       textTransform: "none",
                     }}
                     onClick={() => {
-                      // dispatch(logout());
                       router.push("/login");
                     }}
                   >
@@ -138,7 +144,4 @@ export const MenuProfile = () => {
       </Menu>
     </>
   );
-}
-
-
-
+};
