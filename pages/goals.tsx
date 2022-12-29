@@ -35,7 +35,7 @@ const GoalsPage: NextPage = () => {
           <Typography
             sx={{
               textAlign: "center",
-              mt: {xs: 5, sm: 10},
+              mt: { xs: 5, sm: 10 },
               fontSize: { xs: "50px", sm: "80px" },
               fontWeight: 600,
             }}
@@ -94,8 +94,8 @@ const GoalsPage: NextPage = () => {
           // bgcolor: "grey",
         }}
       >
-        {RENDIMIENTOS.map((rend) => (
-          <GoalCard rendimiento={rend} />
+        {RENDIMIENTOS.map((rend, index) => (
+          <GoalCard key={rend.rendimiento + index} rendimiento={rend} />
         ))}
       </Box>
     </>

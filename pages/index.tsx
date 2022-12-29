@@ -89,7 +89,7 @@ const Home = () => {
               Tipo de imperio
             </Typography>
             {ESCROW_TYPES.map((type, index) => (
-              <Box key="type" display="flex" justifyContent="space-between">
+              <Box key={type} display="flex" justifyContent="space-between">
                 <Typography sx={{ color: "#7B7B7B", fontSize: "16px" }}>
                   {type}
                 </Typography>
@@ -137,7 +137,7 @@ const Home = () => {
           <>
             <Typography sx={{ fontSize: "24px", mb: 3 }}>Proveedor</Typography>
             {ESCROW_PROVEES.map((type, index) => (
-              <Box key="type" display="flex" justifyContent="space-between">
+              <Box key={type} display="flex" justifyContent="space-between">
                 <Typography sx={{ color: "#7B7B7B", fontSize: "16px" }}>
                   {type}
                 </Typography>
@@ -265,6 +265,7 @@ const Home = () => {
             empires.length > 0 &&
             empires.map((emp) => (
               <PurpleTooltip
+                key={emp.id}
                 title={emp.name}
                 placement="top"
                 arrow
