@@ -14,7 +14,8 @@ import {
   IEmpire,
 } from "../interfaces/empireInterfaces";
 import { NextPage } from "next";
-import { InmobiliaryForm } from "../components/newForms";
+import { BankAccountForm, InmobiliaryForm } from "../components/newForms";
+import { CashAccountDetails } from "../components/List";
 
 const right: IRight[] = [
   {
@@ -266,7 +267,16 @@ const Patrimony: NextPage = () => {
     <>
       <Box sx={{ width: "100%", height: "100%" }}>
         {/* <StepForm premium={true} iempire={empire} /> */}
-        <InmobiliaryForm inmobiliaryType={"casa"} img="" />
+        {/* <InmobiliaryForm inmobiliaryType={"casa"} img="" /> */}
+        {/* <BankAccountForm accountName={"Wallet 1"} img={""} isWallet />
+        <CashAccountDetails type={"wallets"} /> */}
+        <BankAccountForm
+          accountName={"Cuenta Bancaria"}
+          img={""}
+          isWallet={false}
+        />
+        <CashAccountDetails type={"cuentas"} />
+
         {/* <div onDrop={onDropEntry} onDragOver={allowDrop}>
           {draggmode ? (
             <Grid
@@ -294,7 +304,7 @@ const Patrimony: NextPage = () => {
           ""
         )} */}
       </Box>
-      <BottomMenu data={MENU_ACTIONS} />
+      {/* <BottomMenu data={MENU_ACTIONS} /> */}
     </>
   );
 };

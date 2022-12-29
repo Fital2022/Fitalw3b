@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IEmpire } from "../../interfaces/empireInterfaces";
 import { RootState, selectEscrow } from "../../store";
 import { useRouter } from "next/router";
-import { MenuProfile } from './MenuProfile';
+import { MenuProfile } from "./MenuProfile";
 
 export const TopBar = () => {
   const { name, type } =
@@ -62,7 +62,7 @@ export const TopBar = () => {
         </Typography>
       </Box>
       <Box flex={1} />
-      <MenuProfile/>
+      <MenuProfile />
       {/* <CardMedia
         image="images/profile.png"
         sx={{
