@@ -86,7 +86,7 @@
   align-items: left;
 }
 
-.container {
+/* .container {
   margin: 0 auto;
   padding: 0 10px;
   max-width: 800px;
@@ -95,24 +95,24 @@
   white-space: nowrap;
   margin-top: -80px;
   width: 390px;
-}
+} */
 
 .container::-webkit-scrollbar {
   display: none;
 }
 
-.container > a {
+/* .container > a {
   display: inline-block;
   text-decoration: none;
   text-align: center;
   padding: 12px;
   font-size: 20px;
-}
+} */
 
 .infoMember {
   position: absolute;
-  width: 14px;
-  height: 14px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   bottom: 6px;
   right: 120px;

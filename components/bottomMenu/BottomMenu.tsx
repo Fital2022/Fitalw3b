@@ -14,29 +14,19 @@ export const BottomMenu: FC<Props> = ({ data }) => {
   return (
     <>
       <Box
-        sx={{
-          display: { lg: "none", md: "none" },
-        }}
-      >
-        <div className={styles["container"]}>
-          <a>Dinero</a>
-          <a>Mobiliario</a>
-          <a>Inmobiliario</a>
-          <a>Derechos</a>
-        </div>
-      </Box>
-      <Box
+        className={styles["container"]}
         sx={{
           position: "fixed",
-          bottom: 20,
+          bottom: { xs: null, sm: null, md: 20 },
+          marginTop: { xs: -10, sm: -10 },
           left: "50%",
           transform: "translate(-45%)",
           bgcolor: "rgba(255,255,255,0.3)",
-          // bgcolor: "red",
           borderRadius: "10px",
           backdropFilter: "blur(2px)",
-          // display: "flex",
-          display: { xs: "none", md: "fixed" },
+          display: "flex",
+          overflowX: { xs: "auto", sm: "hidden", md: "hidden" },
+          overflowY: { xs: "auto", sm: "hidden", md: "hidden" },
         }}
       >
         {data.map((element) => {
@@ -53,7 +43,6 @@ export const BottomMenu: FC<Props> = ({ data }) => {
                     top: "120px",
                     left: "-25px",
                     zIndex: -10,
-                    // backgroundColor: "grey",
                     height: "110px",
                     visibility: "hidden",
                     opacity: 0,
@@ -78,9 +67,9 @@ export const BottomMenu: FC<Props> = ({ data }) => {
               <Button
                 key={element.link.id}
                 sx={{
-                  padding: "15px",
-                  width: { xs: "150px", md: "180px" },
-                  color: "black",
+                  padding: { xs: null, sm: "15px", md: "15px" },
+                  width: { xs: "100px", sm: "180px", md: "180px" },
+                  color: { xs: "gray", sm: "gray", md: "black" },
                   bgcolor: "transparent",
                 }}
                 onClick={() =>

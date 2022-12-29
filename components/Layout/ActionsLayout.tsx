@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { IEmpire } from "../../interfaces/empireInterfaces";
 import { RootState } from "../../store";
+import { MenuProfile } from '../Ui/MenuProfile';
 import {
   HouseOutlined,
   FileOpenOutlined,
@@ -134,7 +135,7 @@ export const ActionsLayout: FC<PropsWithChildren<Props>> = ({
                   : ""}
               </Typography>
             </Box>
-            <Box sx={{ display: { xs: "none", md: "block" } }}>
+            {/* <Box sx={{ display: { xs: "none", md: "block" } }}>
               {name ? (
                 <Typography
                   variant="h5"
@@ -157,6 +158,12 @@ export const ActionsLayout: FC<PropsWithChildren<Props>> = ({
                   {type}
                 </Typography>
               ) : null}
+            </Box> */}
+            
+            <Box
+              sx={{display: {xs:"none", sm:"none", md: "flex"}}}
+            >
+              <MenuProfile/>
             </Box>
             <Box
               sx={{ display: { xs: "flex", md: "none" }, alignItems: "center" }}
