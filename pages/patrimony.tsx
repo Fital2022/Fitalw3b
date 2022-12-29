@@ -1,11 +1,11 @@
-import { DragEvent } from "react";
+import { DragEvent, useEffect } from "react";
 import { ActionsLayout } from "../components/Layout";
 import { Box, Grid, Typography } from "@mui/material";
 import { IBottomMenuData } from "../interfaces";
 import { BottomMenu } from "../components/bottomMenu/BottomMenu";
 import { StepForm, StepForm2 } from "../components/forms";
 import { useDispatch, useSelector } from "react-redux";
-import { setShowForm, AppDispatch, RootState, setShowForm2 } from "../store";
+import { setShowForm, AppDispatch, RootState, setShowForm2, setSuboptions } from "../store";
 import {
   IRight,
   IRightBeneficiary,
@@ -239,6 +239,18 @@ let tipo: IRight["type"] = "casa";
 let img = "";
 
 const Patrimony: NextPage = () => {
+
+  let dataform = useSelector((state: RootState) => state.form.formvalues2);
+
+  useEffect(() => {
+    console.log("Aqui estan los valores");
+    tipo = dataform.name as IRight["type"]
+    img = dataform.img
+    if (tipo.length > 0) {
+      dispatch(setShowForm2(true))
+    }
+  }, [dataform]);
+
   const onDropEntry = (event: DragEvent<HTMLDivElement>) => {
     console.log(event);
     tipo = event.dataTransfer.getData("option") as IRight["type"];
@@ -265,19 +277,6 @@ const Patrimony: NextPage = () => {
     <>
       <Box alignItems={"center"} sx={{ marginTop: 10 }}>
         {/* <StepForm premium={true} iempire={empire} /> */}
-        <div onDrop={onDropEntry} onDragOver={allowDrop}>
-          {draggmode ? (
-            <Grid
-              container
-              justifyContent="center"
-              sx={{ bgcolor: "#D3D3D3", height: "60vh", transition: "all .3s" }}
-            >
-              <Typography sx={{ align: "center" }}>Suelta aqui</Typography>
-            </Grid>
-          ) : (
-            ""
-          )}
-        </div>
         {formmode ? (
           <Grid item sx={{ transition: "all .1s" }}>
             {" "}

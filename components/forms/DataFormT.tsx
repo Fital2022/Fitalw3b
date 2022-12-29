@@ -28,7 +28,7 @@ label.Mui-focused{
     border: 1px solid #707070;
 }
 .MuiOutlinedInput-root {
-    width: 446px;
+    width: 465px;
     height: 35px;
     border-radius: 5px;
     border: 1px solid #707070;
@@ -56,31 +56,65 @@ label.Mui-focused{
 
 const StyledTextField2 = styled(TextField)`
 label.Mui-focused{
-    width: 273px;
+  width: 221px;
+    height: 36px;
+    border-radius: 5px;
+    border: 1px solid #707070;
+}
+.MuiOutlinedInput-root {
+  width: 221px;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid #707070;
+    fieldset {
+        width: 202px;
+        height: 37px;
+        border-radius: 5px;
+        border: 1px solid #707070;
+    }
+  }
+  &:hover fieldset {
+    width: 202px;
+    height: 36px;
+    border-radius: 5px;
+    border: 1px solid #707070;
+  }
+  &.Mui-focused fieldset {
+    width: 221px;
+    height: 35px;
+    border-radius: 5px;
+    border: 1px solid #707070;
+  }
+}
+` as typeof TextField;
+
+const StyledTextField3 = styled(TextField)`
+    label.Mui-focused{
+    width: 300px;
     height: 35px;
     border-radius: 5px;
     border: 1px solid #707070;
 }
 .MuiOutlinedInput-root {
-    width: 273px;
+  width: 320px;
     height: 35px;
     border-radius: 5px;
     border: 1px solid #707070;
     fieldset {
-        width: 273px;
+      width: 300px;
         height: 38px;
         border-radius: 5px;
         border: 1px solid #707070;
     }
   }
   &:hover fieldset {
-    width: 273px;
+    width: 300px;
     height: 38px;
     border-radius: 5px;
     border: 1px solid #707070;
   }
   &.Mui-focused fieldset {
-    width: 273px;
+    width: 300px;
     height: 35px;
     border-radius: 5px;
     border: 1px solid #707070;
@@ -89,24 +123,35 @@ label.Mui-focused{
 ` as typeof TextField;
 
 interface Props {
-//   premium: boolean;
-//   iempire: IEmpire;
+  //   premium: boolean;
+  //   iempire: IEmpire;
   title: string;
   img: string;
   status: string;
   setStatus: React.Dispatch<React.SetStateAction<string>>;
-  open:boolean;
-  setOpen:React.Dispatch<React.SetStateAction<boolean>>;
+  open: boolean;
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
   sucesion: boolean;
   setSucesion: React.Dispatch<React.SetStateAction<boolean>>;
   submit: boolean;
   setSubmit: React.Dispatch<React.SetStateAction<boolean>>;
-  setNameb: React.Dispatch<React.SetStateAction<string>>
+  setNameb: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const DataFormT: FC<Props> = ({ title, img, setStatus,setOpen, sucesion, setSucesion,submit,setSubmit, setNameb }) => {
-//   const [sucesion, setSucesion] = useState(true);
-  const [showBeneficiaryModal, setShowBeneficiaryModal] = useState<boolean>(false);
+export const DataFormT: FC<Props> = ({
+  title,
+  img,
+  setStatus,
+  setOpen,
+  sucesion,
+  setSucesion,
+  submit,
+  setSubmit,
+  setNameb,
+}) => {
+  //   const [sucesion, setSucesion] = useState(true);
+  const [showBeneficiaryModal, setShowBeneficiaryModal] =
+    useState<boolean>(false);
   const [formValue, setformValue] = useState({
     name: "",
     birth: "",
@@ -137,7 +182,7 @@ export const DataFormT: FC<Props> = ({ title, img, setStatus,setOpen, sucesion, 
   const handleSubmitF = async (event: any) => {
     event.preventDefault();
     if (title === "Beneficiario") {
-        setNameb(event.target.name.value)
+      setNameb(event.target.name.value);
       dispatch(getRights());
       setSubmit(true);
     } else {
@@ -370,7 +415,7 @@ export const DataFormT: FC<Props> = ({ title, img, setStatus,setOpen, sucesion, 
                       width: "130px",
                       height: "37px",
                     }}
-                    onClick={() => setSucesion(false) }
+                    onClick={() => setSucesion(false)}
                   >
                     Sucesion
                   </Button>
@@ -384,7 +429,7 @@ export const DataFormT: FC<Props> = ({ title, img, setStatus,setOpen, sucesion, 
           <Grid
             item
             container
-            xs={5}
+            xs={6}
             justifyContent="center"
             direction="column"
           >
@@ -393,7 +438,7 @@ export const DataFormT: FC<Props> = ({ title, img, setStatus,setOpen, sucesion, 
                 <Typography variant="h4">SUCESIÓN</Typography>
               </div>
               <form onSubmit={handleSubmitF}>
-                <StyledTextField
+                <StyledTextField3
                   required
                   onChange={onFormFieldChanges}
                   placeholder="Nombre Completo"
@@ -404,7 +449,7 @@ export const DataFormT: FC<Props> = ({ title, img, setStatus,setOpen, sucesion, 
                 <br />
                 <br />
 
-                <StyledTextField
+                <StyledTextField3
                   required
                   onChange={onFormFieldChanges}
                   type={"date"}
@@ -439,7 +484,7 @@ export const DataFormT: FC<Props> = ({ title, img, setStatus,setOpen, sucesion, 
                 </FormControl>
                 <br />
                 <br />
-                <StyledTextField
+                <StyledTextField3
                   required
                   placeholder="Curp"
                   name="curp"
@@ -449,7 +494,7 @@ export const DataFormT: FC<Props> = ({ title, img, setStatus,setOpen, sucesion, 
                 />
                 <br />
                 <br />
-                <StyledTextField
+                <StyledTextField3
                   required
                   placeholder="RFC"
                   name="rfc"
@@ -459,7 +504,7 @@ export const DataFormT: FC<Props> = ({ title, img, setStatus,setOpen, sucesion, 
                 />
                 <br />
                 <br />
-                <StyledTextField
+                <StyledTextField3
                   required
                   placeholder="Domicilio"
                   name="direction"
@@ -469,7 +514,7 @@ export const DataFormT: FC<Props> = ({ title, img, setStatus,setOpen, sucesion, 
                 />
                 <br />
                 <br />
-                <StyledTextField
+                <StyledTextField3
                   required
                   placeholder="Estado civil"
                   name="marital"
@@ -505,7 +550,7 @@ export const DataFormT: FC<Props> = ({ title, img, setStatus,setOpen, sucesion, 
                         height: "37px",
                       }}
                       className={styles["button-form-select"]}
-                      onClick={() => setSucesion(true) }
+                      onClick={() => setSucesion(true)}
                     >
                       Atras
                     </Button>
@@ -517,49 +562,49 @@ export const DataFormT: FC<Props> = ({ title, img, setStatus,setOpen, sucesion, 
           <Grid
             item
             container
-            xs={5}
+            xs={4}
             justifyContent="center"
             direction="column"
           >
             <Grid item>
               <div className={styles["form-title"]}>
-                <Typography variant="subtitle1">Condiciones</Typography>
+                <Typography sx={{mr: "50px"}} variant="subtitle1">Condiciones</Typography>
               </div>
               <br />
-              <Typography>Educación</Typography>
+              <Typography sx={{color: "black"}}>Educación</Typography>
               <hr className={styles["form-line"]} />
               <Grid container justifyContent="center" item direction="row">
-                <Typography>Licenciatura</Typography> &nbsp;&nbsp;
+                <Typography sx={{color: "black"}}>Licenciatura</Typography> &nbsp;&nbsp;
                 <CheckCircle className={styles["icon-check"]} />
               </Grid>
               <Grid container justifyContent="center" item direction="row">
-                <Typography>Maestria</Typography> &nbsp;&nbsp;
+                <Typography sx={{color: "black"}}>Maestria</Typography> &nbsp;&nbsp;
                 <CheckCircle className={styles["icon-check"]} />
               </Grid>
               <br />
-              <Typography>Familia</Typography>
+              <Typography sx={{color: "black"}}>Familia</Typography>
               <hr className={styles["form-line"]} />
               <Grid container justifyContent="center" item direction="row">
-                <Typography>Prueba de paternidad</Typography> &nbsp;&nbsp;
+                <Typography sx={{color: "black"}}>Prueba de paternidad</Typography> &nbsp;&nbsp;
                 <CheckCircle className={styles["icon-check"]} />
               </Grid>
               <Grid container justifyContent="center" item direction="row">
-                <Typography>Casa</Typography> &nbsp;&nbsp;
+                <Typography sx={{color: "black"}}>Casa</Typography> &nbsp;&nbsp;
                 <CheckCircle className={styles["icon-check"]} />
               </Grid>
               <Grid container justifyContent="center" item direction="row">
-                <Typography>Tener un hijo</Typography> &nbsp;&nbsp;
+                <Typography sx={{color: "black"}}>Tener un hijo</Typography> &nbsp;&nbsp;
                 <CheckCircle className={styles["icon-check"]} />
               </Grid>
               <br />
-              <Typography>Patrimonio</Typography>
+              <Typography sx={{color: "black"}}>Patrimonio</Typography>
               <hr className={styles["form-line"]} />
               <Grid container justifyContent="center" item direction="row">
-                <Typography>Tener $1,000,000,000</Typography> &nbsp;&nbsp;
+                <Typography sx={{color: "black"}}>Tener $1,000,000,000</Typography> &nbsp;&nbsp;
                 <CheckCircle className={styles["icon-check"]} />
               </Grid>
               <br />
-              <Typography>Otra</Typography>
+              <Typography sx={{color: "black"}}  >Otra</Typography>
               <hr className={styles["form-line"]} />
               <Grid container justifyContent="center" item direction="row">
                 <StyledTextField2 />
@@ -571,4 +616,3 @@ export const DataFormT: FC<Props> = ({ title, img, setStatus,setOpen, sucesion, 
     </>
   );
 };
-

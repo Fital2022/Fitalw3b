@@ -129,16 +129,8 @@ const DataTable: FC<Props> = ({ rights, beneficiarys }) => {
     <>
     {beneficiarys.length > 0 && rights.length > 0 ? 
     <Box>
-    {/* <Typography
-        variant="h2"
-        component="h1"
-        sx={{ textAlign: "center", mt: 5, color: "black" }}
-      >
-        Testamento Digital
-      </Typography> */}
-
     <Box display="flex" justifyContent="center"  sx={{width: '600px', height: '400px', overflowX: 'auto'}}>
-      <TableContainer component={Paper} className={styles['table-style']} sx={{overflow: 'scroll'}} >
+      <TableContainer  className={styles['table-style']} sx={{overflow: 'scroll'}} >
         <Table aria-label="simple table" stickyHeader className={styles['table-style']}>
           <TableHead>
             <TableRow>

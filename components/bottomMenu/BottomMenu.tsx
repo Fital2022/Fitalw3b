@@ -1,14 +1,25 @@
 import { Box, Button, Grid } from "@mui/material";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { IBottomMenuData } from "../../interfaces";
 import { OneLink } from "./SubLinks";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState, setAutoSubOptions, setSuboptions } from "../../store";
 
 interface Props {
   data: IBottomMenuData[];
 }
 
 export const BottomMenu: FC<Props> = ({ data }) => {
+  const dispatch = useDispatch<AppDispatch>();
+  let show = useSelector((state: RootState) => state.form.suboptions);
   const [currentId, setCurrentId] = useState<number | undefined>();
+
+  useEffect(() => {
+    if (show == false) {
+      setCurrentId(undefined)
+    }
+  }, [show])
+  
 
   return (
     <Box
@@ -28,27 +39,31 @@ export const BottomMenu: FC<Props> = ({ data }) => {
         return (
           <Box
             key={element.link.id}
-            sx={{ position: "relative", bgcolor: "transparent" }}
+            sx={{alignItems: "center",  bgcolor: "transparent" }}
           >
             <Box
               sx={[
                 {
+                  alignItems: "center",
                   display: "flex",
                   position: "absolute",
                   top: "120px",
-                  left: "-25px",
+                  right: "-80px",
                   zIndex: -10,
                   // backgroundColor: "grey",
-                  height: "110px",
+                  height: "270px",
                   visibility: "hidden",
                   opacity: 0,
                   transition: "all 0.5s ease",
+                  translate: "-3vw", 
+                  // transform: "translateX()"
                 },
-                element.link.id === currentId && {
+                element.link.id === currentId && show   && {
                   visibility: "visible",
-                  top: "-120px",
+                  top: "-60vh",
                   zIndex: 1,
                   opacity: 1,
+                  
                 },
               ]}
             >
@@ -68,10 +83,11 @@ export const BottomMenu: FC<Props> = ({ data }) => {
                 color: "black",
                 bgcolor: "transparent",
               }}
-              onClick={() =>
+              onClick={() => {
                 setCurrentId((prevId) =>
-                  prevId === element.link.id ? undefined : element.link.id
-                )
+                  prevId === element.link.id ? undefined && dispatch(setSuboptions(false)) : element.link.id);
+                  dispatch(setSuboptions(true))
+              }
               }
             >
               {element.link.name}

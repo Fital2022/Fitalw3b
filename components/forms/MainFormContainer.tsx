@@ -49,8 +49,7 @@ export const MainFormContainer: FC<Props> = ({
       </Box>
       <Box
         sx={{
-          borderRadius: "15px",
-          border: "1px solid #707070",
+         
           p: 3,
           bgcolor: "#fff",
           position: "absolute",

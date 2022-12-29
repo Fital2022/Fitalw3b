@@ -8,6 +8,15 @@ export const addformSlice = createSlice({
     showform2: false,
     currentid: 6,
     userid: 5,
+    suboptions: false,
+    formvalues: {
+      name: "",
+      img: ""
+    },
+    formvalues2: {
+      name: "",
+      img: ""
+    }
   },
   reducers: {
 
@@ -26,11 +35,28 @@ export const addformSlice = createSlice({
     },
     adduser: (state) =>{
         state.userid = state.userid + 1;
+    },
+    setSuboptions: (state, {payload}: PayloadAction<boolean>) => {
+      state.suboptions = payload
+      console.log("El valor es: " + state.suboptions)
+    },
+    setAutoSubOptions: (state) => {
+      state.suboptions =!state.suboptions
+      console.log("El valor es: " + state.suboptions)
+    },
 
-    }
+    setFormValues: (state, {payload: {name, img}}: PayloadAction<{name: string, img: string}> ) => {
+      state.formvalues.name = name;
+      state.formvalues.img = img;
+    },
+    setFormValues2: (state, {payload: {name, img}}: PayloadAction<{name: string, img: string}> ) => {
+      state.formvalues2.name = name;
+      state.formvalues2.img = img;
+    },
 
   },
 });
+
 
 export const {
  
@@ -39,4 +65,8 @@ export const {
   setShowForm2,
   addid,
   adduser,
+  setSuboptions,
+  setAutoSubOptions,
+  setFormValues,
+  setFormValues2,
 } = addformSlice.actions;

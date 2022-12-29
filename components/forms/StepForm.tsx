@@ -1,9 +1,4 @@
-import {
-  CameraAlt,
-  CheckCircle,
-  CloseOutlined,
-  Star,
-} from "@mui/icons-material";
+import { CloseOutlined } from "@mui/icons-material";
 import {
   Avatar,
   Badge,
@@ -24,8 +19,6 @@ import {
 } from "@mui/material";
 import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import styles from "../../styles/Things.module.css";
-import { TextField } from "@mui/material";
-import DataTable from "../tables/DataTable";
 import {
   IBeneficiary,
   IEmpire,
@@ -39,12 +32,15 @@ import {
   AppDispatch,
   getRights,
   RootState,
+  setFormValues,
   setShowForm,
 } from "../../store";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import { useRouter } from "next/router";
 import { DataFormT } from "./DataFormT";
-import { ResumeFormT } from './ResumeFormT';
+import { ResumeFormT } from "./ResumeFormT";
+import { PremiumFormT } from "./PremiumFormT";
+import { MainFormContainer } from "./MainFormContainer";
 
 // confetti
 function randomInRange(min: any, max: any) {
@@ -77,74 +73,6 @@ const style = {
   p: 4,
   borderRadius: "20px",
 };
-
-const StyledTextField = styled(TextField)`
-label.Mui-focused{
-    width: 446px;
-    height: 35px;
-    border-radius: 5px;
-    border: 1px solid #707070;
-}
-.MuiOutlinedInput-root {
-    width: 446px;
-    height: 35px;
-    border-radius: 5px;
-    border: 1px solid #707070;
-    fieldset {
-        width: 446px;
-        height: 38px;
-        border-radius: 5px;
-        border: 1px solid #707070;
-    }
-  }
-  &:hover fieldset {
-    width: 446px;
-    height: 38px;
-    border-radius: 5px;
-    border: 1px solid #707070;
-  }
-  &.Mui-focused fieldset {
-    width: 446px;
-    height: 35px;
-    border-radius: 5px;
-    border: 1px solid #707070;
-  }
-}
-` as typeof TextField;
-
-const StyledTextField2 = styled(TextField)`
-label.Mui-focused{
-    width: 273px;
-    height: 35px;
-    border-radius: 5px;
-    border: 1px solid #707070;
-}
-.MuiOutlinedInput-root {
-    width: 273px;
-    height: 35px;
-    border-radius: 5px;
-    border: 1px solid #707070;
-    fieldset {
-        width: 273px;
-        height: 38px;
-        border-radius: 5px;
-        border: 1px solid #707070;
-    }
-  }
-  &:hover fieldset {
-    width: 273px;
-    height: 38px;
-    border-radius: 5px;
-    border: 1px solid #707070;
-  }
-  &.Mui-focused fieldset {
-    width: 273px;
-    height: 35px;
-    border-radius: 5px;
-    border: 1px solid #707070;
-  }
-}
-` as typeof TextField;
 
 interface Props {
   premium: boolean;
@@ -308,7 +236,7 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
 
   const [dataoption, setdataoption] = useState(true);
 
-  const [formoption, setFormoption] = useState("data");
+  const [formoption, setFormoption] = useState("Datos");
 
   const changecontent = () => {
     if (sucesion) {
@@ -324,6 +252,11 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
 
   const closeform = () => {
     dispatch(setShowForm(false));
+    let data = {
+      name: "",
+      img: ""
+    }
+    dispatch(setFormValues(data))
   };
 
   const closemodalform = () => {
@@ -347,6 +280,8 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
     (state: RootState) => state.empire.selectedEmpire?.beneficiary
   );
 
+  let formmode = useSelector((state: RootState) => state.form.showform);
+
   useEffect(() => {
     if (formoption !== "data" && formoption !== "resume")
       setShowPremiumModal(true);
@@ -360,170 +295,26 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
       alignItems="flex-end"
       position="relative"
     >
-      <IconButton
-        onClick={closeform}
-        sx={{
-          position: "absolute",
-          top: "0px",
-          left: "500px",
-          border: "1px solid #888",
-        }}
-      >
-        <CloseOutlined />
-      </IconButton>
-      <Grid
-        item
-        container
-        xs={8}
-        justifyContent="flex-end"
-        sx={{ marginRight: 80 }}
-      >
-        <Button
-          onClick={() => setFormoption("data")}
-          sx={
-            formoption === "data"
-              ? {
-                  bgcolor: "#31A354",
-                  color: "white",
-                  borderRadius: "10px",
-                  width: "130px",
-                  height: "37px",
-                  ":hover": {
-                    bgcolor: "#31A354",
-                    color: "white",
-                    borderRadius: "10px",
-                    width: "130px",
-                    height: "37px",
-                  },
-                }
-              : {
-                  bgcolor: "white",
-                  border: "0.5px solid black",
-                  color: "black",
-                  borderRadius: "10px",
-                  width: "130px",
-                  height: "37px",
-                  ":hover": {
-                    bgcolor: "#31A354",
-                    color: "white",
-                    borderRadius: "10px",
-                    width: "130px",
-                    height: "37px",
-                  },
-                }
-          }
-        >
-          Datos
-        </Button>
-        &nbsp;&nbsp;&nbsp;
-        <Button
-          onClick={() => setFormoption("resume")}
-          sx={
-            formoption === "resume"
-              ? {
-                  bgcolor: "#31A354",
-                  color: "white",
-                  borderRadius: "10px",
-                  width: "130px",
-                  height: "37px",
-                  ":hover": {
-                    bgcolor: "#31A354",
-                    color: "white",
-                    borderRadius: "10px",
-                    width: "130px",
-                    height: "37px",
-                  },
-                }
-              : {
-                  bgcolor: "white",
-                  border: "0.5px solid black",
-                  color: "black",
-                  borderRadius: "10px",
-                  width: "130px",
-                  height: "37px",
-                  ":hover": {
-                    bgcolor: "#31A354",
-                    color: "white",
-                    borderRadius: "10px",
-                    width: "130px",
-                    height: "37px",
-                  },
-                }
-          }
-        >
-          Resumen
-        </Button>
-        &nbsp;&nbsp;&nbsp;
-        <Button
-          onClick={() => setFormoption("premium")}
-          sx={
-            formoption === "premium"
-              ? {
-                  bgcolor: "#31A354",
-                  color: "white",
-                  borderRadius: "10px",
-                  width: "130px",
-                  height: "37px",
-                  ":hover": {
-                    bgcolor: "#31A354",
-                    color: "white",
-                    borderRadius: "10px",
-                    width: "130px",
-                    height: "37px",
-                  },
-                }
-              : {
-                  bgcolor: "white",
-                  border: "0.5px solid black",
-                  color: "black",
-                  borderRadius: "10px",
-                  width: "130px",
-                  height: "37px",
-                  ":hover": {
-                    bgcolor: "#31A354",
-                    color: "white",
-                    borderRadius: "10px",
-                    width: "130px",
-                    height: "37px",
-                  },
-                }
-          }
-          startIcon={<Star />}
-        >
-          Premium
-        </Button>
-      </Grid>
       <Grid item xs={5}>
-        <Card
-          className={styles["form"]}
-          sx={
-            sucesion
-              ? {
-                  width: "717px",
-                  height: "540px",
-                  borderRadius: "40px",
-                  border: "0.5px solid black",
-                }
-              : {
-                  width: "1034px",
-                  height: "542px",
-                  borderRadius: "40px",
-                  border: "0.5px solid black",
-                }
-          }
+        <Grid
+          item
+          container
+          xs={12}
+          justifyContent="flex-end"
+          alignItems={"center"}
+          sx={{ marginLeft: "3px", position: "absoluta" }}
+        ></Grid>
+        <MainFormContainer
+          buttons={["Datos", "Resumen", "Premium"]}
+          option={formoption}
+          setOption={setFormoption}
+          show={formmode}
+          setShow={closeform}
         >
-          <Grid
-            item
-            container
-            xs={12}
-            justifyContent="flex-end"
-            alignItems={"center"}
-            sx={{ marginLeft: "3px", position: "absoluta" }}
-          ></Grid>
-          <CardContent>
-            <Grid container>
-              {(() => {
-                if (formoption === "data") {
+          <Grid container>
+            {(() => {
+              switch (formoption) {
+                case "Datos":
                   return (
                     <DataFormT
                       title={title}
@@ -539,17 +330,21 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
                       setNameb={setNameb}
                     />
                   );
-                } else if (formoption === "resume") {
+                case "Resumen":
                   return (
                     <>
-                      {sucesion != false ? setSucesion(false) : ""}
-                      <ResumeFormT title={title} img={img} beneficiary={beneficiary} rights={rights} />
+                      
+                      <ResumeFormT
+                        title={title}
+                        img={img}
+                        beneficiary={beneficiary}
+                        rights={rights}
+                      />
                     </>
                   );
-                } else {
+                case "Premium":
                   return (
                     <>
-                      {sucesion != true ? setSucesion(true) : ""}
                       <Modal
                         open={showPremiumModal}
                         onClose={() => setShowPremiumModal(false)}
@@ -609,135 +404,16 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
                           </Box>
                         </Box>
                       </Modal>
-                      <Grid item xs={2}>
-                        <Badge
-                          anchorOrigin={{
-                            vertical: "bottom",
-                            horizontal: "right",
-                          }}
-                          badgeContent={<CameraAlt />}
-                        >
-                          <Avatar
-                            alt="service1"
-                            src={img}
-                            sx={{ width: "70px", height: "70px" }}
-                          />
-                        </Badge>
-                        <br />
-                        <br />
-                        <Typography>{title}</Typography>
-                      </Grid>
-                      <Grid
-                        item
-                        container
-                        xs={10}
-                        justifyContent="center"
-                        direction="column"
-                      >
-                        <div className={styles["form-title"]}>
-                          <Typography variant="h4">
-                            Sube tus documentos
-                          </Typography>
-                        </div>
-                        <br />
-                        <br />
-                        <br />
-                        <FormControl>
-                          <FormLabel>Curp</FormLabel>
-                          <StyledTextField
-                            required
-                            type="file"
-                            placeholder="Curp"
-                            disabled={!premium}
-                          />
-                        </FormControl>
-
-                        <FormControl>
-                          <FormLabel>RFC</FormLabel>
-                          <StyledTextField
-                            required
-                            type="file"
-                            placeholder="RFC"
-                            disabled={!premium}
-                          />
-                        </FormControl>
-                        <FormLabel>Comprobante de domicilio</FormLabel>
-                        <StyledTextField
-                          required
-                          type="file"
-                          placeholder="Comprobante"
-                          disabled={!premium}
-                        />
-
-                        <FormControl component="fieldset">
-                          <FormLabel component="legend">Estado Civil</FormLabel>
-                          <RadioGroup
-                            row
-                            aria-label="Genre"
-                            defaultValue="null"
-                          >
-                            <FormControlLabel
-                              value="Casado"
-                              control={<Radio color="primary" />}
-                              label="Casado"
-                              disabled={!premium}
-                            />
-                            <FormControlLabel
-                              value="Soltero"
-                              control={<Radio color="primary" />}
-                              label="Soltero"
-                              disabled={!premium}
-                            />
-                            <FormControlLabel
-                              value="Divorciado"
-                              control={<Radio color="primary" />}
-                              label="Divorciado"
-                              disabled={!premium}
-                            />
-                            <FormControlLabel
-                              value="Viudo"
-                              control={<Radio color="primary" />}
-                              label="Viudo"
-                              disabled={!premium}
-                            />
-                          </RadioGroup>
-                        </FormControl>
-                        <StyledTextField
-                          required
-                          type="file"
-                          placeholder="Curp"
-                          disabled={!premium}
-                        />
-                        <br />
-                        <br />
-                        <Grid
-                          container
-                          direction="row"
-                          justifyContent="flex-end"
-                        >
-                          <Button
-                            sx={{
-                              marginRight: "80px",
-                              bgcolor: "#31A354",
-                              color: "white",
-                              borderRadius: "10px",
-                              width: "130px",
-                              height: "37px",
-                            }}
-                            className={styles["button-form-select"]}
-                            onClick={closeform}
-                          >
-                            Finalizar
-                          </Button>
-                        </Grid>
-                      </Grid>
+                      <PremiumFormT img={img} premium={premium} title={title} />
                     </>
                   );
-                }
-              })()}
-            </Grid>
-          </CardContent>
-        </Card>
+
+                default:
+                  break;
+              }
+            })()}
+          </Grid>
+        </MainFormContainer>
       </Grid>
       <form onSubmit={handleSubmitF}>
         {status === "success" ? (

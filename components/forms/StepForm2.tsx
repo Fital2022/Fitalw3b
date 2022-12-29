@@ -40,8 +40,11 @@ import {
   addRight,
   AppDispatch,
   RootState,
+  setFormValues,
+  setFormValues2,
   setShowForm,
   setShowForm2,
+  setSuboptions,
 } from "../../store";
 import { useFilePicker } from "use-file-picker";
 import { useRouter } from "next/router";
@@ -101,6 +104,11 @@ export const StepForm2: FC<Props> = ({ premium, iempire, title, img }) => {
   const dispatch = useDispatch<AppDispatch>();
   const closeform = () => {
     dispatch(setShowForm2(false));
+    let data = {
+      name: "",
+      img: ""
+    }
+    dispatch(setFormValues2(data))
   };
   let formmode = useSelector((state: RootState) => state.form.showform2);
 
