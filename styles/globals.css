@@ -1,4 +1,5 @@
 :root {
+  --primary-color: #8E4BA8;
   --side-gradient: transparent
     linear-gradient(180deg, #000000 0%, #8E4BA8 100%) 0% 0%
     no-repeat padding-box;

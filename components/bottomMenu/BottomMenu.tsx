@@ -18,12 +18,12 @@ export const BottomMenu: FC<Props> = ({ data }) => {
           display: { lg: "none", md: "none" },
         }}
       >
-        <div className={styles["container"]}>
+        <Box className={styles["container"]}>
           <a>Dinero</a>
           <a>Mobiliario</a>
           <a>Inmobiliario</a>
           <a>Derechos</a>
-        </div>
+        </Box>
       </Box>
       <Box
         sx={{
