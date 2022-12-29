@@ -13,20 +13,21 @@ export const BottomMenu: FC<Props> = ({ data }) => {
 
   return (
     <>
+    
       <Box
         className={styles["container"]}
         sx={{
           position: "fixed",
           bottom: { xs: null, sm: null, md: 20 },
-          marginTop: { xs: -10, sm: -10 },
-          left: "50%",
+          marginTop: { xs: -70, sm: -82 },
+          left: "45%",
           transform: "translate(-45%)",
           bgcolor: "rgba(255,255,255,0.3)",
           borderRadius: "10px",
           backdropFilter: "blur(2px)",
           display: "flex",
-          overflowX: { xs: "auto", sm: "hidden", md: "hidden" },
-          overflowY: { xs: "auto", sm: "hidden", md: "hidden" },
+          // overflowX: { xs: "auto"},
+          overflowY: { xs: "auto", sm: "visible", md: "visible" },
         }}
       >
         {data.map((element) => {

@@ -14,6 +14,7 @@ import {
   IEmpire,
 } from "../interfaces/empireInterfaces";
 import { NextPage } from "next";
+import { InmobiliaryForm } from "../components/newForms";
 
 const right: IRight[] = [
   {
@@ -263,9 +264,10 @@ const Patrimony: NextPage = () => {
 
   return (
     <>
-      <Box alignItems={"center"} sx={{ marginTop: 10 }}>
+      <Box sx={{ width: "100%", height: "100%" }}>
         {/* <StepForm premium={true} iempire={empire} /> */}
-        <div onDrop={onDropEntry} onDragOver={allowDrop}>
+        <InmobiliaryForm inmobiliaryType={"casa"} img="" />
+        {/* <div onDrop={onDropEntry} onDragOver={allowDrop}>
           {draggmode ? (
             <Grid
               container
@@ -277,8 +279,8 @@ const Patrimony: NextPage = () => {
           ) : (
             ""
           )}
-        </div>
-        {formmode ? (
+        </div> */}
+        {/* {formmode ? (
           <Grid item sx={{ transition: "all .1s" }}>
             {" "}
             <StepForm2
@@ -290,7 +292,7 @@ const Patrimony: NextPage = () => {
           </Grid>
         ) : (
           ""
-        )}
+        )} */}
       </Box>
       <BottomMenu data={MENU_ACTIONS} />
     </>
