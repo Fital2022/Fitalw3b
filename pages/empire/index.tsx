@@ -122,7 +122,7 @@ const ResponsiveGrid: FC<Props> = ({ rights }) => {
   );
   
   return (
-    <ActionsLayout pageDescription="" title="">
+    <>
       <RightsList data={rightss} onClick={handleClick}/>
       <>
         <Modal
@@ -209,7 +209,7 @@ const ResponsiveGrid: FC<Props> = ({ rights }) => {
           }}
         />
       </>
-    </ActionsLayout>
+    </>
   );
 };
 

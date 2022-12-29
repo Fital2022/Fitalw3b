@@ -15,7 +15,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { NextPage } from "next";
 import { AppDispatch, RootState, setShowForm } from "../store";
 
-
 const MENU_ACTIONS: IBottomMenuData[] = [
   {
     link: { id: 1, name: "Arbol" },
@@ -43,16 +42,16 @@ const MENU_ACTIONS: IBottomMenuData[] = [
   },
 ];
 
-let tipo = ''
-let img = ''
+let tipo = "";
+let img = "";
 
 const Testament: NextPage = () => {
   const onDropEntry = (event: DragEvent<HTMLDivElement>) => {
     console.log(event);
-    tipo = event.dataTransfer.getData('option')
-    img = event.dataTransfer.getData('img')
-    console.log({tipo})
-    console.log({img})
+    tipo = event.dataTransfer.getData("option");
+    img = event.dataTransfer.getData("img");
+    console.log({ tipo });
+    console.log({ img });
     dispatch(setShowForm(true));
   };
 
@@ -63,7 +62,6 @@ const Testament: NextPage = () => {
   let formmode = useSelector((state: RootState) => state.form.showform);
 
   let empire = useSelector((state: RootState) => state.empire.selectedEmpire);
-  
 
   const allowDrop = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -71,10 +69,7 @@ const Testament: NextPage = () => {
   };
 
   return (
-    <ActionsLayout
-      title={"Fital - Testamento Digital"}
-      pageDescription={"Página de testamento digital"}
-    >
+    <>
       <Box alignItems={"center"} sx={{ marginTop: 10 }}>
         {/* <StepForm premium={true} iempire={empire} /> */}
         <div onDrop={onDropEntry} onDragOver={allowDrop}>
@@ -93,14 +88,14 @@ const Testament: NextPage = () => {
         {formmode ? (
           <Grid item sx={{ transition: "all .1s" }}>
             {" "}
-            <StepForm premium={true} iempire={empire} title={tipo} img={img}  />
+            <StepForm premium={true} iempire={empire} title={tipo} img={img} />
           </Grid>
         ) : (
           ""
         )}
       </Box>
       <BottomMenu data={MENU_ACTIONS} />
-    </ActionsLayout>
+    </>
   );
 };
 

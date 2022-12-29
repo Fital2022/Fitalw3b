@@ -85,17 +85,10 @@ export const SideBar = () => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
 
   const { route } = useRouter();
-  const [selectedPosition, setSelectedPosition] = useState<
-    SxProps<Theme> | undefined
-  >();
+
   const { name } = useSelector(
     (state: RootState) => state.empire.selectedEmpire
   );
-
-  // useEffect(() => {
-  //   if (route == "/patrimony") setSelectedPosition({ transform: 'translateY(-2px)' });
-  //   if (route == "/testament") setSelectedPosition({ transform: 'translateY(30px)' });
-  // }, [route]);
 
   return (
     <Box
@@ -164,120 +157,41 @@ export const SideBar = () => {
         <Box
           sx={{ position: "relative", display: { xs: "none", md: "block" } }}
         >
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            sx={{ mb: 2 }}
-          >
-            <NextLink href="/patrimony" passHref>
-              <Link>
-                <IconButton
-                  sx={{
-                    bgcolor: route == "/patrimony" ? "white" : "transparent",
-                  }}
-                >
-                  <HouseOutlined
-                    fontSize="large"
-                    sx={{ color: route == "/patrimony" ? "black" : "white" }}
-                  />
-                </IconButton>
-              </Link>
-            </NextLink>
-            <Typography variant="caption" sx={{ color: "white" }}>
-              Patrimonio
-            </Typography>
-          </Box>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            sx={{ mb: 2 }}
-          >
-            <NextLink href="/testament" passHref>
-              <Link>
-                <IconButton
-                  sx={{
-                    bgcolor: route == "/testament" ? "white" : "transparent",
-                  }}
-                >
-                  <FileOpenOutlined
-                    fontSize="large"
-                    sx={{ color: route == "/testament" ? "black" : "white" }}
-                  />
-                </IconButton>
-              </Link>
-            </NextLink>
-            <Typography variant="caption" sx={{ color: "white" }}>
-              Testamento
-            </Typography>
-          </Box>
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            sx={{ mb: 2 }}
-          >
-            <NextLink href="/goals" passHref>
-              <Link>
-                <IconButton
-                  sx={{ bgcolor: route == "/goals" ? "white" : "transparent" }}
-                >
-                  <FlagCircleOutlined
-                    fontSize="large"
-                    sx={{ color: route == "/goals" ? "black" : "white" }}
-                  />
-                </IconButton>
-              </Link>
-            </NextLink>
-            <Typography variant="caption" sx={{ color: "white" }}>
-              Metas
-            </Typography>
-          </Box>
-          {/* <Box
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
-          sx={{ mb: 2 }}
-        >
-          <NextLink href="/savings" passHref>
-            <Link>
-              <IconButton
-                sx={{ bgcolor: route == "/savings" ? "white" : "transparent" }}
+          {OPTIONS.map((page) => (
+            <Box
+              key={page.path}
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              sx={{ mb: 2 }}
+            >
+              <NextLink href={page.path} passHref>
+                <Link>
+                  <IconButton
+                  // sx={{
+                  //   bgcolor: route == page.path ? "white" : "transparent",
+                  // }}
+                  >
+                    {page.icon({
+                      transition: "all 0.6s ease",
+                      color: route == page.path ? "#1BD145" : "white",
+                      fontSize: "none",
+                    })}
+                  </IconButton>
+                </Link>
+              </NextLink>
+              <Typography
+                variant="caption"
+                sx={{
+                  color: route == page.path ? "#1BD145" : "white",
+                  textAlign: "center",
+                  transition: "all 0.6s ease",
+                }}
               >
-                <AttachMoneyOutlined
-                  fontSize="large"
-                  sx={{ color: route == "/savings" ? "black" : "white" }}
-                />
-              </IconButton>
-            </Link>
-          </NextLink>
-          <Typography variant="caption" sx={{ color: "white" }}>
-            Ahorros
-          </Typography>
-        </Box> */}
-          <Box
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            sx={{ mb: 2 }}
-          >
-            <NextLink href="/empire" passHref>
-              <Link>
-                <IconButton
-                  sx={{ bgcolor: route == "/empire" ? "white" : "transparent" }}
-                >
-                  <HolidayVillage
-                    fontSize="large"
-                    sx={{ color: route == "/empire" ? "black" : "white" }}
-                  />
-                </IconButton>
-              </Link>
-            </NextLink>
-            <Typography variant="caption" sx={{ color: "white" }}>
-              Imperio
-            </Typography>
-          </Box>
+                {page.title.includes("Digital") ? "Testamento" : page.title}
+              </Typography>
+            </Box>
+          ))}
         </Box>
         <Box flex={1} />
         <IconButton
@@ -305,7 +219,7 @@ export const SideBar = () => {
       </Box>
       <Box
         sx={{
-          display: "flex",
+          display: { xs: "flex", md: "none" },
           justifyContent: "center",
           alignItems: "center",
           width: "100%",
@@ -317,12 +231,13 @@ export const SideBar = () => {
       >
         <Box
           sx={{
-            display: "flex",
-            justifyContent: "space-around",
+            display: { xs: "flex", md: "none" },
+            justifyContent: { xs: "space-around", md: "space-between" },
             flexWrap: "wrap",
             transition: "all 0.3s ease",
             opacity: !showMenu ? 0 : 1,
             height: !showMenu ? "0px" : "auto",
+            width: "100%",
           }}
         >
           {OPTIONS.map((item) => (
@@ -344,7 +259,7 @@ export const SideBar = () => {
             >
               <NextLink href={item.path} passHref>
                 <Link>
-                  <IconButton>
+                  <IconButton onClick={() => setShowMenu(false)}>
                     {item.icon(
                       route == item.path
                         ? ({ color: "#1BD145" } as SxProps)

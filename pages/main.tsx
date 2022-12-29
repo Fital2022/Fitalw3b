@@ -83,7 +83,7 @@ const PurpleTooltip = styled(({ className, ...props }: TooltipProps) => (
 
 const MainMenu: NextPage = () => {
   return (
-    <MainLayout title={"Fital"} pageDescription={"Página principal"}>
+    <>
       <Box
         display="flex"
         justifyContent="center"
@@ -155,7 +155,7 @@ const MainMenu: NextPage = () => {
           ))}
         </Grid>
       </Box>
-    </MainLayout>
+    </>
   );
 };
 
