@@ -22,7 +22,7 @@ export const ResumeFormT: FC<Props> = ({title,img, rights, beneficiary}) => {
       };
   return (
     <>
-      <Grid item xs={2}>
+      <Grid item xs={2} sx={{bgcolor: "blue", height: "500px"}} >
         <Badge
           anchorOrigin={{
             vertical: "bottom",
@@ -46,14 +46,9 @@ export const ResumeFormT: FC<Props> = ({title,img, rights, beneficiary}) => {
         xs={8}
         justifyContent="center"
         direction="column"
-        className={styles["table-data"]}
+        // className={styles["table-data"]}
       >
         <Grid item container direction="column">
-          <br />
-          <br />
-          <br />
-          <br />
-          <br />
           <div className={styles["form-title"]}>
             <Typography variant="h4">{title}</Typography>
           </div>

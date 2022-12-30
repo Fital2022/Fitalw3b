@@ -1,5 +1,5 @@
 import { Box, Typography, Grid } from "@mui/material";
-import React, { DragEvent } from "react";
+import React, { DragEvent, useEffect, useState } from "react";
 import { ActionsLayout } from "../components/Layout";
 import { StepForm } from "../components/forms";
 import {
@@ -14,6 +14,8 @@ import { IBottomMenuData } from "../interfaces";
 import { useDispatch, useSelector } from "react-redux";
 import { NextPage } from "next";
 import { AppDispatch, RootState, setShowForm } from "../store";
+import { BottomMenu2 } from '../components/bottomMenu/BottomMenu2';
+import { NewDataTable } from '../components/tables/NewDataTable';
 
 const MENU_ACTIONS: IBottomMenuData[] = [
   {
@@ -46,6 +48,18 @@ let tipo = "";
 let img = "";
 
 const Testament: NextPage = () => {
+  let dataform = useSelector((state: RootState) => state.form.formvalues);
+  const [option, setOption] = useState("")
+
+  useEffect(() => {
+    console.log("Aqui estan los valores");
+    tipo = dataform.name as IRight["type"]
+    img = dataform.img
+    if (tipo.length > 0) {
+      dispatch(setShowForm(true));
+    }
+  }, [dataform]);
+
   const onDropEntry = (event: DragEvent<HTMLDivElement>) => {
     console.log(event);
     tipo = event.dataTransfer.getData("option");
@@ -63,6 +77,13 @@ const Testament: NextPage = () => {
 
   let empire = useSelector((state: RootState) => state.empire.selectedEmpire);
 
+  const rights = useSelector(
+    (state: RootState) => state.empire.selectedEmpire?.rights
+  );
+  const beneficiary = useSelector(
+    (state: RootState) => state.empire.selectedEmpire?.beneficiary
+  );
+
   const allowDrop = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     console.log("Si solte algo");
@@ -72,29 +93,18 @@ const Testament: NextPage = () => {
     <>
       <Box alignItems={"center"} sx={{ marginTop: 10 }}>
         {/* <StepForm premium={true} iempire={empire} /> */}
-        <div onDrop={onDropEntry} onDragOver={allowDrop}>
-          {draggmode ? (
-            <Grid
-              container
-              justifyContent="center"
-              sx={{ bgcolor: "#D3D3D3", height: "60vh", transition: "all .3s" }}
-            >
-              <Typography sx={{ align: "center" }}>Suelta aqui</Typography>
-            </Grid>
-          ) : (
-            ""
-          )}
-        </div>
-        {formmode ? (
+        {/* {formmode ? (
           <Grid item sx={{ transition: "all .1s" }}>
             {" "}
             <StepForm premium={true} iempire={empire} title={tipo} img={img} />
           </Grid>
         ) : (
           ""
-        )}
+        )} */}
+        <NewDataTable rights={rights} beneficiarys={beneficiary} />
       </Box>
-      <BottomMenu data={MENU_ACTIONS} />
+      {/* <BottomMenu data={MENU_ACTIONS} /> */}
+      <BottomMenu2 data={MENU_ACTIONS} setOption={setOption} option={option} />
     </>
   );
 };

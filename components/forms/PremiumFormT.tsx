@@ -46,7 +46,6 @@ interface Props {
     premium: boolean;
 }
 
-
 export const PremiumFormT: FC<Props> = ({title, img, premium}) => {
     const dispatch = useDispatch<AppDispatch>();
     const closeform = () => {
