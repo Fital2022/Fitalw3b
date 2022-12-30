@@ -14,6 +14,8 @@ import {
   IEmpire,
 } from "../interfaces/empireInterfaces";
 import { NextPage } from "next";
+import { BankAccountForm, InmobiliaryForm } from "../components/newForms";
+import { CashAccountDetails } from "../components/List";
 
 const right: IRight[] = [
   {
@@ -275,8 +277,21 @@ const Patrimony: NextPage = () => {
 
   return (
     <>
-      <Box alignItems={"center"} sx={{ marginTop: 10 }}>
+      <Box sx={{ width: "100%", height: "100%" }}>
         {/* <StepForm premium={true} iempire={empire} /> */}
+        <div onDrop={onDropEntry} onDragOver={allowDrop}>
+          {draggmode ? (
+            <Grid
+              container
+              justifyContent="center"
+              sx={{ bgcolor: "#D3D3D3", height: "60vh", transition: "all .3s" }}
+            >
+              <Typography sx={{ align: "center" }}>Suelta aqui</Typography>
+            </Grid>
+          ) : (
+            ""
+          )}
+        </div>
         {formmode ? (
           <Grid item sx={{ transition: "all .1s" }}>
             {" "}
@@ -289,9 +304,9 @@ const Patrimony: NextPage = () => {
           </Grid>
         ) : (
           ""
-        )}
+        )} */}
       </Box>
-      <BottomMenu data={MENU_ACTIONS} />
+      {/* <BottomMenu data={MENU_ACTIONS} /> */}
     </>
   );
 };

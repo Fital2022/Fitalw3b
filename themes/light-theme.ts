@@ -1,6 +1,17 @@
 import { createTheme } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
 
+declare module "@mui/material/Button" {
+  interface ButtonPropsVariantOverrides {
+    submit: true;
+  }
+}
+declare module "@mui/material/Button" {
+  interface ButtonPropsColorOverrides {
+    submit: true;
+  }
+}
+
 export const lightTheme = createTheme({
   palette: {
     mode: "light",
@@ -12,6 +23,15 @@ export const lightTheme = createTheme({
     // }
   },
   components: {
+    MuiOutlinedInput: {
+      styleOverrides: {
+        input: {
+          ":focus": {
+            backgroundColor: "transparent",
+          },
+        },
+      },
+    },
     // MuiLink: {
     //   defaultProps: {
     //     underline: "none",
@@ -49,40 +69,31 @@ export const lightTheme = createTheme({
         // },
         h5: {
           fontSize: 16,
-          fontWeight: 'bold'
-        }
+          fontWeight: "bold",
+        },
       },
     },
 
-    // MuiButton: {
-    //   defaultProps: {
-    //     variant: "contained",
-    //     size: "small",
-    //     disableElevation: true,
-    //   },
-    //   styleOverrides: {
-    //     root: {
-    //       textTransform: "none",
-    //       boxShadow: "none",
-    //       borderRadius: 10,
-    //       ":hover": {
-    //         backgroundColor: "rgba(0,0,0,0.05)",
-    //         transition: "all 0.3s ease-in-out",
-    //       },
-    //     },
-    //   },
-    // },
-
-    // MuiCard: {
-    //   defaultProps: {
-    //     elevation: 0,
-    //   },
-    //   styleOverrides: {
-    //     root: {
-    //       boxShadow: "0px 5px 5px rgba(0,0,0,0.05)",
-    //       borderRadius: "10px",
-    //     },
-    //   },
-    // },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          ":hover": {},
+        },
+      },
+      variants: [
+        {
+          props: { variant: "submit", color: "submit" },
+          style: {
+            backgroundColor: "#1BD145",
+            color: "white",
+            ":hover": {
+              color: "#1BD145",
+              border: "1px solid #1BD145",
+              bgcolor: "white",
+            },
+          },
+        },
+      ],
+    },
   },
 });
