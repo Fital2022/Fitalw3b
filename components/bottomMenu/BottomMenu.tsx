@@ -14,6 +14,12 @@ export const BottomMenu: FC<Props> = ({ data }) => {
   const dispatch = useDispatch<AppDispatch>();
   let show = useSelector((state: RootState) => state.form.suboptions);
   const [currentId, setCurrentId] = useState<number | undefined>();
+  
+  useEffect(() => {
+    if (show == false) {
+      setCurrentId(undefined)
+    }
+  }, [show])
 
   return (
     <>
