@@ -5,7 +5,13 @@ import { IBottomMenuData } from "../interfaces";
 import { BottomMenu } from "../components/bottomMenu/BottomMenu";
 import { StepForm, StepForm2 } from "../components/forms";
 import { useDispatch, useSelector } from "react-redux";
-import { setShowForm, AppDispatch, RootState, setShowForm2, setSuboptions } from "../store";
+import {
+  setShowForm,
+  AppDispatch,
+  RootState,
+  setShowForm2,
+  setSuboptions,
+} from "../store";
 import {
   IRight,
   IRightBeneficiary,
@@ -241,15 +247,14 @@ let tipo: IRight["type"] = "casa";
 let img = "";
 
 const Patrimony: NextPage = () => {
-
   let dataform = useSelector((state: RootState) => state.form.formvalues2);
 
   useEffect(() => {
     console.log("Aqui estan los valores");
-    tipo = dataform.name as IRight["type"]
-    img = dataform.img
+    tipo = dataform.name as IRight["type"];
+    img = dataform.img;
     if (tipo.length > 0) {
-      dispatch(setShowForm2(true))
+      dispatch(setShowForm2(true));
     }
   }, [dataform]);
 
@@ -277,9 +282,37 @@ const Patrimony: NextPage = () => {
 
   return (
     <>
-      <Box sx={{ width: "100%", height: "100%" }}>
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justifyContent="center"
+        marginTop={2}
+        display={{
+          sm: "none",
+          md: "none",
+          lg: "none",
+          xl: "none",
+        }}
+      >
+        <Grid item xs={3}>
+          <BottomMenu data={MENU_ACTIONS} />
+        </Grid>
+      </Grid>
+      <Box sx={{ width: "100%", height: "100%", marginTop: -6 }}>
         {/* <StepForm premium={true} iempire={empire} /> */}
-        <div onDrop={onDropEntry} onDragOver={allowDrop}>
+        {/* <InmobiliaryForm inmobiliaryType={"casa"} img="" /> */}
+        {/* <BankAccountForm accountName={"Wallet 1"} img={""} isWallet />
+        <CashAccountDetails type={"wallets"} /> */}
+        <BankAccountForm
+          accountName={"Cuenta Bancaria"}
+          img={""}
+          isWallet={false}
+        />
+        <CashAccountDetails type={"cuentas"} />
+
+        {/* <div onDrop={onDropEntry} onDragOver={allowDrop}>
           {draggmode ? (
             <Grid
               container
@@ -291,8 +324,8 @@ const Patrimony: NextPage = () => {
           ) : (
             ""
           )}
-        </div>
-        {formmode ? (
+        </div> */}
+        {/* {formmode ? (
           <Grid item sx={{ transition: "all .1s" }}>
             {" "}
             <StepForm2

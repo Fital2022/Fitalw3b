@@ -27,11 +27,11 @@ export const BottomMenu: FC<Props> = ({ data }) => {
       <Box
         className={styles["container"]}
         sx={{
-          position: "fixed",
-          bottom: { xs: null, sm: null, md: 20 },
-          marginTop: { xs: -70, sm: -82 },
-          left: "45%",
-          transform: "translate(-45%)",
+            // position: "fixed",
+          // bottom: { xs: null, sm: null, md: 20 },
+          // marginTop: { xs: -70, sm: -82 },
+          // left: "45%",
+          // transform: "translate(-45%)",
           bgcolor: "rgba(255,255,255,0.3)",
           borderRadius: "10px",
           backdropFilter: "blur(2px)",
@@ -44,27 +44,24 @@ export const BottomMenu: FC<Props> = ({ data }) => {
           return (
             <Box
               key={element.link.id}
-              sx={{alignItems: "center",  bgcolor: "transparent" }}
+              sx={{ position: "relative", bgcolor: "transparent" }}
             >
               <Box
                 sx={[
                   {
-                    alignItems: "center",
-                  display: "flex",
+                    display: "flex",
                     position: "absolute",
-                    top: "120px",
-                    right: "-80px",
+                    // top: "120px",
+                    left: "-25px",
                     zIndex: -10,
-                    height: "270px",
+                    height: "110px",
                     visibility: "hidden",
                     opacity: 0,
                     transition: "all 0.5s ease",
-                    translate: "-3vw", 
-                  // transform: "translateX()"
                 },
                   element.link.id === currentId && show   && {
                     visibility: "visible",
-                    top: "-60vh",
+                    top: "-120px",
                     zIndex: 1,
                     opacity: 1,
                     
