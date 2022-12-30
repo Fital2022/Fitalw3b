@@ -20,7 +20,11 @@ import {
   IEmpire,
 } from "../interfaces/empireInterfaces";
 import { NextPage } from "next";
-import { BankAccountForm, InmobiliaryForm } from "../components/newForms";
+import {
+  BankAccountForm,
+  InmobiliaryForm,
+  PersonForm,
+} from "../components/newForms";
 import { CashAccountDetails } from "../components/List";
 
 const right: IRight[] = [
@@ -339,7 +343,7 @@ const Patrimony: NextPage = () => {
           ""
         )} */}
       </Box>
-      {/* <BottomMenu data={MENU_ACTIONS} /> */}
+      <BottomMenu data={MENU_ACTIONS} />
     </>
   );
 };
