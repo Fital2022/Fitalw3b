@@ -1,6 +1,6 @@
 import { DragEvent, useEffect } from "react";
 import { ActionsLayout } from "../components/Layout";
-import { Box, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, Typography } from "@mui/material";
 import { IBottomMenuData } from "../interfaces";
 import { BottomMenu } from "../components/bottomMenu/BottomMenu";
 import { StepForm, StepForm2 } from "../components/forms";
@@ -26,6 +26,7 @@ import {
   PersonForm,
 } from "../components/newForms";
 import { CashAccountDetails } from "../components/List";
+import styles from "../styles/Things.module.css";
 
 const right: IRight[] = [
   {
@@ -286,7 +287,7 @@ const Patrimony: NextPage = () => {
 
   return (
     <>
-      <Grid
+      {/* <Grid
         container
         spacing={0}
         direction="column"
@@ -303,18 +304,30 @@ const Patrimony: NextPage = () => {
         <Grid item xs={3}>
           <BottomMenu data={MENU_ACTIONS} />
         </Grid>
-      </Grid>
+      </Grid> */}
+      <Box
+        className={styles.container}
+        sx={{ overflowX: "auto", width: "100%", maxWidth: "100%" }}
+      >
+        <Box sx={{ display: "flex", width: "auto" }}>
+          {[1, 2, 3, 4, 5, 6, 7].map((element) => (
+            <Button sx={{ ":not(:last-child)": { mr: 2 }, width: "100px" }}>
+              prueba menu asdfasdfasdfasdf
+            </Button>
+          ))}
+        </Box>
+      </Box>
       <Box sx={{ width: "100%", height: "100%", marginTop: -6 }}>
         {/* <StepForm premium={true} iempire={empire} /> */}
-        {/* <InmobiliaryForm inmobiliaryType={"casa"} img="" /> */}
+        <InmobiliaryForm inmobiliaryType={"casa"} img="" />
         {/* <BankAccountForm accountName={"Wallet 1"} img={""} isWallet />
         <CashAccountDetails type={"wallets"} /> */}
-        <BankAccountForm
+        {/* <BankAccountForm
           accountName={"Cuenta Bancaria"}
           img={""}
           isWallet={false}
         />
-        <CashAccountDetails type={"cuentas"} />
+        <CashAccountDetails type={"cuentas"} /> */}
 
         {/* <div onDrop={onDropEntry} onDragOver={allowDrop}>
           {draggmode ? (
@@ -343,7 +356,7 @@ const Patrimony: NextPage = () => {
           ""
         )} */}
       </Box>
-      <BottomMenu data={MENU_ACTIONS} />
+      {/* <BottomMenu data={MENU_ACTIONS} /> */}
     </>
   );
 };

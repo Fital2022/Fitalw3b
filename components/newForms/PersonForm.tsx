@@ -1,9 +1,11 @@
+import { CheckCircle } from "@mui/icons-material";
 import {
   Avatar,
   Box,
   Button,
   FormControlLabel,
   FormLabel,
+  Grid,
   OutlinedInput,
   Radio,
   RadioGroup,
@@ -11,8 +13,9 @@ import {
   Theme,
   Typography,
 } from "@mui/material";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useForm } from "../../hooks/formHooks";
+import styles from "../../styles/Things.module.css";
 
 interface IFormData {
   nombre: string;
@@ -29,6 +32,7 @@ interface Props {
   img: string;
 }
 export const PersonForm: FC<Props> = ({ img, person }) => {
+  const [showSucesion, setShowSucesion] = useState<boolean>(false);
   const [data, onChange, onReset] = useForm<IFormData>({
     curp: "",
     domicilio: "",
@@ -141,6 +145,63 @@ export const PersonForm: FC<Props> = ({ img, person }) => {
           name="estadoCivil"
           onChange={onChange}
         />
+        {showSucesion && (
+          <Grid item>
+            <div className={styles["form-title"]}>
+              <Typography sx={{ mr: "50px" }} variant="subtitle1">
+                Condiciones
+              </Typography>
+            </div>
+            <br />
+            <Typography sx={{ color: "black" }}>Educación</Typography>
+            <hr className={styles["form-line"]} />
+            <Grid container justifyContent="center" item direction="row">
+              <Typography sx={{ color: "black" }}>Licenciatura</Typography>{" "}
+              &nbsp;&nbsp;
+              <CheckCircle className={styles["icon-check"]} />
+            </Grid>
+            <Grid container justifyContent="center" item direction="row">
+              <Typography sx={{ color: "black" }}>Maestria</Typography>{" "}
+              &nbsp;&nbsp;
+              <CheckCircle className={styles["icon-check"]} />
+            </Grid>
+            <br />
+            <Typography sx={{ color: "black" }}>Familia</Typography>
+            <hr className={styles["form-line"]} />
+            <Grid container justifyContent="center" item direction="row">
+              <Typography sx={{ color: "black" }}>
+                Prueba de paternidad
+              </Typography>{" "}
+              &nbsp;&nbsp;
+              <CheckCircle className={styles["icon-check"]} />
+            </Grid>
+            <Grid container justifyContent="center" item direction="row">
+              <Typography sx={{ color: "black" }}>Casa</Typography> &nbsp;&nbsp;
+              <CheckCircle className={styles["icon-check"]} />
+            </Grid>
+            <Grid container justifyContent="center" item direction="row">
+              <Typography sx={{ color: "black" }}>Tener un hijo</Typography>{" "}
+              &nbsp;&nbsp;
+              <CheckCircle className={styles["icon-check"]} />
+            </Grid>
+            <br />
+            <Typography sx={{ color: "black" }}>Patrimonio</Typography>
+            <hr className={styles["form-line"]} />
+            <Grid container justifyContent="center" item direction="row">
+              <Typography sx={{ color: "black" }}>
+                Tener $1,000,000,000
+              </Typography>{" "}
+              &nbsp;&nbsp;
+              <CheckCircle className={styles["icon-check"]} />
+            </Grid>
+            <br />
+            <Typography sx={{ color: "black" }}>Otra</Typography>
+            <hr className={styles["form-line"]} />
+            {/* <Grid container justifyContent="center" item direction="row">
+              <StyledTextField2 />
+            </Grid> */}
+          </Grid>
+        )}
         <Box
           sx={{
             display: "flex",
@@ -155,7 +216,12 @@ export const PersonForm: FC<Props> = ({ img, person }) => {
           >
             Finalizar
           </Button>
-          <Button sx={buttonStyles} variant="submit" color="submit">
+          <Button
+            sx={buttonStyles}
+            onClick={() => setShowSucesion((prevState) => !prevState)}
+            variant="submit"
+            color="submit"
+          >
             Sucesión
           </Button>
         </Box>
