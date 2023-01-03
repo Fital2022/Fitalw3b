@@ -27,6 +27,7 @@ import {
 } from "../components/newForms";
 import { CashAccountDetails } from "../components/List";
 import styles from "../styles/Things.module.css";
+import { BottomMenuMobile } from "../components/bottomMenu/BottomMenuMobile";
 
 const right: IRight[] = [
   {
@@ -287,36 +288,22 @@ const Patrimony: NextPage = () => {
 
   return (
     <>
-      {/* <Grid
-        container
-        spacing={0}
-        direction="column"
-        alignItems="center"
-        justifyContent="center"
-        marginTop={2}
-        display={{
-          sm: "none",
-          md: "none",
-          lg: "none",
-          xl: "none",
-        }}
-      >
-        <Grid item xs={3}>
-          <BottomMenu data={MENU_ACTIONS} />
-        </Grid>
-      </Grid> */}
-      <Box
+
+
+        <BottomMenuMobile data={MENU_ACTIONS} />
+      
+      {/* <Box
         className={styles.container}
         sx={{ overflowX: "auto", width: "100%", maxWidth: "100%" }}
       >
         <Box sx={{ display: "flex", width: "auto" }}>
           {[1, 2, 3, 4, 5, 6, 7].map((element) => (
             <Button sx={{ ":not(:last-child)": { mr: 2 }, width: "100px" }}>
-              prueba menu asdfasdfasdfasdf
+              Menu
             </Button>
           ))}
         </Box>
-      </Box>
+      </Box> */}
       <Box sx={{ width: "100%", height: "100%", marginTop: -6 }}>
         {/* <StepForm premium={true} iempire={empire} /> */}
         <InmobiliaryForm inmobiliaryType={"casa"} img="" />
@@ -356,7 +343,7 @@ const Patrimony: NextPage = () => {
           ""
         )} */}
       </Box>
-      {/* <BottomMenu data={MENU_ACTIONS} /> */}
+      <BottomMenu data={MENU_ACTIONS} />
     </>
   );
 };
