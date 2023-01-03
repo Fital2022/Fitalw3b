@@ -305,7 +305,7 @@ const Patrimony: NextPage = () => {
           <BottomMenu data={MENU_ACTIONS} />
         </Grid>
       </Grid> */}
-      <Box
+      {/* <Box
         className={styles.container}
         sx={{ overflowX: "auto", width: "100%", maxWidth: "100%" }}
       >
@@ -316,10 +316,11 @@ const Patrimony: NextPage = () => {
             </Button>
           ))}
         </Box>
-      </Box>
+      </Box> */}
       <Box sx={{ width: "100%", height: "100%", marginTop: -6 }}>
         {/* <StepForm premium={true} iempire={empire} /> */}
-        <InmobiliaryForm inmobiliaryType={"casa"} img="" />
+        {/* <InmobiliaryForm inmobiliaryType={"casa"} img="" /> */}
+        <PersonForm person={"Emperador"} img={""} />
         {/* <BankAccountForm accountName={"Wallet 1"} img={""} isWallet />
         <CashAccountDetails type={"wallets"} /> */}
         {/* <BankAccountForm
