@@ -47,7 +47,7 @@ export const BottomMenu: FC<Props> = ({ data }) => {
             position: "fixed",
           bottom: 20,
           marginTop: { xs: -70, sm: -82 },
-          left: "45%",
+          left: "50%",
           transform: "translate(-45%)",
           bgcolor: "rgba(255,255,255,0.3)",
           // bgcolor: "red",
@@ -69,11 +69,9 @@ export const BottomMenu: FC<Props> = ({ data }) => {
                     alignItems: "center",
                     justifyContent: "center",
                     display: "flex",
-                    bgcolor: "red",
-
                     position: "absolute",
                     top: "120px",
-                    right: {xs: "5vw", sm: "5vw", md: "-3vw"},
+                    right: {xs: "5vw", sm: "15vw", md: "4vw"},
                     zIndex: -10,
                     height: "270px",
                     minWidth: "510px",
@@ -84,7 +82,7 @@ export const BottomMenu: FC<Props> = ({ data }) => {
                   element.link.id === currentId &&
                     show && {
                       visibility: "visible",
-                      top: "-120px",
+                      top:{ xs: "600px" ,sm: "-600px" ,md:"-600px",},
                       zIndex: 1,
                       opacity: 1,
                     },

@@ -288,8 +288,6 @@ const Patrimony: NextPage = () => {
 
   return (
     <>
-
-
         <BottomMenuMobile data={MENU_ACTIONS} />
       
       {/* <Box
@@ -303,7 +301,6 @@ const Patrimony: NextPage = () => {
             </Button>
           ))}
         </Box> */}
-      </Box>
       <Box sx={{ width: "100%", height: "100%", marginTop: -6 }}>
         {/* <StepForm premium={true} iempire={empire} /> */}
         {/* <InmobiliaryForm inmobiliaryType={"casa"} img="" /> */}
@@ -343,7 +340,6 @@ const Patrimony: NextPage = () => {
           ""
         )} */}
       </Box>
-      <BottomMenu data={MENU_ACTIONS} />
       <BottomMenu data={MENU_ACTIONS} />
     </>
   );
