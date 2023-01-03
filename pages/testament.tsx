@@ -14,8 +14,9 @@ import { IBottomMenuData } from "../interfaces";
 import { useDispatch, useSelector } from "react-redux";
 import { NextPage } from "next";
 import { AppDispatch, RootState, setShowForm } from "../store";
-import { BottomMenu2 } from '../components/bottomMenu/BottomMenu2';
-import { NewDataTable } from '../components/tables/NewDataTable';
+import { BottomMenu2 } from "../components/bottomMenu/BottomMenu2";
+import { NewDataTable } from "../components/tables/NewDataTable";
+import { BottomMenuMobile } from "../components/bottomMenu/BottomMenuMobile";
 
 const MENU_ACTIONS: IBottomMenuData[] = [
   {
@@ -49,12 +50,12 @@ let img = "";
 
 const Testament: NextPage = () => {
   let dataform = useSelector((state: RootState) => state.form.formvalues);
-  const [option, setOption] = useState("")
+  const [option, setOption] = useState("");
 
   useEffect(() => {
     console.log("Aqui estan los valores");
-    tipo = dataform.name as IRight["type"]
-    img = dataform.img
+    tipo = dataform.name as IRight["type"];
+    img = dataform.img;
     if (tipo.length > 0) {
       dispatch(setShowForm(true));
     }
@@ -91,6 +92,8 @@ const Testament: NextPage = () => {
 
   return (
     <>
+      <BottomMenuMobile data={MENU_ACTIONS} />
+
       <Box alignItems={"center"} sx={{ marginTop: 10 }}>
         {/* <StepForm premium={true} iempire={empire} /> */}
         {/* {formmode ? (
@@ -103,8 +106,8 @@ const Testament: NextPage = () => {
         )} */}
         <NewDataTable rights={rights} beneficiarys={beneficiary} />
       </Box>
-      {/* <BottomMenu data={MENU_ACTIONS} /> */}
-      <BottomMenu2 data={MENU_ACTIONS} setOption={setOption} option={option} />
+      <BottomMenu data={MENU_ACTIONS} />
+      {/* <BottomMenu2 data={MENU_ACTIONS} setOption={setOption} option={option} /> */}
     </>
   );
 };

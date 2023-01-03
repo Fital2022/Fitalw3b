@@ -3,6 +3,7 @@ import {
   Avatar,
   Box,
   Button,
+  Divider,
   FormControlLabel,
   FormLabel,
   Grid,
@@ -145,67 +146,72 @@ export const PersonForm: FC<Props> = ({ img, person }) => {
           name="estadoCivil"
           onChange={onChange}
         />
-        {showSucesion && (
-          <Grid item>
-            <div className={styles["form-title"]}>
-              <Typography sx={{ mr: "50px" }} variant="subtitle1">
-                Condiciones
-              </Typography>
-            </div>
-            <br />
-            <Typography sx={{ color: "black" }}>Educación</Typography>
-            <hr className={styles["form-line"]} />
-            <Grid container justifyContent="center" item direction="row">
-              <Typography sx={{ color: "black" }}>Licenciatura</Typography>{" "}
-              &nbsp;&nbsp;
-              <CheckCircle className={styles["icon-check"]} />
-            </Grid>
-            <Grid container justifyContent="center" item direction="row">
-              <Typography sx={{ color: "black" }}>Maestria</Typography>{" "}
-              &nbsp;&nbsp;
-              <CheckCircle className={styles["icon-check"]} />
-            </Grid>
-            <br />
-            <Typography sx={{ color: "black" }}>Familia</Typography>
-            <hr className={styles["form-line"]} />
-            <Grid container justifyContent="center" item direction="row">
-              <Typography sx={{ color: "black" }}>
-                Prueba de paternidad
-              </Typography>{" "}
-              &nbsp;&nbsp;
-              <CheckCircle className={styles["icon-check"]} />
-            </Grid>
-            <Grid container justifyContent="center" item direction="row">
-              <Typography sx={{ color: "black" }}>Casa</Typography> &nbsp;&nbsp;
-              <CheckCircle className={styles["icon-check"]} />
-            </Grid>
-            <Grid container justifyContent="center" item direction="row">
-              <Typography sx={{ color: "black" }}>Tener un hijo</Typography>{" "}
-              &nbsp;&nbsp;
-              <CheckCircle className={styles["icon-check"]} />
-            </Grid>
-            <br />
-            <Typography sx={{ color: "black" }}>Patrimonio</Typography>
-            <hr className={styles["form-line"]} />
-            <Grid container justifyContent="center" item direction="row">
-              <Typography sx={{ color: "black" }}>
-                Tener $1,000,000,000
-              </Typography>{" "}
-              &nbsp;&nbsp;
-              <CheckCircle className={styles["icon-check"]} />
-            </Grid>
-            <br />
-            <Typography sx={{ color: "black" }}>Otra</Typography>
-            <hr className={styles["form-line"]} />
-            {/* <Grid container justifyContent="center" item direction="row">
-              <StyledTextField2 />
-            </Grid> */}
-          </Grid>
-        )}
+        <Box
+          mt={4}
+          sx={{
+            transformOrigin: "top",
+            transform: "scaleY(0)",
+            transition: "all 0.5s ease",
+            visibility: "hidden",
+            maxHeight: "0px",
+            ...(showSucesion &&
+              ({
+                visibility: "visible",
+                transform: "scaleY(1)",
+                maxHeight: "1000px",
+              } as SxProps)),
+          }}
+        >
+          <Typography sx={subTextStyles}>CONDICIONES</Typography>
+          <Typography sx={textBoldStyles}>Educación</Typography>
+          <Divider sx={dividerStyles} />
+          <Box sx={row}>
+            <Typography sx={subTextStyles}>Licenciatura</Typography>
+            <CheckCircle sx={checkStyles} />
+          </Box>
+          <Box sx={row}>
+            <Typography sx={subTextStyles}>Maestria</Typography>
+            <CheckCircle sx={checkStyles} />
+          </Box>
+          <Typography sx={textBoldStyles}>Familia</Typography>
+          <Divider sx={dividerStyles} />
+          <Box sx={row}>
+            <Typography sx={subTextStyles}>Prueba de partenidad</Typography>
+            <CheckCircle sx={checkStyles} />
+          </Box>
+          <Box sx={row}>
+            <Typography sx={subTextStyles}>Casa</Typography>
+            <CheckCircle sx={checkStyles} />
+          </Box>
+          <Box sx={row}>
+            <Typography sx={subTextStyles}>Tener un hijo</Typography>
+            <CheckCircle sx={checkStyles} />
+          </Box>
+          <Typography sx={textBoldStyles}>Patrimonio</Typography>
+          <Box sx={row}>
+            <Typography sx={subTextStyles}>Tener $1,000,000</Typography>
+            <CheckCircle sx={checkStyles} />
+          </Box>
+          <Typography sx={textBoldStyles}>Otra</Typography>
+          <Divider sx={dividerStyles} />
+          <OutlinedInput
+            sx={inputStyles}
+            fullWidth
+            // placeholder="Domicilio*"
+            // value={domicilio}
+            // name="domicilio"
+            // onChange={onChange}
+          />
+        </Box>
+
         <Box
           sx={{
             display: "flex",
-            justifyContent: { xs: "space-between", sm: "flex-start" },
+            justifyContent: {
+              xs: "space-between",
+              sm: "flex-start",
+              pb: showSucesion ? 4 : 0,
+            },
           }}
         >
           <Button
@@ -243,4 +249,30 @@ const buttonStyles: SxProps<Theme> = {
   ":not(:last-child)": {
     mr: { xs: 0, sm: 2 },
   },
+};
+
+const subTextStyles: SxProps<Theme> = {
+  fontSize: "16px",
+  color: "#6A6A6A",
+  mb: 2,
+};
+
+const textBoldStyles: SxProps<Theme> = {
+  fontSize: "16px",
+  color: "#000",
+  mb: 1,
+};
+
+const row: SxProps<Theme> = {
+  display: "flex",
+  justifyContent: "space-between",
+};
+
+const dividerStyles: SxProps<Theme> = {
+  mb: 1,
+  bgcolor: "#707070",
+};
+
+const checkStyles: SxProps<Theme> = {
+  color: "#1BD145",
 };

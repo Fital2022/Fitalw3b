@@ -3,7 +3,12 @@ import React, { FC, useEffect, useState } from "react";
 import { IBottomMenuData } from "../../interfaces";
 import { OneLink } from "./SubLinks";
 import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState, setAutoSubOptions, setSuboptions } from "../../store";
+import {
+  AppDispatch,
+  RootState,
+  setAutoSubOptions,
+  setSuboptions,
+} from "../../store";
 import styles from "../../styles/Things.module.css";
 
 interface Props {
@@ -14,16 +19,28 @@ export const BottomMenu: FC<Props> = ({ data }) => {
   const dispatch = useDispatch<AppDispatch>();
   let show = useSelector((state: RootState) => state.form.suboptions);
   const [currentId, setCurrentId] = useState<number | undefined>();
-  
+
   useEffect(() => {
     if (show == false) {
-      setCurrentId(undefined)
+      setCurrentId(undefined);
     }
-  }, [show])
+  }, [show]);
 
   return (
     <>
-    
+      {/* <Box
+        className={styles.container}
+        sx={{ overflowX: "auto", width: "100%", maxWidth: "100%", display: { sm: "none", md: "none" }}}
+      >
+        <Box sx={{ display: "flex", width: "auto" }}>
+          {data.map((element) => (
+            <Button sx={{ ":not(:last-child)": { mr: 2 }, width: "100px",  color: { xs: "gray", sm: "gray", md: "black" },
+            bgcolor: "transparent", }}>
+              {element.link.name}
+            </Button>
+          ))}
+        </Box>
+      </Box> */}
       <Box
         className={styles["container"]}
         sx={{
@@ -33,11 +50,11 @@ export const BottomMenu: FC<Props> = ({ data }) => {
           left: "45%",
           transform: "translate(-45%)",
           bgcolor: "rgba(255,255,255,0.3)",
+          // bgcolor: "red",
           borderRadius: "10px",
           backdropFilter: "blur(2px)",
-          display: "flex",
-          // overflowX: { xs: "auto"},
-          overflowY: { xs: "auto", sm: "visible", md: "visible" },
+          // display: "flex",
+          display: { xs: "none", sm: "flex" },
         }}
       >
         {data.map((element) => {
@@ -63,16 +80,14 @@ export const BottomMenu: FC<Props> = ({ data }) => {
                     visibility: "hidden",
                     opacity: 0,
                     transition: "all 0.5s ease",
-                    translate: "-3vw"
-                },
-                  element.link.id === currentId && show   && {
-                    visibility: "visible",
-                    bgcolor: "gray",
-                    top: "-60vh",
-                    zIndex: 1,
-                    opacity: 1,
-                    
-                },
+                  },
+                  element.link.id === currentId &&
+                    show && {
+                      visibility: "visible",
+                      top: "-120px",
+                      zIndex: 1,
+                      opacity: 1,
+                    },
                 ]}
               >
                 {element.sublinks.map((sub) => (
@@ -100,10 +115,12 @@ export const BottomMenu: FC<Props> = ({ data }) => {
                 }}
                 onClick={() => {
                   setCurrentId((prevId) =>
-                    prevId === element.link.id ? undefined && dispatch(setSuboptions(false)) : element.link.id);
-                    dispatch(setSuboptions(true))
-                }
-              }
+                    prevId === element.link.id
+                      ? undefined && dispatch(setSuboptions(false))
+                      : element.link.id
+                  );
+                  dispatch(setSuboptions(true));
+                }}
               >
                 {element.link.name}
               </Button>
