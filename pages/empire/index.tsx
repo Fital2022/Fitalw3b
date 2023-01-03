@@ -14,6 +14,13 @@ import {
   IconButton,
   Button,
   Modal,
+  Switch,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
 } from "@mui/material";
 
 import EditIcon from "@mui/icons-material/Edit";
@@ -26,6 +33,8 @@ import { RootState } from "../../store/store";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import router from "next/router";
 import { RightsList } from "../../components/List";
+import { EditRounded, DeleteRounded } from "@mui/icons-material";
+import { NextPage } from "next";
 
 // confetti
 function randomInRange(min: any, max: any) {
@@ -59,19 +68,15 @@ const style = {
   borderRadius: "20px",
 };
 
-interface Props {
-  rights: IRight[];
-}
+const TITLES = [
+  "Bien",
+  "Estatus",
+  "Heredero",
+  "Porcentaje de herencia",
+  "Valor",
+];
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(2),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
-
-const ResponsiveGrid: FC<Props> = ({ rights }) => {
+const EmpirePage: NextPage = () => {
   // confetti
   const refAnimationInstance = useRef<any>(null);
   const [intervalId, setIntervalId] = useState<any | null>(null);
@@ -115,15 +120,99 @@ const ResponsiveGrid: FC<Props> = ({ rights }) => {
   const handleClick = () => {
     startAnimation();
     handleOpen();
-  }
+  };
 
   const rightss = useSelector(
     (state: RootState) => state.empire.selectedEmpire?.rights
   );
-  
+
   return (
     <>
-      <RightsList data={rightss} onClick={handleClick}/>
+      {/* <RightsList data={rightss} onClick={handleClick}/> */}
+      <TableContainer
+        component={Paper}
+        sx={{
+          maxHeight: "550px",
+          // boxShadow: "0px -10px 15px #00000029",
+          borderRadius: "10px",
+          bgcolor: "transparent",
+          maxWidth: "95%",
+          mx: "auto",
+          mt: 3,
+        }}
+      >
+        <Table sx={{ minWidth: 650 }} stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              {TITLES &&
+                TITLES.length > 0 &&
+                TITLES.map((title) => (
+                  <TableCell
+                    key={title}
+                    align="center"
+                    sx={{
+                      bgcolor: "rgba(142, 75, 168, 0.16)",
+                      color: "#7B7B7B",
+                    }}
+                  >
+                    {title}
+                  </TableCell>
+                ))}
+            </TableRow>
+          </TableHead>
+          <TableBody sx={{ overflowY: "hidden" }}>
+            {rightss &&
+              rightss.length > 0 &&
+              rightss.map((item, index) => (
+                <TableRow
+                  key={item.id}
+                  sx={{
+                    "&:last-child td, &:last-child th": { border: 0 },
+                    bgcolor:
+                      index % 2 !== 0
+                        ? "rgba(142, 75, 168, 0.16)"
+                        : "transparent",
+                  }}
+                >
+                  <TableCell
+                    align="center"
+                    sx={{
+                      color: "#7B7B7B",
+                      display: "flex",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        maxWidth: "50%",
+                        width: "200px",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "flex-start",
+                        // bgcolor: 'grey'
+                      }}
+                    >
+                      <Avatar src={item.img} sx={{ mr: 3 }} />
+                      <Typography>{item.name}</Typography>
+                    </Box>
+                  </TableCell>
+                  <TableCell align="center" sx={{ color: "#7B7B7B" }}>
+                    <Typography>Sin asignar</Typography>
+                  </TableCell>
+                  <TableCell align="center" sx={{ color: "#7B7B7B" }}>
+                    <Typography>Sin asignar</Typography>
+                  </TableCell>
+                  <TableCell align="center" sx={{ color: "#7B7B7B" }}>
+                    <Typography>0%</Typography>
+                  </TableCell>
+                  <TableCell align="center" sx={{ color: "#7B7B7B" }}>
+                    <Typography>1,000,000</Typography>
+                  </TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
       <>
         <Modal
           open={open}
@@ -185,7 +274,6 @@ const ResponsiveGrid: FC<Props> = ({ rights }) => {
                   bgcolor: "#31a354",
                   opacity: "1",
                 }}
-                
                 onClick={function (event) {
                   handleClose();
                   pauseAnimation();
@@ -213,4 +301,4 @@ const ResponsiveGrid: FC<Props> = ({ rights }) => {
   );
 };
 
-export default ResponsiveGrid;
+export default EmpirePage;
