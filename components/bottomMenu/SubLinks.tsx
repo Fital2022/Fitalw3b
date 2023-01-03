@@ -20,7 +20,7 @@ import { useRouter } from "next/router";
 // };
 
 interface Props extends IBottomMenuSubLink {
-  align?: 'flex-end' | 'flex-start';
+  align?: 'flex-end' | 'flex-start' | 'center';
 }
 
 export const OneLink: FC<Props> = ({ img, name, align = 'flex-end' }) => 

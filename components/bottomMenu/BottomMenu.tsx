@@ -27,11 +27,11 @@ export const BottomMenu: FC<Props> = ({ data }) => {
       <Box
         className={styles["container"]}
         sx={{
-            // position: "fixed",
-          // bottom: { xs: null, sm: null, md: 20 },
-          // marginTop: { xs: -70, sm: -82 },
-          // left: "45%",
-          // transform: "translate(-45%)",
+            position: "fixed",
+          bottom: 20,
+          marginTop: { xs: -70, sm: -82 },
+          left: "45%",
+          transform: "translate(-45%)",
           bgcolor: "rgba(255,255,255,0.3)",
           borderRadius: "10px",
           backdropFilter: "blur(2px)",
@@ -44,24 +44,31 @@ export const BottomMenu: FC<Props> = ({ data }) => {
           return (
             <Box
               key={element.link.id}
-              sx={{ position: "relative", bgcolor: "transparent" }}
+              sx={{alignItems: "center", bgcolor: "transparent" }}
             >
               <Box
                 sx={[
                   {
+                    alignItems: "center",
+                    justifyContent: "center",
                     display: "flex",
+                    bgcolor: "red",
+
                     position: "absolute",
-                    // top: "120px",
-                    left: "-25px",
+                    top: "120px",
+                    right: {xs: "5vw", sm: "5vw", md: "-3vw"},
                     zIndex: -10,
-                    height: "110px",
+                    height: "270px",
+                    minWidth: "510px",
                     visibility: "hidden",
                     opacity: 0,
                     transition: "all 0.5s ease",
+                    translate: "-3vw"
                 },
                   element.link.id === currentId && show   && {
                     visibility: "visible",
-                    top: "-120px",
+                    bgcolor: "gray",
+                    top: "-60vh",
                     zIndex: 1,
                     opacity: 1,
                     
@@ -69,11 +76,18 @@ export const BottomMenu: FC<Props> = ({ data }) => {
                 ]}
               >
                 {element.sublinks.map((sub) => (
-                  <OneLink
+                  <>
+                  {element.sublinks.length === 1 ?  <OneLink
                     key={sub.id}
                     {...sub}
-                    align={sub.id === 2 ? "flex-start" : "flex-end"}
-                  />
+                    align={"center"}
+                  /> : 
+                   <OneLink
+                   key={sub.id}
+                   {...sub}
+                   align={sub.id === 2 ? "flex-start" : "flex-end"}
+                 />}
+                  </>
                 ))}
               </Box>
               <Button

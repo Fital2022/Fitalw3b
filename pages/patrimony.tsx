@@ -309,17 +309,17 @@ const Patrimony: NextPage = () => {
         className={styles.container}
         sx={{ overflowX: "auto", width: "100%", maxWidth: "100%" }}
       >
-        <Box sx={{ display: "flex", width: "auto" }}>
+        {/* <Box sx={{ display: "flex", width: "auto" }}>
           {[1, 2, 3, 4, 5, 6, 7].map((element) => (
             <Button sx={{ ":not(:last-child)": { mr: 2 }, width: "100px" }}>
               prueba menu asdfasdfasdfasdf
             </Button>
           ))}
-        </Box>
+        </Box> */}
       </Box>
       <Box sx={{ width: "100%", height: "100%", marginTop: -6 }}>
         {/* <StepForm premium={true} iempire={empire} /> */}
-        <InmobiliaryForm inmobiliaryType={"casa"} img="" />
+        {/* <InmobiliaryForm inmobiliaryType={"casa"} img="" /> */}
         {/* <BankAccountForm accountName={"Wallet 1"} img={""} isWallet />
         <CashAccountDetails type={"wallets"} /> */}
         {/* <BankAccountForm
@@ -356,7 +356,7 @@ const Patrimony: NextPage = () => {
           ""
         )} */}
       </Box>
-      {/* <BottomMenu data={MENU_ACTIONS} /> */}
+      <BottomMenu data={MENU_ACTIONS} />
     </>
   );
 };
