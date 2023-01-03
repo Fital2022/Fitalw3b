@@ -31,6 +31,7 @@ export const MenuProfile = () => {
         sx={{
           width: { xs: "45px", md: "55px" },
           height: { xs: "45px", md: "55px" },
+          cursor: "pointer"
         }}
         onClick={handleClick}
       />
