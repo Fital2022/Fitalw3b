@@ -26,7 +26,7 @@ export const BottomMenuMobile: FC<Props> = ({ data }) => {
     }
   }, [show]);
 
-  function click(){
+  function click() {
     console.log("Click");
   }
 
@@ -44,19 +44,71 @@ export const BottomMenuMobile: FC<Props> = ({ data }) => {
       >
         <Box sx={{ display: "flex", width: "auto" }}>
           {data.map((element) => (
-            <Button
-              sx={{
-                ":not(:last-child)": { mr: 0.5 },
-                width: "100px",
-                color: { xs: "gray", sm: "gray", md: "black" },
-                bgcolor: "transparent",
-              }}
-              onClick={
-                click
-              }
+            <Box
+              key={element.link.id}
+              sx={{ alignItems: "center", bgcolor: "transparent" }}
             >
-              {element.link.name}
-            </Button>
+              <Box
+                sx={[
+                  {
+                    alignItems: "center",
+                    justifyContent: "center",
+                    display: "flex",
+                    position: "absolute",
+                    top: "120px",
+                    right: { xs: "7vw", sm: "15vw", md: "4vw" },
+                    zIndex: -10,
+                    height: "250px",
+                    minWidth: "250px",
+                    visibility: "hidden",
+                    opacity: 0,
+                    transition: "all 0.5s ease",
+                  },
+                  element.link.id === currentId &&
+                    show && {
+                      visibility: "visible",
+                      top: { xs: "none", sm: "-600px", md: "-600px" },
+                      bottom: { xs: "-600px", sm: "none", md: "none" },
+                      zIndex: 1,
+                      opacity: 1,
+                    },
+                ]}
+              >
+                {element.sublinks.map((sub) => (
+                  <>
+                    {element.sublinks.length === 1 ? (
+                      <OneLink key={sub.id} {...sub} align={"center"} />
+                    ) : (
+                      <OneLink
+                        key={sub.id}
+                        {...sub}
+                        align={sub.id === 2 ? "flex-start" : "flex-end"}
+                      />
+                    )}
+                  </>
+                ))}
+              </Box>
+              <Button
+                key={element.link.id}
+                sx={{
+                  padding: { xs: null, sm: "15px", md: "15px" },
+                  ":not(:last-child)": { mr: 0.5 },
+                  width: "100px",
+                  color: { xs: "gray", sm: "gray", md: "black" },
+                  bgcolor: "transparent",
+                }}
+                onClick={() => {
+                  setCurrentId((prevId) =>
+                    prevId === element.link.id
+                      ? undefined && dispatch(setSuboptions(false))
+                      : element.link.id
+                  );
+                  dispatch(setSuboptions(true));
+                }}
+              >
+                {element.link.name}
+              </Button>
+            </Box>
           ))}
         </Box>
       </Box>

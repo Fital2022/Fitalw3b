@@ -82,7 +82,8 @@ export const BottomMenu: FC<Props> = ({ data }) => {
                   element.link.id === currentId &&
                     show && {
                       visibility: "visible",
-                      top:{ xs: "600px" ,sm: "-600px" ,md:"-600px",},
+                      top:{ xs: "none" ,sm: "-600px" ,md:"-600px",},
+                      bottom: {xs: "-600px", sm:"none", md:"none"},
                       zIndex: 1,
                       opacity: 1,
                     },

@@ -60,7 +60,7 @@ export const OneLink: FC<Props> = ({ img, name, align = 'flex-end' }) =>
   return (
   // <Button draggable onDragStart={onDragStart} onDragEnd={onDragEnd} sx={{ flexDirection: "column", alignSelf: align }}>
   <Button onClick={setOptions} sx={{ flexDirection: "column", alignSelf: align }}>
-    <Avatar  src={img} sx={{width: '170px', height: '170px'}} />
+    <Avatar  src={img} sx={{width: {xs: "85px", sm: '170px', md: '170px'} , height: {xs: "85px", sm: '170px', md: '170px'}}} />
     <Typography
       sx={{ fontSize: "10px", textTransform: "none", color: "black" }}
     >
