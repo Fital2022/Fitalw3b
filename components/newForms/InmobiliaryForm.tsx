@@ -12,13 +12,14 @@ import {
 import { FC, FormEvent } from "react";
 import { useForm } from "../../hooks/formHooks";
 import CloseIcon from '@mui/icons-material/Close';
+import { IRight } from '../../interfaces/empireInterfaces';
 
 interface IInmobiliaryForm {
   escritura: string;
 }
 
 interface Props {
-  inmobiliaryType: "casa" | "departamento" | "bodega";
+  inmobiliaryType: IRight['type'];
   img: string;
 }
 export const InmobiliaryForm: FC<Props> = ({ inmobiliaryType, img }) => {

@@ -2,9 +2,10 @@ import { Avatar, Box, Button, Typography } from "@mui/material";
 import React, { FC, DragEvent } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IBottomMenuSubLink } from "../../interfaces";
-import { setDragg, setFormValues, setFormValues2, setSuboptions } from "../../store";
+import { setDragg, setFormValues, setFormValues2, setShowForm, setShowForm2, setSuboptions } from "../../store";
 import { AppDispatch, RootState } from '../../store/store';
 import { useRouter } from "next/router";
+import { IRight } from '../../interfaces/empireInterfaces';
 
 // interface Props {
 //   data: IBottomMenuSubLink[];
@@ -32,16 +33,18 @@ export const OneLink: FC<Props> = ({ img, name, align = 'flex-end' }) =>
 
   const setOptions = () => {
     let data = {
-      name: name,
+      name: name as IRight['type'],
       img: img
     }
     console.log(data)
     dispatch(setSuboptions(false))
-    if (route === "/testament") {
+    if (route === "/patrimony") {
       dispatch(setFormValues(data))
+      dispatch(setShowForm(true))
     }
     else {
       dispatch(setFormValues2(data))
+      dispatch(setShowForm2(true))
     }
   }
 

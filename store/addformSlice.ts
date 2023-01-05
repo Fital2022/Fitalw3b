@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IRight } from "../interfaces/empireInterfaces";
 
 export const addformSlice = createSlice({
   name: "form",
@@ -11,11 +12,11 @@ export const addformSlice = createSlice({
     suboptions: false,
     menuselected: "",
     formvalues: {
-      name: "",
+      name: "" as IRight['type'],
       img: ""
     },
     formvalues2: {
-      name: "",
+      name: "" as IRight['type'],
       img: ""
     }
   },
@@ -26,6 +27,7 @@ export const addformSlice = createSlice({
     },
     setShowForm: (state, { payload }: PayloadAction<boolean>) => {
       state.showform = payload;
+      console.log("Cambie su valor a: " + state.showform);
     },
     setShowForm2: (state, { payload }: PayloadAction<boolean>) => {
       state.showform2 = payload;
@@ -46,16 +48,17 @@ export const addformSlice = createSlice({
       console.log("El valor es: " + state.suboptions)
     },
 
-    setFormValues: (state, {payload: {name, img}}: PayloadAction<{name: string, img: string}> ) => {
+    setFormValues: (state, {payload: {name, img}}: PayloadAction<{name: IRight['type'], img: string}> ) => {
       state.formvalues.name = name;
       state.formvalues.img = img;
     },
-    setFormValues2: (state, {payload: {name, img}}: PayloadAction<{name: string, img: string}> ) => {
+    setFormValues2: (state, {payload: {name, img}}: PayloadAction<{name: IRight['type'], img: string}> ) => {
       state.formvalues2.name = name;
       state.formvalues2.img = img;
     },
     setMenuSelected: (state, {payload}: PayloadAction<string>) => {
       state.menuselected = payload;
+      console.log("El menuselected es: " + state.menuselected)
     },
 
   },

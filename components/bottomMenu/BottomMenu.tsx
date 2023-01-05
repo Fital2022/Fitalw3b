@@ -7,6 +7,7 @@ import {
   AppDispatch,
   RootState,
   setAutoSubOptions,
+  setMenuSelected,
   setSuboptions,
 } from "../../store";
 import styles from "../../styles/Things.module.css";
@@ -117,12 +118,20 @@ export const BottomMenu: FC<Props> = ({ data }) => {
                 },
               ]}
                 onClick={() => {
-                  setCurrentId((prevId) =>
-                    prevId === element.link.id
-                      ? undefined && dispatch(setSuboptions(false))
-                      : element.link.id
+                  setCurrentId((prevId) => {
+                    if (prevId === element.link.id) {
+                      dispatch(setSuboptions(false))
+                      // dispatch(setMenuSelected(""))
+                      return undefined; 
+                    }
+                    dispatch(setSuboptions(true));
+                    dispatch(setMenuSelected(element.link.name))
+                    return element.link.id;
+                  }
+                    // prevId === element.link.id
+                    //   ? undefined && dispatch(setSuboptions(false)) && console.log("Se cierra el menu")
+                    //   : element.link.id 
                   );
-                  dispatch(setSuboptions(true));
                 }}
               >
                 {element.link.name}

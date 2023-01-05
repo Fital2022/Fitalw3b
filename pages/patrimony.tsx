@@ -11,7 +11,6 @@ import {
   RootState,
   setShowForm2,
   setSuboptions,
-  setFormValues2,
 } from "../store";
 import {
   IRight,
@@ -275,22 +274,23 @@ const Patrimony: NextPage = () => {
     dispatch(setShowForm2(true));
   };
 
-  const dispatch = useDispatch<AppDispatch>();
-
-  const closeform = () => {
-    dispatch(setShowForm2(false));
-    let data = {
-      name: "",
-      img: "",
-    };
-   console.log("Click");
+  const closeform = ()  => {
+    dispatch(setShowForm(false));
   };
+
+  const dispatch = useDispatch<AppDispatch>();
 
   let draggmode = useSelector((state: RootState) => state.form.isDraggin);
 
   let formmode = useSelector((state: RootState) => state.form.showform2);
 
   let empire = useSelector((state: RootState) => state.empire.selectedEmpire);
+
+  let menuoption = useSelector((state: RootState) => state.form.menuselected);
+
+  let show = useSelector((state: RootState) => state.form.showform);
+
+  let { name, img } = useSelector((state: RootState) => state.form.formvalues);
 
   const allowDrop = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -314,28 +314,53 @@ const Patrimony: NextPage = () => {
         </Box> */}
       <Box sx={{ width: "100%", height: "100%", marginTop: -6 }}>
         <>
-          {/* { ( ()=> {
-          switch (key) {
-            case value:
-              
-              break;
-          
-            default:
-              break;
-          }
-        }) } */}
+          {(() => {
+            switch (menuoption) {
+              case "Dinero":
+                return show ? (
+                  <>
+                    <BankAccountForm
+                      accountName={name}
+                      img={img}
+                      isWallet={false}
+                      setShow={closeform}
+                    />
+                    <CashAccountDetails type={"cuentas"} />
+                  </>
+                ) : null;
+              case "Mobiliario":
+                return show ? (
+                  <>
+                    <>
+                      <InmobiliaryForm inmobiliaryType={name} img={img} />
+                    </>
+                  </>
+                ): null;
+              case "Inmobiliario":
+                return show ? (
+                  <>
+                    <>
+                    <InmobiliaryForm inmobiliaryType={name} img={img} />
+                    </>
+                  </>
+                ) : null;
+              case "Derechos":
+                return show ? (
+                  <>
+                    <>
+                    <InmobiliaryForm inmobiliaryType={name} img={img} />
+                    </>
+                  </>
+                ) : null
+              default:
+                break;
+            }
+          })()}
         </>
         {/* <StepForm premium={true} iempire={empire} /> */}
-        {/* <InmobiliaryForm inmobiliaryType={"casa"} img="" /> */}
+
         {/* <BankAccountForm accountName={"Wallet 1"} img={""} isWallet />
         <CashAccountDetails type={"wallets"} /> */}
-        <BankAccountForm
-          setShow={closeform}
-          accountName={"Cuenta Bancaria"}
-          img={""}
-          isWallet={false}
-        />
-        <CashAccountDetails type={"cuentas"} />
 
         {/* <div onDrop={onDropEntry} onDragOver={allowDrop}>
           {draggmode ? (
