@@ -90,13 +90,17 @@ export const BottomMenuMobile: FC<Props> = ({ data }) => {
               </Box>
               <Button
                 key={element.link.id}
-                sx={{
+                sx={[{
                   padding: { xs: null, sm: "15px", md: "15px" },
                   ":not(:last-child)": { mr: 0.5 },
                   width: "100px",
                   color: { xs: "gray", sm: "gray", md: "black" },
                   bgcolor: "transparent",
-                }}
+                },
+                element.link.id === currentId && {
+                  color: { xs: "#8E4BA8", sm: "#8E4BA8", md: "#8E4BA8" } ,
+                },
+              ]}
                 onClick={() => {
                   setCurrentId((prevId) =>
                     prevId === element.link.id
