@@ -21,12 +21,12 @@ import {
 import row from "@nextui-org/react/types/row";
 import React, { FC, useState } from "react";
 import { Button, Grid } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 import {
   IRight,
   IBeneficiary,
   IRightBeneficiary,
 } from "../../interfaces/empireInterfaces";
-
 
 const StyledSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -34,55 +34,55 @@ const StyledSwitch = styled((props: SwitchProps) => (
   width: 42,
   height: 26,
   padding: 0,
-  '& .MuiSwitch-switchBase': {
+  "& .MuiSwitch-switchBase": {
     padding: 0,
     margin: 2,
-    transitionDuration: '100ms',
-    '&.Mui-checked': {
-      transform: 'translateX(16px)',
-      color: '#fff',
-      '& + .MuiSwitch-track': {
-        backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#65C466',
+    transitionDuration: "100ms",
+    "&.Mui-checked": {
+      transform: "translateX(16px)",
+      color: "#fff",
+      "& + .MuiSwitch-track": {
+        backgroundColor: theme.palette.mode === "dark" ? "#2ECA45" : "#65C466",
         opacity: 1,
         border: 0,
       },
-      '&.Mui-disabled + .MuiSwitch-track': {
+      "&.Mui-disabled + .MuiSwitch-track": {
         opacity: 0.5,
       },
     },
-    '&.Mui-focusVisible .MuiSwitch-thumb': {
-      color: '#33cf4d',
-      border: '6px solid #fff',
+    "&.Mui-focusVisible .MuiSwitch-thumb": {
+      color: "#33cf4d",
+      border: "6px solid #fff",
     },
-    '&.Mui-disabled .MuiSwitch-thumb': {
+    "&.Mui-disabled .MuiSwitch-thumb": {
       color:
-        theme.palette.mode === 'light'
+        theme.palette.mode === "light"
           ? theme.palette.grey[100]
           : theme.palette.grey[600],
     },
-    '&.Mui-disabled + .MuiSwitch-track': {
-      opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
+    "&.Mui-disabled + .MuiSwitch-track": {
+      opacity: theme.palette.mode === "light" ? 0.7 : 0.3,
     },
   },
-  '& .MuiSwitch-thumb': {
-    boxSizing: 'border-box',
+  "& .MuiSwitch-thumb": {
+    boxSizing: "border-box",
     width: 22,
     height: 22,
   },
-  '& .MuiSwitch-track': {
+  "& .MuiSwitch-track": {
     borderRadius: 26 / 2,
-    backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
+    backgroundColor: theme.palette.mode === "light" ? "#E9E9EA" : "#39393D",
     opacity: 1,
-    transition: theme.transitions.create(['background-color'], {
+    transition: theme.transitions.create(["background-color"], {
       duration: 500,
     }),
   },
 }));
 
-
 interface Props {
   rights: IRight[];
   beneficiarys: IBeneficiary[];
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 function createData(
@@ -155,22 +155,25 @@ function Row(props: {
                 <TableHead></TableHead>
                 <TableBody>
                   {rights.map((right) => (
-                    
                     <TableRow key={right.id}>
                       <TableCell component="th" scope="row">
                         {right.type}
                       </TableCell>
                       <TableCell align="right">
-                        <StyledSwitch  />
+                        <StyledSwitch />
                       </TableCell>
                     </TableRow>
                   ))}
                   <TableRow>
-                    <Grid container  justifyContent={"flex-end"}>
+                    <Grid container justifyContent={"flex-end"}>
                       <Grid item>
                         <Button
                           sx={{
-                            marginLeft: {xs: "10vw", sm: "2.2vw", md:"0.1vw"} ,
+                            marginLeft: {
+                              xs: "10vw",
+                              sm: "2.2vw",
+                              md: "0.1vw",
+                            },
                             marginTop: "10px",
                             bgcolor: "#1BD145",
                             borderRadius: "5px",
@@ -227,27 +230,32 @@ function Row(props: {
             </Box> */}
             <Box margin={1}>
               <Typography variant="h6" gutterBottom component="div">
-              Porcentaje
+                Porcentaje
               </Typography>
               <Table size="small" aria-label="purchases">
                 <TableHead></TableHead>
                 <TableBody>
-                {rights.map((right, index) => (
+                  {rights.map((right, index) => (
                     <TableRow key={right.id}>
                       <TableCell component="th" scope="row">
                         {right.type}
                       </TableCell>
                       <TableCell align="right">
-                        <input style={{width: "40px"}} width={"5px"} type={"number"} value={beneficiary.properties[index].percentage}></input>
+                        <input
+                          style={{ width: "40px" }}
+                          width={"5px"}
+                          type={"number"}
+                          value={beneficiary.properties[index].percentage}
+                        ></input>
                       </TableCell>
                     </TableRow>
                   ))}
                   <TableRow>
-                    <Grid container  justifyContent={"flex-end"}>
+                    <Grid container justifyContent={"flex-end"}>
                       <Grid item>
                         <Button
                           sx={{
-                            marginLeft: {xs: "9vw", sm: "1.9vw", md:"0"} ,
+                            marginLeft: { xs: "9vw", sm: "1.9vw", md: "0" },
                             marginTop: "10px",
                             bgcolor: "#1BD145",
                             borderRadius: "5px",
@@ -278,7 +286,7 @@ const rows = [
   createData("Gingerbread", 356, 16.0, 49, 3.9, 1.5),
 ];
 
-export const NewDataTable: FC<Props> = ({ rights, beneficiarys }) => {
+export const NewDataTable: FC<Props> = ({ rights, beneficiarys, setShow }) => {
   return (
     <>
       <Box
@@ -291,6 +299,23 @@ export const NewDataTable: FC<Props> = ({ rights, beneficiarys }) => {
           mx: "auto",
         }}
       >
+        <Grid container justifyContent={"flex-end"}>
+          <Box sx={{ display: "flex", alignItems: "right", mb: 3 }}>
+            <IconButton
+              sx={{
+                border: "1px solid #707070",
+                right: "10px",
+                ":hover": {
+                  bgcolor: "#707070",
+                  color: "white",
+                },
+              }}
+              onClick={() => setShow(false)}
+            >
+              <CloseIcon />
+            </IconButton>
+          </Box>
+        </Grid>
         <TableContainer>
           <Table aria-label="collapsible table" stickyHeader>
             <TableHead></TableHead>

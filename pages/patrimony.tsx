@@ -274,7 +274,7 @@ const Patrimony: NextPage = () => {
     dispatch(setShowForm2(true));
   };
 
-  const closeform = ()  => {
+  const closeform = () => {
     dispatch(setShowForm(false));
   };
 
@@ -322,7 +322,7 @@ const Patrimony: NextPage = () => {
                     <BankAccountForm
                       accountName={name}
                       img={img}
-                      isWallet={name.includes('Wallet') ? true : false}
+                      isWallet={name.includes("Wallet") ? true : false}
                       setShow={closeform}
                     />
                     <CashAccountDetails type={"cuentas"} />
@@ -330,22 +330,34 @@ const Patrimony: NextPage = () => {
                 ) : null;
               case "Mobiliario":
                 return show ? (
-                    <>
-                      <InmobiliaryForm inmobiliaryType={name} img={img} />
-                    </>
-                ): null;
+                  <>
+                    <InmobiliaryForm
+                      inmobiliaryType={name}
+                      img={img}
+                      setShow={closeform}
+                    />
+                  </>
+                ) : null;
               case "Inmobiliario":
                 return show ? (
-                    <>
-                    <InmobiliaryForm inmobiliaryType={name} img={img} />
-                    </>
+                  <>
+                    <InmobiliaryForm
+                      inmobiliaryType={name}
+                      img={img}
+                      setShow={closeform}
+                    />
+                  </>
                 ) : null;
               case "Derechos":
                 return show ? (
-                    <>
-                    <InmobiliaryForm inmobiliaryType={name} img={img} />
-                    </>
-                ) : null
+                  <>
+                    <InmobiliaryForm
+                      inmobiliaryType={name}
+                      img={img}
+                      setShow={closeform}
+                    />
+                  </>
+                ) : null;
               default:
                 break;
             }

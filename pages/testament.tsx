@@ -72,10 +72,9 @@ const Testament: NextPage = () => {
     dispatch(setShowForm(true));
   };
 
-
   const dispatch = useDispatch<AppDispatch>();
 
-  const closeform = ()  => {
+  const closeform = () => {
     dispatch(setShowForm2(false));
   };
 
@@ -104,8 +103,7 @@ const Testament: NextPage = () => {
       <BottomMenuMobile data={MENU_ACTIONS} />
 
       <Box alignItems={"center"} sx={{ marginTop: 10 }}>
-
-      <>
+        <>
           {(() => {
             switch (menuoption) {
               case "Arbol":
@@ -122,16 +120,16 @@ const Testament: NextPage = () => {
                 ) : null;
               case "Herencia":
                 return show ? (
-                    <>
-                      <NewDataTable rights={rights} beneficiarys={beneficiary} />
-                    </>
-                ): null;
-              case "Resumen":
-                return show ? (
-                    <>
-                    
-                    </>
+                  <>
+                    <NewDataTable
+                      rights={rights}
+                      beneficiarys={beneficiary}
+                      setShow={closeform}
+                    />
+                  </>
                 ) : null;
+              case "Resumen":
+                return show ? <></> : null;
 
               default:
                 break;

@@ -49,7 +49,6 @@ export const MainFormContainer: FC<Props> = ({
       </Box>
       <Box
         sx={{
-         
           p: 3,
           bgcolor: "#fff",
           position: "absolute",

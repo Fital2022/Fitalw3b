@@ -11,18 +11,23 @@ import {
 } from "@mui/material";
 import { FC, FormEvent } from "react";
 import { useForm } from "../../hooks/formHooks";
-import CloseIcon from '@mui/icons-material/Close';
-import { IRight } from '../../interfaces/empireInterfaces';
+import CloseIcon from "@mui/icons-material/Close";
+import { IRight } from "../../interfaces/empireInterfaces";
 
 interface IInmobiliaryForm {
   escritura: string;
 }
 
 interface Props {
-  inmobiliaryType: IRight['type'];
+  inmobiliaryType: IRight["type"];
   img: string;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
-export const InmobiliaryForm: FC<Props> = ({ inmobiliaryType, img }) => {
+export const InmobiliaryForm: FC<Props> = ({
+  inmobiliaryType,
+  img,
+  setShow,
+}) => {
   const [data, onChange, onReset] = useForm({
     escritura: "",
   } as IInmobiliaryForm);
@@ -70,7 +75,8 @@ export const InmobiliaryForm: FC<Props> = ({ inmobiliaryType, img }) => {
               <Typography
                 sx={{ color: "#6A6A6A", fontSize: "20px", fontWeight: "600" }}
               >
-                {inmobiliaryType.charAt(0).toUpperCase() + inmobiliaryType.slice(1)}
+                {inmobiliaryType.charAt(0).toUpperCase() +
+                  inmobiliaryType.slice(1)}
               </Typography>
             </Box>
           </Grid>
@@ -85,7 +91,7 @@ export const InmobiliaryForm: FC<Props> = ({ inmobiliaryType, img }) => {
                     color: "white",
                   },
                 }}
-                // onClick={() => setShow(false)}
+                onClick={() => setShow(false)}
               >
                 <CloseIcon />
               </IconButton>
