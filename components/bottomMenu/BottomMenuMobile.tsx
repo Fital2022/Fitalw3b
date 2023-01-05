@@ -7,6 +7,8 @@ import {
   AppDispatch,
   RootState,
   setAutoSubOptions,
+  setMenuSelected,
+  setShowForm2,
   setSuboptions,
 } from "../../store";
 import styles from "../../styles/Things.module.css";
@@ -64,7 +66,7 @@ export const BottomMenuMobile: FC<Props> = ({ data }) => {
                     opacity: 0,
                     transition: "all 0.5s ease",
                   },
-                  element.link.id === currentId &&
+                  element.link.id === currentId && element.link.name != 'Herencia' &&
                     show && {
                       visibility: "visible",
                       top: { xs: "none", sm: "-600px", md: "-600px" },
@@ -101,14 +103,23 @@ export const BottomMenuMobile: FC<Props> = ({ data }) => {
                   color: { xs: "#8E4BA8", sm: "#8E4BA8", md: "#8E4BA8" } ,
                 },
               ]}
-                onClick={() => {
-                  setCurrentId((prevId) =>
-                    prevId === element.link.id
-                      ? undefined && dispatch(setSuboptions(false))
-                      : element.link.id
-                  );
+              onClick={() => {
+                setCurrentId((prevId) => {
+                  if (prevId === element.link.id) {
+                    dispatch(setSuboptions(false))
+                    // dispatch(setMenuSelected(""))
+                    return undefined; 
+                  }
                   dispatch(setSuboptions(true));
-                }}
+                  dispatch(setMenuSelected(element.link.name))
+                  if (element.link.name === 'Herencia') {
+                    dispatch(setShowForm2(true));
+                  }
+                  return element.link.id;
+                }
+            
+                );
+              }}
               >
                 {element.link.name}
               </Button>

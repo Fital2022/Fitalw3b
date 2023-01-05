@@ -261,7 +261,7 @@ const Patrimony: NextPage = () => {
     img = dataform.img;
     console.log("Tengo el tipo: " + tipo + " cuya imagen es: " + img);
     if (tipo.length > 0) {
-      dispatch(setShowForm2(true));
+      dispatch(setShowForm(true));
     }
   }, [dataform]);
 
@@ -322,7 +322,7 @@ const Patrimony: NextPage = () => {
                     <BankAccountForm
                       accountName={name}
                       img={img}
-                      isWallet={false}
+                      isWallet={name.includes('Wallet') ? true : false}
                       setShow={closeform}
                     />
                     <CashAccountDetails type={"cuentas"} />
@@ -330,27 +330,21 @@ const Patrimony: NextPage = () => {
                 ) : null;
               case "Mobiliario":
                 return show ? (
-                  <>
                     <>
                       <InmobiliaryForm inmobiliaryType={name} img={img} />
                     </>
-                  </>
                 ): null;
               case "Inmobiliario":
                 return show ? (
-                  <>
                     <>
                     <InmobiliaryForm inmobiliaryType={name} img={img} />
                     </>
-                  </>
                 ) : null;
               case "Derechos":
                 return show ? (
-                  <>
                     <>
                     <InmobiliaryForm inmobiliaryType={name} img={img} />
                     </>
-                  </>
                 ) : null
               default:
                 break;

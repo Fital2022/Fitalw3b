@@ -8,6 +8,7 @@ import {
   RootState,
   setAutoSubOptions,
   setMenuSelected,
+  setShowForm2,
   setSuboptions,
 } from "../../store";
 import styles from "../../styles/Things.module.css";
@@ -80,7 +81,7 @@ export const BottomMenu: FC<Props> = ({ data }) => {
                     opacity: 0,
                     transition: "all 0.5s ease",
                   },
-                  element.link.id === currentId &&
+                  element.link.id === currentId && element.link.name != 'Herencia' &&
                     show && {
                       visibility: "visible",
                       top:{ xs: "none" ,sm: "-600px" ,md:"-600px",},
@@ -126,6 +127,9 @@ export const BottomMenu: FC<Props> = ({ data }) => {
                     }
                     dispatch(setSuboptions(true));
                     dispatch(setMenuSelected(element.link.name))
+                    if (element.link.name === 'Herencia') {
+                      dispatch(setShowForm2(true));
+                    }
                     return element.link.id;
                   }
                     // prevId === element.link.id
