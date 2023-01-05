@@ -65,7 +65,6 @@ const Pensions: NextPage = () => {
 
   return (
     <>
-      {/* prueba */}
       <Grid item xs={12}>
         <Box
           marginTop={4}

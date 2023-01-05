@@ -11,6 +11,7 @@ import {
   RootState,
   setShowForm2,
   setSuboptions,
+  setFormValues2,
 } from "../store";
 import {
   IRight,
@@ -259,7 +260,7 @@ const Patrimony: NextPage = () => {
     console.log("Aqui estan los valores");
     tipo = dataform.name as IRight["type"];
     img = dataform.img;
-    console.log("Tengo el tipo: " + tipo + " cuya imagen es: " + img)
+    console.log("Tengo el tipo: " + tipo + " cuya imagen es: " + img);
     if (tipo.length > 0) {
       dispatch(setShowForm2(true));
     }
@@ -276,6 +277,15 @@ const Patrimony: NextPage = () => {
 
   const dispatch = useDispatch<AppDispatch>();
 
+  const closeform = () => {
+    dispatch(setShowForm2(false));
+    let data = {
+      name: "",
+      img: "",
+    };
+   console.log("Click");
+  };
+
   let draggmode = useSelector((state: RootState) => state.form.isDraggin);
 
   let formmode = useSelector((state: RootState) => state.form.showform2);
@@ -289,8 +299,8 @@ const Patrimony: NextPage = () => {
 
   return (
     <>
-        <BottomMenuMobile data={MENU_ACTIONS} />
-      
+      <BottomMenuMobile data={MENU_ACTIONS} />
+
       {/* <Box
         className={styles.container}
         sx={{ overflowX: "auto", width: "100%", maxWidth: "100%" }}
@@ -304,7 +314,7 @@ const Patrimony: NextPage = () => {
         </Box> */}
       <Box sx={{ width: "100%", height: "100%", marginTop: -6 }}>
         <>
-        {/* { ( ()=> {
+          {/* { ( ()=> {
           switch (key) {
             case value:
               
@@ -320,6 +330,7 @@ const Patrimony: NextPage = () => {
         {/* <BankAccountForm accountName={"Wallet 1"} img={""} isWallet />
         <CashAccountDetails type={"wallets"} /> */}
         <BankAccountForm
+          setShow={closeform}
           accountName={"Cuenta Bancaria"}
           img={""}
           isWallet={false}

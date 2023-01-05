@@ -7,10 +7,11 @@ import {
   SxProps,
   Theme,
   IconButton,
+  Grid,
 } from "@mui/material";
 import { FC, FormEvent } from "react";
 import { useForm } from "../../hooks/formHooks";
-import CloseIcon from '@mui/icons-material/Close';
+import CloseIcon from "@mui/icons-material/Close";
 interface ICashForm {
   banco: string;
 }
@@ -19,8 +20,14 @@ interface Props {
   accountName: string;
   img: string;
   isWallet: boolean;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
-export const BankAccountForm: FC<Props> = ({ accountName, img, isWallet }) => {
+export const BankAccountForm: FC<Props> = ({
+  accountName,
+  img,
+  isWallet,
+  setShow,
+}) => {
   const [data, onChange, onReset] = useForm<ICashForm>({ banco: "" });
   const { banco } = data;
   const onSubmit = (event: FormEvent) => {
@@ -76,20 +83,59 @@ export const BankAccountForm: FC<Props> = ({ accountName, img, isWallet }) => {
           maxWidth: "95%",
         }}
       >
-        <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
-        <IconButton
-          sx={{
-            border: "1px solid #707070",
-            right: "10px",
-            ":hover": {
-              bgcolor: "#707070",
-              color: "white",
-            },
-          }}
-          // onClick={() => setShow(false)}
-        >
-          <CloseIcon />
-        </IconButton>
+        {/* prueba */}
+        <Grid container>
+          <Grid item xs={6}>
+            <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+              <Avatar
+                src={img}
+                sx={{
+                  width: { xs: "55px", sm: "70px" },
+                  height: { xs: "55px", sm: "70px" },
+                  mr: 3,
+                }}
+              />
+              <Typography
+                sx={{ color: "#6A6A6A", fontSize: "20px", fontWeight: "600" }}
+              >
+                {accountName.charAt(0).toUpperCase() + accountName.slice(1)}
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={6} container justifyContent={"flex-end"}>
+            <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+              <IconButton
+                sx={{
+                  border: "1px solid #707070",
+                  right: "10px",
+                  ":hover": {
+                    bgcolor: "#707070",
+                    color: "white",
+                  },
+                }}
+                onClick={() => setShow(false)}
+              >
+                <CloseIcon />
+              </IconButton>
+            </Box>
+          </Grid>
+        </Grid>
+        {/* prueba */}
+
+        {/* <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+          <IconButton
+            sx={{
+              border: "1px solid #707070",
+              right: "10px",
+              ":hover": {
+                bgcolor: "#707070",
+                color: "white",
+              },
+            }}
+            // onClick={() => setShow(false)}
+          >
+            <CloseIcon />
+          </IconButton>
           <Avatar
             src={img}
             sx={{
@@ -103,7 +149,7 @@ export const BankAccountForm: FC<Props> = ({ accountName, img, isWallet }) => {
           >
             {accountName.charAt(0).toUpperCase() + accountName.slice(1)}
           </Typography>
-        </Box>
+        </Box> */}
         <OutlinedInput
           placeholder="Banco*"
           sx={inputStyles}
