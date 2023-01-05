@@ -259,6 +259,7 @@ const Patrimony: NextPage = () => {
     console.log("Aqui estan los valores");
     tipo = dataform.name as IRight["type"];
     img = dataform.img;
+    console.log("Tengo el tipo: " + tipo + " cuya imagen es: " + img)
     if (tipo.length > 0) {
       dispatch(setShowForm2(true));
     }
@@ -302,16 +303,28 @@ const Patrimony: NextPage = () => {
           ))}
         </Box> */}
       <Box sx={{ width: "100%", height: "100%", marginTop: -6 }}>
+        <>
+        {/* { ( ()=> {
+          switch (key) {
+            case value:
+              
+              break;
+          
+            default:
+              break;
+          }
+        }) } */}
+        </>
         {/* <StepForm premium={true} iempire={empire} /> */}
         {/* <InmobiliaryForm inmobiliaryType={"casa"} img="" /> */}
         {/* <BankAccountForm accountName={"Wallet 1"} img={""} isWallet />
         <CashAccountDetails type={"wallets"} /> */}
-        {/* <BankAccountForm
+        <BankAccountForm
           accountName={"Cuenta Bancaria"}
           img={""}
           isWallet={false}
         />
-        <CashAccountDetails type={"cuentas"} /> */}
+        <CashAccountDetails type={"cuentas"} />
 
         {/* <div onDrop={onDropEntry} onDragOver={allowDrop}>
           {draggmode ? (

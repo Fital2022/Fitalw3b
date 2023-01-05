@@ -285,7 +285,8 @@ export const NewDataTable: FC<Props> = ({ rights, beneficiarys }) => {
         sx={{
           bgcolor: "rgba(255, 255, 255, 0.3)",
           backdropFilter: "blur(0,5px)",
-          width: "1826px",
+          width: "1556px",
+          height: "100%",
           maxWidth: "95%",
           mx: "auto",
         }}

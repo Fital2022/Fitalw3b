@@ -35,6 +35,7 @@ export const OneLink: FC<Props> = ({ img, name, align = 'flex-end' }) =>
       name: name,
       img: img
     }
+    console.log(data)
     dispatch(setSuboptions(false))
     if (route === "/testament") {
       dispatch(setFormValues(data))

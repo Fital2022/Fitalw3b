@@ -6,9 +6,11 @@ import {
   Button,
   SxProps,
   Theme,
+  IconButton,
 } from "@mui/material";
 import { FC, FormEvent } from "react";
 import { useForm } from "../../hooks/formHooks";
+import CloseIcon from '@mui/icons-material/Close';
 interface ICashForm {
   banco: string;
 }
@@ -38,6 +40,32 @@ export const BankAccountForm: FC<Props> = ({ accountName, img, isWallet }) => {
         mt: { xs: 7, sm: 10 },
       }}
     >
+      {/* <Box
+        sx={{
+         
+          p: 3,
+          bgcolor: "#fff",
+          position: "relative",
+          width: "100%",
+        }}
+      >
+        <IconButton
+          sx={{
+            border: "1px solid #707070",
+            position: "relative",
+            left: "9vw",
+            // top: -40,
+            // left: -40,
+            ":hover": {
+              bgcolor: "#707070",
+              color: "white",
+            },
+          }}
+          // onClick={() => setShow(false)}
+        >
+          <CloseIcon />
+        </IconButton>
+      </Box> */}
       <Box
         onSubmit={onSubmit}
         component="form"
@@ -49,6 +77,19 @@ export const BankAccountForm: FC<Props> = ({ accountName, img, isWallet }) => {
         }}
       >
         <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+        <IconButton
+          sx={{
+            border: "1px solid #707070",
+            right: "10px",
+            ":hover": {
+              bgcolor: "#707070",
+              color: "white",
+            },
+          }}
+          // onClick={() => setShow(false)}
+        >
+          <CloseIcon />
+        </IconButton>
           <Avatar
             src={img}
             sx={{

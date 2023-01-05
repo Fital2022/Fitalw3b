@@ -9,6 +9,7 @@ export const addformSlice = createSlice({
     currentid: 6,
     userid: 5,
     suboptions: false,
+    menuselected: "",
     formvalues: {
       name: "",
       img: ""
@@ -53,6 +54,9 @@ export const addformSlice = createSlice({
       state.formvalues2.name = name;
       state.formvalues2.img = img;
     },
+    setMenuSelected: (state, {payload}: PayloadAction<string>) => {
+      state.menuselected = payload;
+    },
 
   },
 });
@@ -69,4 +73,5 @@ export const {
   setAutoSubOptions,
   setFormValues,
   setFormValues2,
+  setMenuSelected,
 } = addformSlice.actions;
