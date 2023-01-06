@@ -17,6 +17,7 @@ import { AppDispatch, RootState, setShowForm, setShowForm2 } from "../store";
 import { BottomMenu2 } from "../components/bottomMenu/BottomMenu2";
 import { NewDataTable } from "../components/tables/NewDataTable";
 import { BottomMenuMobile } from "../components/bottomMenu/BottomMenuMobile";
+import { PersonForm } from "../components/newForms";
 
 const MENU_ACTIONS: IBottomMenuData[] = [
   {
@@ -109,6 +110,7 @@ const Testament: NextPage = () => {
               case "Arbol":
                 return show ? (
                   <>
+                  <PersonForm img={img} person={name} />
                     {/* <BankAccountForm
                       accountName={name}
                       img={img}
