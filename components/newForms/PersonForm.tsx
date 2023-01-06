@@ -7,6 +7,7 @@ import {
   FormControlLabel,
   FormLabel,
   Grid,
+  IconButton,
   OutlinedInput,
   Radio,
   RadioGroup,
@@ -17,6 +18,7 @@ import {
 import { FC, useState } from "react";
 import { useForm } from "../../hooks/formHooks";
 import styles from "../../styles/Things.module.css";
+import CloseIcon from '@mui/icons-material/Close';
 
 interface IFormData {
   nombre: string;
@@ -31,8 +33,9 @@ interface IFormData {
 interface Props {
   person: string;
   img: string;
+  setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
-export const PersonForm: FC<Props> = ({ img, person }) => {
+export const PersonForm: FC<Props> = ({ img, person, setShow }) => {
   const [showSucesion, setShowSucesion] = useState<boolean>(false);
   const [data, onChange, onReset] = useForm<IFormData>({
     curp: "",
@@ -67,7 +70,45 @@ export const PersonForm: FC<Props> = ({ img, person }) => {
           maxWidth: "95%",
         }}
       >
-        <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+        {/* prueba */}
+        <Grid container>
+          <Grid item xs={6}>
+            <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+              <Avatar
+                src={img}
+                sx={{
+                  width: { xs: "55px", sm: "70px" },
+                  height: { xs: "55px", sm: "70px" },
+                  mr: 3,
+                }}
+              />
+              <Typography
+                sx={{ color: "#6A6A6A", fontSize: "20px", fontWeight: "600" }}
+              >
+                {person.charAt(0).toUpperCase() + person.slice(1)}
+              </Typography>
+            </Box>
+          </Grid>
+          <Grid item xs={6} container justifyContent={"flex-end"}>
+            <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
+              <IconButton
+                sx={{
+                  border: "1px solid #707070",
+                  right: "10px",
+                  ":hover": {
+                    bgcolor: "#707070",
+                    color: "white",
+                  },
+                }}
+                onClick={() => setShow(false)}
+              >
+                <CloseIcon />
+              </IconButton>
+            </Box>
+          </Grid>
+        </Grid>
+        {/* prueba */}
+        {/* <Box sx={{ display: "flex", alignItems: "center", mb: 3 }}>
           <Avatar
             src={img}
             sx={{
@@ -81,7 +122,7 @@ export const PersonForm: FC<Props> = ({ img, person }) => {
           >
             {person.charAt(0).toUpperCase() + person.slice(1)}
           </Typography>
-        </Box>
+        </Box> */}
         <OutlinedInput
           sx={inputStyles}
           placeholder="Nombre Completo*"

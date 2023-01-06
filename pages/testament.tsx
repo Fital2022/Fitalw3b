@@ -110,7 +110,7 @@ const Testament: NextPage = () => {
               case "Arbol":
                 return show ? (
                   <>
-                  <PersonForm img={img} person={name} />
+                    <PersonForm img={img} person={name} setShow={closeform} />
                     {/* <BankAccountForm
                       accountName={name}
                       img={img}
