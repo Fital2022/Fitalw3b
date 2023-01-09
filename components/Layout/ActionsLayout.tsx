@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { IEmpire } from "../../interfaces/empireInterfaces";
 import { RootState } from "../../store";
-import { MenuProfile } from "../Ui/MenuProfile";
+import { MenuProfile } from "../Ui/MenuProfilee";
 import {
   HouseOutlined,
   FileOpenOutlined,

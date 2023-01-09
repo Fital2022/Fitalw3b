@@ -1,4 +1,4 @@
 export * from "./SideBar";
 export * from "./TopBar";
 export * from "./FormRegistry";
-export * from "./MenuProfile";
+export * from "./MenuProfilee";

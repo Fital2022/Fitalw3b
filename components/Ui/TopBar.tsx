@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IEmpire } from "../../interfaces/empireInterfaces";
 import { RootState, selectEscrow } from "../../store";
 import { useRouter } from "next/router";
-import { MenuProfile } from "./MenuProfile";
+import { MenuProfile } from "./MenuProfilee";
 
 export const TopBar = () => {
   const { name, type } =
