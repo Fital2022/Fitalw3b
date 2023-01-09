@@ -27,6 +27,8 @@ import {
   IBeneficiary,
   IRightBeneficiary,
 } from "../../interfaces/empireInterfaces";
+import { useDispatch } from "react-redux";
+import { AppDispatch, statusBeneficiaryright } from "../../store";
 
 const StyledSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -85,27 +87,6 @@ interface Props {
   setShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number,
-  price: number
-) {
-  return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-    price,
-    history: [
-      { date: "2020-01-05", customerId: "11091700", amount: 3 },
-      { date: "2020-01-02", customerId: "Anonymous", amount: 1 },
-    ],
-  };
-}
 
 function Row(props: {
   idx: number;
@@ -116,6 +97,22 @@ function Row(props: {
   const { rights } = props;
   const { idx } = props;
   const [open, setOpen] = React.useState(false);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const changestatus = (idx:number,index: number, active: boolean) => {
+
+    let data = {
+      beneficiary: idx,
+      index: index,
+      active: !active,
+    }
+    console.log("Se acciono el switch")
+    console.log(data)
+
+    dispatch(statusBeneficiaryright(data));
+
+  };
+
 
   return (
     <>
@@ -154,13 +151,13 @@ function Row(props: {
               <Table size="small" aria-label="purchases">
                 <TableHead></TableHead>
                 <TableBody>
-                  {rights.map((right) => (
-                    <TableRow key={right.id}>
+                  {beneficiary.properties.map((property, index) => (
+                    <TableRow key={property.id}>
                       <TableCell component="th" scope="row">
-                        {right.type}
+                       {property.type}
                       </TableCell>
                       <TableCell align="right">
-                        <StyledSwitch />
+                        <StyledSwitch checked={property.active} onChange={() => changestatus(idx,index,property.active)} />
                       </TableCell>
                     </TableRow>
                   ))}
@@ -235,18 +232,22 @@ function Row(props: {
               <Table size="small" aria-label="purchases">
                 <TableHead></TableHead>
                 <TableBody>
-                  {rights.map((right, index) => (
-                    <TableRow key={right.id}>
+                  {beneficiary.properties.map((property, index) => (
+                    <TableRow key={property.id}>
                       <TableCell component="th" scope="row">
-                        {right.type}
+                        {property.type}
                       </TableCell>
                       <TableCell align="right">
+                        {property.active ? 
                         <input
-                          style={{ width: "40px" }}
-                          width={"5px"}
-                          type={"number"}
-                          value={beneficiary.properties[index].percentage}
-                        ></input>
+                        style={{ width: "40px" }}
+                        width={"5px"}
+                        type={"number"}
+                        // value={beneficiary.properties[index].percentage}
+                        value={property.percentage}
+                        readOnly
+                      ></input>
+                         : null}
                       </TableCell>
                     </TableRow>
                   ))}
@@ -277,15 +278,6 @@ function Row(props: {
     </>
   );
 }
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0, 3.99),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3, 4.99),
-  createData("Eclair", 262, 16.0, 24, 6.0, 3.79),
-  createData("Cupcake", 305, 3.7, 67, 4.3, 2.5),
-  createData("Gingerbread", 356, 16.0, 49, 3.9, 1.5),
-];
-
 export const NewDataTable: FC<Props> = ({ rights, beneficiarys, setShow }) => {
   return (
     <>

@@ -43,6 +43,7 @@ export const OneLink: FC<Props> = ({ img, name, align = 'flex-end' }) =>
       dispatch(setShowForm(true))
     }
     else {
+      console.log(data)
       dispatch(setFormValues2(data))
       dispatch(setShowForm2(true))
     }

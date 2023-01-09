@@ -13,7 +13,7 @@ import { BottomMenu } from "../components/bottomMenu/BottomMenu";
 import { IBottomMenuData } from "../interfaces";
 import { useDispatch, useSelector } from "react-redux";
 import { NextPage } from "next";
-import { AppDispatch, RootState, setShowForm, setShowForm2 } from "../store";
+import { AppDispatch, RootState, setFormValues2, setMenuSelected, setShowForm, setShowForm2 } from "../store";
 import { BottomMenu2 } from "../components/bottomMenu/BottomMenu2";
 import { NewDataTable } from "../components/tables/NewDataTable";
 import { BottomMenuMobile } from "../components/bottomMenu/BottomMenuMobile";
@@ -50,7 +50,7 @@ let tipo = "";
 let img = "";
 
 const Testament: NextPage = () => {
-  let dataform = useSelector((state: RootState) => state.form.formvalues);
+  let dataform = useSelector((state: RootState) => state.form.formvalues2);
   const [option, setOption] = useState("");
   let menuoption = useSelector((state: RootState) => state.form.menuselected);
   let show = useSelector((state: RootState) => state.form.showform2);
@@ -77,6 +77,12 @@ const Testament: NextPage = () => {
 
   const closeform = () => {
     dispatch(setShowForm2(false));
+    dispatch(setMenuSelected(""))
+    let data = {
+      name: "" as IRight['type'],
+      img: ""
+    }
+    dispatch(setFormValues2(data))
   };
 
   let draggmode = useSelector((state: RootState) => state.form.isDraggin);
@@ -92,7 +98,7 @@ const Testament: NextPage = () => {
     (state: RootState) => state.empire.selectedEmpire?.beneficiary
   );
 
-  let { name, img } = useSelector((state: RootState) => state.form.formvalues);
+  let { name, img } = useSelector((state: RootState) => state.form.formvalues2);
 
   const allowDrop = (event: DragEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -108,7 +114,7 @@ const Testament: NextPage = () => {
           {(() => {
             switch (menuoption) {
               case "Arbol":
-                return show ? (
+                return show && name.length > 0  ? (
                   <>
                     <PersonForm img={img} person={name} setShow={closeform} />
                     {/* <BankAccountForm
@@ -131,7 +137,10 @@ const Testament: NextPage = () => {
                   </>
                 ) : null;
               case "Resumen":
-                return show ? <></> : null;
+                return show ? 
+                <>
+
+                </> : null;
 
               default:
                 break;

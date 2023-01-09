@@ -124,6 +124,12 @@ export const empireSlice = createSlice({
         }
       }
     },
+
+    statusBeneficiaryright: (state, {payload: {beneficiary,active, index}}: PayloadAction<{beneficiary: number,active: boolean, index: number}>) => {
+      state.selectedEmpire.beneficiary[beneficiary].properties[index].active = active
+     // console.log("Tengo: " + state.selectedEmpire.beneficiary[beneficiary].properties[index])
+    },
+
     addTrustor: (
       state,
       {
@@ -139,6 +145,9 @@ export const empireSlice = createSlice({
       for (let index = 0; index < state.selectedEmpire.rights.length; index++) {
         let data: IRightBeneficiary = {
           idRight: state.selectedEmpire.rights[index].id!,
+          id: state.selectedEmpire.rights[index].id!, //si se usa despuues quitarlo por qe es para rellenar
+          type: "Arte", //si se usa despuues quitarlo por qe es para rellenar
+          active:  true, //si se usa despuues quitarlo por qe es para rellenar
           percentage: 0,
         };
         console.log("Voy a añadirel id: " + state.selectedEmpire.rights[index].id!)
@@ -166,4 +175,5 @@ export const {
   selectEscrow,
   updateBeneficiaryProperties,
   deleteBeneficiaryProperties,
+  statusBeneficiaryright,
 } = empireSlice.actions;

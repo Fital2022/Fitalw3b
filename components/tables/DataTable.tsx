@@ -178,7 +178,7 @@ const DataTable: FC<Props> = ({ rights, beneficiarys }) => {
                               >
                                 <IconButton
                                   onClick={() =>
-                                    quitmatrixdata(id, index, items.idRight)
+                                    quitmatrixdata(id, index, items.idRight!)
                                   }
                                 >
                                   <FiberManualRecord
@@ -200,7 +200,7 @@ const DataTable: FC<Props> = ({ rights, beneficiarys }) => {
                               >
                                 <IconButton
                                   onClick={() =>
-                                    getmatrixdata(id, index, items.idRight)
+                                    getmatrixdata(id, index, items.idRight!)
                                   }
                                 >
                                   <FiberManualRecordOutlined

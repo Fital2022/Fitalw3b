@@ -10,7 +10,7 @@ export interface IEmpire {
 export interface IRight {
   name: string;
   value: number;
-  type: "casa" | "departamento" | "auto" | "seguro" | "Cuenta Bancaria" | "Wallet 1" | "Wallet 2" | "Arte" | "Inversiones" | "Bitcoin";
+  type: "casa" | "departamento" | "auto" | "seguro" | "Cuenta Bancaria" | "Wallet 1" | "Wallet 2" | "Arte" | "Inversiones" | "Bitcoin" | "";
   id?: number;
   img?: string;
 }
@@ -28,6 +28,9 @@ export interface IBeneficiary {
 }
 
 export interface IRightBeneficiary {
-  idRight: number;
+  idRight: IRight['id'];
+  id: number;
+  type: IRight['type']
   percentage: number;
+  active: boolean;
 }
