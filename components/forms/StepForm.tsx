@@ -253,7 +253,7 @@ export const StepForm: FC<Props> = ({ premium, iempire, title, img }) => {
   const closeform = () => {
     dispatch(setShowForm(false));
     let data = {
-      name: "",
+      name: "" as IRight['type'],
       img: ""
     }
     dispatch(setFormValues(data))

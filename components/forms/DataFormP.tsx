@@ -75,6 +75,9 @@ export const DataFormP: FC<Props> = ({
     };
     let propertie: IRightBeneficiary = {
       idRight: idvalue,
+      id: idvalue,
+      type: "Arte", //quitar valores de relleno de arriba y abajo de esta linea
+      active: false,
       percentage: 0,
     };
     console.log(dataright);
